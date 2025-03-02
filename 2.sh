@@ -83,3 +83,4 @@ cd ..
 sudo rm -R fuzzmoji
 
 
+sudo reboot

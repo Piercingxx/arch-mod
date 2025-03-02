@@ -31,3 +31,4 @@ QT_QPA_PLATFORM=xcb
 #Steam audio issues so run this..
 ALSOFT_DRIVERS=pulse
 
+sudo reboot
