@@ -22,6 +22,7 @@ paru -S ranger --noconfirm
 paru -S nautilus-renamer --noconfirm
 paru -S nautilus-open-any-terminal --noconfirm
 paru -S code-nautilus-git --noconfirm
+paru -S kitty --noconfirm
 
 
 # Fonts & Icons & Cursors
@@ -54,6 +55,7 @@ paru -S visual-studio-code-bin --noconfirm
 paru -S mission-center --noconfirm
 paru -S obsidian --noconfirm
 paru -S libreoffice-fresh --noconfirm
+paru -S kdenlive-git --noconfirm
 # Gimp and GPU drivers for it
 paru -S gimp-devel --noconfirm
 paru -S opencl-amd --noconfirm

@@ -33,7 +33,8 @@ sudo pacman-key --lsign-key 56C464BAAC421453
     echo "The file does not exist."
   fi
 
-paru -S libwacom-surface --noconfirm
+paru -Syu
+paru -Sy libwacom-surface
 
 sudo pacman -Syu
 sudo pacman -S linux-surface linux-surface-headers iptsd
@@ -42,5 +43,18 @@ sudo pacman -S linux-surface-secureboot-mok
 
 
 paru -S surface-dtx-daemon --noconfirm
+
+systemctl enable surface-dtx-daemon.service
+systemctl --user surface-dtx-userd.service
+
+
+sudo touch /boot/loader/entries/surface.conf
+  cat /boot/loader/entries/surface.conf >> /boot/loader/entries/surface.conf
+  echo "
+  title Arch Surface
+  linux /vmlinuz-linux-surface
+  initrd  /initramfs-linux-surface.img
+  options root=LABEL=arch rw"
+
 
 sudo reboot
