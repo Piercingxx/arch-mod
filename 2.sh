@@ -24,6 +24,18 @@ paru -S nautilus-open-any-terminal --noconfirm
 paru -S code-nautilus-git --noconfirm
 paru -S kitty --noconfirm
 
+# Applications
+paru -S mpv --noconfirm
+paru -S synochat --noconfirm
+paru -S synology-drive --noconfirm
+paru -S visual-studio-code-bin --noconfirm
+paru -S mission-center --noconfirm
+paru -S obsidian --noconfirm
+paru -S libreoffice-fresh --noconfirm
+paru -S kdenlive-git --noconfirm
+# Gimp and GPU drivers for it
+paru -S gimp-devel --noconfirm
+paru -S opencl-amd --noconfirm
 
 # Fonts & Icons & Cursors
 mkdir -p $HOME/.fonts
@@ -45,21 +57,14 @@ paru -S terminus-font-ttf --noconfirm
 paru -S noto-color-emoji-fontconfig --noconfirm
 paru -S wtype-git --noconfirm
 paru -S xcursor-simp1e-gruvbox-light --noconfirm
-
-
-# Applications
-paru -S mpv --noconfirm
-paru -S synochat --noconfirm
-paru -S synology-drive --noconfirm
-paru -S visual-studio-code-bin --noconfirm
-paru -S mission-center --noconfirm
-paru -S obsidian --noconfirm
-paru -S libreoffice-fresh --noconfirm
-paru -S kdenlive-git --noconfirm
-# Gimp and GPU drivers for it
-paru -S gimp-devel --noconfirm
-paru -S opencl-amd --noconfirm
-
+# Fuzzmoji
+git clone https://codeberg.org/codingotaku/fuzzmoji.git
+cd fuzzmoji
+sudo mkdir -p /usr/share/fuzzmoji/emoji-list
+sudo cp emoji-list /usr/share/fuzzmoji/emoji-list
+sudo cp fuzzmoji /usr/bin/fuzzmoji
+cd ..
+sudo rm -R fuzzmoji
 
 # Gimp dotfiles
 git clone https://github.com/Piercingxx/gimp-dots.git
@@ -73,16 +78,5 @@ cd gimp-dots/Gimp || exit
 cp -R "3.0" /home/"$username"/.config/GIMP/
 chown "$username":"$username" -R /home/"$username"/.config/GIMP
 cd "$builddir" || exit
-
-
-# Fuzzmoji
-git clone https://codeberg.org/codingotaku/fuzzmoji.git
-cd fuzzmoji
-sudo mkdir -p /usr/share/fuzzmoji/emoji-list
-sudo cp emoji-list /usr/share/fuzzmoji/emoji-list
-sudo cp fuzzmoji /usr/bin/fuzzmoji
-cd ..
-sudo rm -R fuzzmoji
-
 
 sudo reboot
