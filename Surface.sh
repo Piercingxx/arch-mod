@@ -34,12 +34,12 @@ sudo pacman-key --lsign-key 56C464BAAC421453
   fi
 
 paru -Syu
-paru -Sy libwacom-surface
+paru -Sy libwacom-surface --noconfirm
 
 sudo pacman -Syu
-sudo pacman -S linux-surface linux-surface-headers iptsd
-sudo pacman -S linux-firmware-marvell
-sudo pacman -S linux-surface-secureboot-mok
+sudo pacman -S linux-surface linux-surface-headers iptsd --noconfirm
+sudo pacman -S linux-firmware-marvell --noconfirm
+sudo pacman -S linux-surface-secureboot-mok --noconfirm
 
 
 paru -S surface-dtx-daemon --noconfirm
