@@ -23,9 +23,9 @@ paru -S gnome-shell-extension-caffeine-git --noconfirm
 paru -S gnome-shell-extension-blur-my-shell-git --noconfirm
 paru -S gnome-shell-extension-just-perfection-desktop --noconfirm
 paru -S gnome-shell-extension-space-bar-git --noconfirm
-#paru -S gnome-shell-extension-pop-shell-git --noconfirm
-paru -S gnome-shell-extension-forge --noconfirm
-paru -S gnome-shell-extension-useless-gaps-git --noconfirm
+paru -S gnome-shell-extension-pop-shell-git --noconfirm
+#paru -S gnome-shell-extension-forge --noconfirm
+#paru -S gnome-shell-extension-useless-gaps-git --noconfirm
 
 flatpak install flathub com.mattjakeman.ExtensionManager -y
 paru -S waterfox-bin --noconfirm
