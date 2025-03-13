@@ -13,6 +13,20 @@ fi
 pacman -S mpd --noconfirm
 paru -Syu
 
+# Extensions
+echo "Gnome Extensions"
+sleep 2
+paru -S gnome-shell-extension-appindicator-git --noconfirm
+paru -S gnome-shell-extension-app-icons-taskbar --noconfirm
+paru -S gnome-shell-extension-gsconnect --noconfirm
+paru -S gnome-shell-extension-caffeine-git --noconfirm
+paru -S gnome-shell-extension-blur-my-shell-git --noconfirm
+paru -S gnome-shell-extension-just-perfection-desktop --noconfirm
+paru -S gnome-shell-extension-space-bar-git --noconfirm
+#paru -S gnome-shell-extension-pop-shell-git --noconfirm
+paru -S gnome-shell-extension-forge --noconfirm
+paru -S gnome-shell-extension-useless-gaps-git --noconfirm
+
 flatpak install flathub com.mattjakeman.ExtensionManager -y
 paru -S waterfox-bin --noconfirm
 paru -S pacseek --noconfirm
