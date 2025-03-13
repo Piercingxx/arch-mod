@@ -28,7 +28,7 @@ sudo pacman-key --lsign-key 56C464BAAC421453
 
   if [ -f "/etc/pacman.conf" ]; then
     cat /etc/pacman.conf >> /etc/pacman.conf
-    echo "[linux-surface] Server = https://pkg.surfacelinux.com/arch/" >> /etc/pacman.conf
+    echo "Server = https://pkg.surfacelinux.com/arch/" >> /etc/pacman.conf
   else
     echo "The file does not exist."
   fi
