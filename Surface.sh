@@ -42,7 +42,7 @@ sudo pacman -S linux-firmware-marvell --noconfirm
 sudo pacman -S linux-surface-secureboot-mok --noconfirm
 
 
-paru -S surface-dtx-daemon --noconfirm
+paru -S surface-dtx-daemon
 
 systemctl enable surface-dtx-daemon.service
 systemctl --user surface-dtx-userd.service
