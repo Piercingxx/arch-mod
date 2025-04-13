@@ -16,6 +16,10 @@ I recommend running all the options in order
 - Hyprland will install Hyprland and all the dependencies for my build of Hyprland.
 ![image](https://github.com/user-attachments/assets/edb7a25a-7932-462a-83a9-03addfe1e7f2)
 
+
+![image](https://github.com/user-attachments/assets/d8113c86-4985-420c-ba0d-fc519fe14478)
+
+
 - Gnome Extensions will install all the Gnome Extensions I use as well as customize Gnome with my custom extension settings.
 
 - Surface Kernel will install the Surface Kernel for any Microsoft Surface device.
