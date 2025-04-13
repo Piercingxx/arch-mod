@@ -4,6 +4,7 @@
 
 I recommend running all the options in order
 
+![image](https://github.com/user-attachments/assets/fc6daea2-52b3-4a35-800e-b685c96a3974)
 
 
 - Update System will find the fastest mirrors and update the system.
