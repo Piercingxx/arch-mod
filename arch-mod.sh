@@ -42,7 +42,7 @@ function menu() {
 # Main menu loop
 while true; do
     clear
-    echo -e "${BLUE}System Setup Script${NC}"
+    echo -e "${BLUE}Arch Mod Script${NC}"
     echo -e "${GREEN}Welcome ${username}${NC}\n"
     
     choice=$(menu)
@@ -50,7 +50,7 @@ while true; do
         "Update System")
             echo -e "${YELLOW}Finding The Fastest Mirrors then Updating, Be Patient...${NC}"
             # Update mirrors
-            reflector --verbose --sort rate -l 75 --save /etc/pacman.d/mirrorlist
+            sudo reflector --verbose --sort rate -l 75 --save /etc/pacman.d/mirrorlist
             paru -Syu
             hyprpm update
             hyprpm reload
