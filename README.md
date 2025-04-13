@@ -18,6 +18,7 @@ I recommend running all the options in order
 - Gnome Extensions will install all the Gnome Extensions I use as well as customize Gnome with my custom extension settings.
 
 - Surface Kernel will install the Surface Kernel for any Microsoft Surface device.
+      - This is setup for a systemd bootloader. You will have to go in and edit the boot entry to see the kernal listed.
 
 
 
