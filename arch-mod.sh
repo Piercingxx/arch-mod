@@ -255,6 +255,7 @@ while true; do
                     "Synology Drive")
                         paru -S synology-drive --noconfirm
                         #Synology Drive doesnt support wayland so run this..
+                        # shellcheck disable=SC2034
                         QT_QPA_PLATFORM=xcb
                         ;;
                     "VS Code")
@@ -263,10 +264,10 @@ while true; do
                         ;;
                     "Fonts/Icons/Cursors")
                         echo -e "${YELLOW}Installing fonts, icons, and cursors...${NC}"
-                        mkdir -p $HOME/.fonts
-                        chmod -R u+x $HOME/.fonts
-                        chown -R "$username":"$username" $HOME/.fonts
-                        cd $HOME/.fonts || exit
+                        mkdir -p "$HOME"/.fonts
+                        chmod -R u+x "$HOME"/.fonts
+                        chown -R "$username":"$username" "$HOME"/.fonts
+                        cd "$HOME"/.fonts || exit
                         wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/FiraCode.zip
                         unzip FiraCode.zip
                         wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/Meslo.zip
@@ -284,7 +285,7 @@ while true; do
                         paru -S xcursor-simp1e-gruvbox-light --noconfirm
                         # Fuzzmoji
                         git clone https://codeberg.org/codingotaku/fuzzmoji.git
-                        cd fuzzmoji
+                        cd fuzzmoji || exit
                         sudo mkdir -p /usr/share/fuzzmoji/emoji-list
                         sudo cp emoji-list /usr/share/fuzzmoji/emoji-list
                         sudo cp fuzzmoji /usr/bin/fuzzmoji
