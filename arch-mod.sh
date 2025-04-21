@@ -52,6 +52,7 @@ while true; do
             # Update mirrors
             sudo reflector --verbose --sort rate -l 75 --save /etc/pacman.d/mirrorlist
             paru -Syu
+            wait
             hyprpm update
             hyprpm reload
             msg_box "Mirrors & System Updated Successfully!"
@@ -222,7 +223,7 @@ while true; do
                     for CHOICE in $CHOICES; do
                     case "$CHOICE" in
                     "Core Applications")
-                        pacman -S mpd --noconfirm
+                        sudo pacman -S mpd --noconfirm
                         paru -S mpv --noconfirm
                         flatpak install flathub com.mattjakeman.ExtensionManager -y
                         paru -S waterfox-bin --noconfirm
@@ -235,8 +236,8 @@ while true; do
                         paru -S code-nautilus-git --noconfirm
                         paru -S kitty --noconfirm
                         paru -S mission-center --noconfirm
-                        pacman -S python --noconfirm
-                        pacman -S reflector --noconfirm
+                        sudo pacman -S python --noconfirm
+                        sudo pacman -S reflector --noconfirm
                         ;;
                     "Obsidian")
                         paru -S obsidian --noconfirm
@@ -312,7 +313,7 @@ while true; do
                         paru -S kdenlive-git --noconfirm
                         ;;
                     "Steam")
-                        pacman -S steam --noconfirm
+                        sudo pacman -S steam --noconfirm
                         ;;
                     "Discord")
                         paru -S discord --noconfirm
@@ -463,8 +464,8 @@ while true; do
                         git clone https://github.com/Piercingxx/gimp-dots.git
                             chmod -R u+x gimp-dots
                             chown -R "$username":"$username" gimp-dots
-                            rm -Rf /home/"$username"/.var/app/org.gimp.GIMP/config/GIMP/*
-                            rm -Rf /home/"$username"/.config/GIMP/*
+                            sudo rm -Rf /home/"$username"/.var/app/org.gimp.GIMP/config/GIMP/*
+                            sudo rm -Rf /home/"$username"/.config/GIMP/*
                             mkdir /home/"$username"/.config/GIMP/3.0
                             chown -R "$username":"$username" /home/"$username"/.config/GIMP
                             cd gimp-dots/Gimp || exit
