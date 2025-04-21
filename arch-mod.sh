@@ -48,6 +48,24 @@ while true; do
     choice=$(menu)
     case $choice in
         "Update System")
+            echo -e "${YELLOW}Updating System...${NC}"
+            # Function to check if a command is installed
+                command_exists() {
+                    command -v "$1" >/dev/null 2>&1
+                }
+                # Check if reflector is installed
+                if ! command_exists reflector; then
+                    echo "Reflector is not installed. Installing now..."
+                    # Attempt to install reflector using pacman
+                    sudo pacman -S --noconfirm reflector
+                    # Check if the installation was successful
+                    if ! command_exists reflector; then
+                    echo "Failed to install reflector. Please check your pacman configuration and internet connection."
+                    exit 1  # Exit with an error code
+                    else
+                    echo "Reflector installed successfully."
+                    fi
+                fi
             echo -e "${YELLOW}Finding The Fastest Mirrors then Updating, Be Patient...${NC}"
             # Update mirrors
             sudo reflector --verbose --sort rate -l 75 --save /etc/pacman.d/mirrorlist
@@ -195,6 +213,7 @@ while true; do
                     "GSConnect")
                         paru -S gnome-shell-extension-gsconnect --noconfirm
                         ;;
+
                     esac
                 done
                 fi            
@@ -472,13 +491,14 @@ while true; do
                             cp -R "3.0" /home/"$username"/.config/GIMP/3.0
                             chown "$username":"$username" -R /home/"$username"/.config/GIMP
                             cd "$builddir" || exit
-                            ;;
+                        ;;
                     ".config Dot Files")
                         git clone https://github.com/Piercingxx/piercing-dots.git
                             chmod -R u+x piercing-dots
                             chown -R "$username":"$username" piercing-dots
                             cp -Rf "piercing-dots" /home/"$username"/.config/
                             chown "$username":"$username" -R /home/"$username"/.config/*
+                        ;;
                     esac
                 done
                 fi   
