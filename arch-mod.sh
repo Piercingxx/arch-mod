@@ -33,7 +33,7 @@ function menu() {
         "Applications"                          "Install Applications and Utilities" \
         "Hyprland"                              "This Will Install Hyprland & All Dependencies" \
         "Gnome Extensions"                      "Install Gnome Shell Extensions" \
-        "Copy Dotfiles"                         "Copy Dotfiles" \
+        "Piercing Rice"                         "Apply All My Customizations" \
         "Surface Kernel"                        "Install Surface Kernal" \
         "Reboot System"                         "Reboot the system" \
         "Exit"                                  "Exit the script" 3>&1 1>&2 2>&3
@@ -153,7 +153,6 @@ while true; do
                 exit 1
                 fi
             CHOICES=$(whiptail --separate-output --checklist "Choose options" 0 0 0 \
-                    "Piercings Gnome Customizations" "" ON \
                     "App Indicator" "" ON \
                     "App Icon Taskbar" "" ON \
                     "Blur My Shell" "" On \
@@ -168,8 +167,175 @@ while true; do
                 else
                     for CHOICE in $CHOICES; do
                     case "$CHOICE" in
+                    "App Indicator")
+                        paru -S gnome-shell-extension-appindicator-git --noconfirm
+                        ;;
+                    "App Icon Taskbar")
+                        paru -S gnome-shell-extension-app-icons-taskbar --noconfirm
+                        ;;
+                    "Blur My Shell")
+                        paru -S gnome-shell-extension-blur-my-shell-git --noconfirm
+                        ;;
+                    "Just Perfection")
+                        paru -S gnome-shell-extension-just-perfection-desktop --noconfirm
+                        ;;
+                    "Pop Shell")
+                        paru -S gnome-shell-extension-pop-shell-git --noconfirm
+                        ;;
+                    "Space Bar")
+                        paru -S gnome-shell-extension-space-bar-git --noconfirm
+                        ;;
+                    "Useless Gaps")
+                        paru -S gnome-shell-extension-useless-gaps-git --noconfirm
+                        ;;
+                    "Caffeine")
+                        paru -S gnome-shell-extension-caffeine-git --noconfirm
+                        ;;
+                    "GSConnect")
+                        paru -S gnome-shell-extension-gsconnect --noconfirm
+                        ;;
+                    esac
+                done
+                fi            
+            msg_box "Gnome Shell Extensions & Customization installed successfully!"
+            ;;
+        
+        "Applications")
+                    CHOICES=$(whiptail --separate-output --checklist "Choose options" 0 0 0 \
+                    "Core Applications" "" ON \
+                    "Obsidian" "" ON \
+                    "LibreOffice" "" ON \
+                    "GIMP & Darktable" "" ON \
+                    "Synology Chat" "" ON \
+                    "Synology Drive" "" ON \
+                    "VS Code" "VSCode & Github Desktop" ON \
+                    "Fonts/Icons/Cursors" "Only Run Once" ON \
+                    "Docker" "" OFF \
+                    "Blender" "" OFF \
+                    "Kdenlive" "This takes a very long time to install" OFF \
+                    "Steam" "" OFF \
+                    "Discord" "" OFF \
+                    "Input Remapper" "" OFF 3>&1 1>&2 2>&3)
+                if [ -z "$CHOICE" ]; then
+                    echo "No option was selected, hit Cancel or select an option"
+                else
+                    for CHOICE in $CHOICES; do
+                    case "$CHOICE" in
+                    "Core Applications")
+                        pacman -S mpd --noconfirm
+                        paru -S mpv --noconfirm
+                        flatpak install flathub com.mattjakeman.ExtensionManager -y
+                        paru -S waterfox-bin --noconfirm
+                        paru -S pacseek --noconfirm
+                        paru -S dconf --noconfirm
+                        paru -S fuzzel --noconfirm
+                        paru -S ranger --noconfirm
+                        paru -S nautilus-renamer --noconfirm
+                        paru -S nautilus-open-any-terminal --noconfirm
+                        paru -S code-nautilus-git --noconfirm
+                        paru -S kitty --noconfirm
+                        paru -S mission-center --noconfirm
+                        pacman -S python --noconfirm
+                        pacman -S reflector --noconfirm
+                        ;;
+                    "Obsidian")
+                        paru -S obsidian --noconfirm
+                        ;;
+                    "Libre Office")
+                        paru -S libreoffice-fresh --noconfirm
+                        ;;
+                    "Gimp & Darktable")
+                        paru -S gimp --noconfirm
+                        paru -S darktable --noconfirm
+                        paru -S opencl-amd --noconfirm
+                        ;;
+                    "Synology Chat")
+                        paru -S synochat --noconfirm
+                        ;;
+                    "Synology Drive")
+                        paru -S synology-drive --noconfirm
+                        #Synology Drive doesnt support wayland so run this..
+                        QT_QPA_PLATFORM=xcb
+                        ;;
+                    "VS Code")
+                        paru -S visual-studio-code-bin --noconfirm
+                        paru -S github-desktop-bin --noconfirm
+                        ;;
+                    "Fonts/Icons/Cursors")
+                        echo -e "${YELLOW}Installing fonts, icons, and cursors...${NC}"
+                        mkdir -p $HOME/.fonts
+                        chmod -R u+x $HOME/.fonts
+                        chown -R "$username":"$username" $HOME/.fonts
+                        cd $HOME/.fonts || exit
+                        wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/FiraCode.zip
+                        unzip FiraCode.zip
+                        wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/Meslo.zip
+                        unzip Meslo.zip
+                        rm Firacode.zip
+                        rm Meslo.zip
+                        cd "$builddir" || exit
+                        paru -S papirus-icon-theme --noconfirm
+                        paru -S ttf-firacode --noconfirm
+                        paru -S awesome-terminal-fonts --noconfirm
+                        paru -S ttf-ms-fonts --noconfirm
+                        paru -S terminus-font-ttf --noconfirm
+                        paru -S noto-color-emoji-fontconfig --noconfirm
+                        paru -S wtype-git --noconfirm
+                        paru -S xcursor-simp1e-gruvbox-light --noconfirm
+                        # Fuzzmoji
+                        git clone https://codeberg.org/codingotaku/fuzzmoji.git
+                        cd fuzzmoji
+                        sudo mkdir -p /usr/share/fuzzmoji/emoji-list
+                        sudo cp emoji-list /usr/share/fuzzmoji/emoji-list
+                        sudo cp fuzzmoji /usr/bin/fuzzmoji
+                        cd ..
+                        sudo rm -R fuzzmoji
+                        ;;
+                    "Docker")
+                        wget https://download.docker.com/linux/static/stable/x86_64/docker-28.0.4.tgz -qO- | tar xvfz - docker/docker --strip-components=1
+                        sudo mv ./docker /usr/local/bin
+                        ##Download the latest from https://docs.docker.com/desktop/release-notes/
+                        git clone https://desktop.docker.com/linux/main/amd64/187762/docker-desktop-x86_64.pkg.tar.zst
+                        sudo pacman -U ./docker-desktop-x86_64.pkg.tar.zst
+                        #AI 
+                        curl -fsSL https://ollama.com/install.sh | sh
+                        #ollama pull gemma3:27b 
+                        #ollama pull deepseek-r1:7b
+                        #OpenWebUi
+                        docker run -d -p 3000:8080 --add-host=host.docker.internal:host-gateway -v open-webui:/app/backend/data --name open-webui --restart always ghcr.io/open-webui/open-webui:main
+                        ;;
+                    "Blender")
+                        paru -S blender --noconfirm
+                        ;;
+                    "Kdenlive")
+                        paru -S kdenlive-git --noconfirm
+                        ;;
+                    "Steam")
+                        pacman -S steam --noconfirm
+                        ;;
+                    "Discord")
+                        paru -S discord --noconfirm
+                        ;;
+                    "Input Remapper")
+                        paru -S input-remapper --noconfirm
+                        ;;
+                esac
+                done
+                fi            
+            msg_box "Selected Applications Installed Successfully!"
+            ;;
+        "Piercing Rice")
+            echo -e "${YELLOW}Copying Dotfiles...${NC}"
+            CHOICES=$(whiptail --separate-output --checklist "Choose options" 0 0 0 \
+                    "Piercings Gnome Customizations" "" ON \
+                    "Gimp Dots" "" ON \
+                    ".config Dot Files" "" On 3>&1 1>&2 2>&3)
+                if [ -z "$CHOICE" ]; then
+                    echo "No option was selected, hit Cancel or select an option"
+                else
+                    for CHOICE in $CHOICES; do
+                    case "$CHOICE" in
                     "Piercings Gnome Customizations")
-                        # Customizations
                         gsettings set org.gnome.desktop.interface clock-format 24h
                         gsettings set org.gnome.desktop.interface clock-show-weekday true
                         gsettings set org.gnome.desktop.peripherals.keyboard numlock-state true
@@ -292,87 +458,7 @@ while true; do
                         dconf write /org/gnome/shell/extensions/forge/window-gap-size 'uint32 7'
                         dconf write /org/gtk/gtk4/settings/color-chooser/selected-color "true, 1.0, 1.0, 1.0, 1.0"
                         ;;
-                    "App Indicator")
-                        paru -S gnome-shell-extension-appindicator-git --noconfirm
-                        ;;
-                    "App Icon Taskbar")
-                        paru -S gnome-shell-extension-app-icons-taskbar --noconfirm
-                        ;;
-                    "Blur My Shell")
-                        paru -S gnome-shell-extension-blur-my-shell-git --noconfirm
-                        ;;
-                    "Just Perfection")
-                        paru -S gnome-shell-extension-just-perfection-desktop --noconfirm
-                        ;;
-                    "Pop Shell")
-                        paru -S gnome-shell-extension-pop-shell-git --noconfirm
-                        ;;
-                    "Space Bar")
-                        paru -S gnome-shell-extension-space-bar-git --noconfirm
-                        ;;
-                    "Useless Gaps")
-                        paru -S gnome-shell-extension-useless-gaps-git --noconfirm
-                        ;;
-                    "Caffeine")
-                        paru -S gnome-shell-extension-caffeine-git --noconfirm
-                        ;;
-                    "GSConnect")
-                        paru -S gnome-shell-extension-gsconnect --noconfirm
-                        ;;
-                esac
-                done
-                fi            
-            msg_box "Gnome Shell Extensions & Customization installed successfully!"
-            ;;
-        
-        "Applications")
-                    CHOICES=$(whiptail --separate-output --checklist "Choose options" 0 0 0 \
-                    "Core Applications" "" ON \
-                    "Obsidian" "" ON \
-                    "LibreOffice" "" ON \
-                    "GIMP & Darktable" "Will also install my dots" ON \
-                    "Synology Chat" "" ON \
-                    "Synology Drive" "" ON \
-                    "VS Code" "VSCode & Github Desktop" ON \
-                    "Fonts/Icons/Cursors" "Only Run Once" ON \
-                    "Docker" "" OFF \
-                    "Blender" "" OFF \
-                    "Kdenlive" "This takes a very long time to install" OFF \
-                    "Steam" "" OFF \
-                    "Discord" "" OFF \
-                    "Input Remapper" "" OFF 3>&1 1>&2 2>&3)
-                if [ -z "$CHOICE" ]; then
-                    echo "No option was selected, hit Cancel or select an option"
-                else
-                    for CHOICE in $CHOICES; do
-                    case "$CHOICE" in
-                    "Core Applications")
-                        pacman -S mpd --noconfirm
-                        paru -S mpv --noconfirm
-                        flatpak install flathub com.mattjakeman.ExtensionManager -y
-                        paru -S waterfox-bin --noconfirm
-                        paru -S pacseek --noconfirm
-                        paru -S dconf --noconfirm
-                        paru -S fuzzel --noconfirm
-                        paru -S ranger --noconfirm
-                        paru -S nautilus-renamer --noconfirm
-                        paru -S nautilus-open-any-terminal --noconfirm
-                        paru -S code-nautilus-git --noconfirm
-                        paru -S kitty --noconfirm
-                        paru -S mission-center --noconfirm
-                        pacman -S python --noconfirm
-                        pacman -S reflector --noconfirm
-                        ;;
-                    "Obsidian")
-                        paru -S obsidian --noconfirm
-                        ;;
-                    "Libre Office")
-                        paru -S libreoffice-fresh --noconfirm
-                        ;;
-                    "Gimp & Darktable")
-                        paru -S gimp --noconfirm
-                        paru -S darktable --noconfirm
-                        paru -S opencl-amd --noconfirm
+                    "Gimp Dots")
                         git clone https://github.com/Piercingxx/gimp-dots.git
                             chmod -R u+x gimp-dots
                             chown -R "$username":"$username" gimp-dots
@@ -384,90 +470,17 @@ while true; do
                             cp -R "3.0" /home/"$username"/.config/GIMP/3.0
                             chown "$username":"$username" -R /home/"$username"/.config/GIMP
                             cd "$builddir" || exit
-                        ;;
-                    "Synology Chat")
-                        paru -S synochat --noconfirm
-                        ;;
-                    "Synology Drive")
-                        paru -S synology-drive --noconfirm
-                        #Synology Drive doesnt support wayland so run this..
-                        QT_QPA_PLATFORM=xcb
-                        ;;
-                    "VS Code")
-                        paru -S visual-studio-code-bin --noconfirm
-                        paru -S github-desktop-bin --noconfirm
-                        ;;
-                    "Fonts/Icons/Cursors")
-                        echo -e "${YELLOW}Installing fonts, icons, and cursors...${NC}"
-                        mkdir -p $HOME/.fonts
-                        chmod -R u+x $HOME/.fonts
-                        chown -R "$username":"$username" $HOME/.fonts
-                        cd $HOME/.fonts || exit
-                        wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/FiraCode.zip
-                        unzip FiraCode.zip
-                        wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/Meslo.zip
-                        unzip Meslo.zip
-                        rm Firacode.zip
-                        rm Meslo.zip
-                        cd "$builddir" || exit
-                        paru -S papirus-icon-theme --noconfirm
-                        paru -S ttf-firacode --noconfirm
-                        paru -S awesome-terminal-fonts --noconfirm
-                        paru -S ttf-ms-fonts --noconfirm
-                        paru -S terminus-font-ttf --noconfirm
-                        paru -S noto-color-emoji-fontconfig --noconfirm
-                        paru -S wtype-git --noconfirm
-                        paru -S xcursor-simp1e-gruvbox-light --noconfirm
-                        # Fuzzmoji
-                        git clone https://codeberg.org/codingotaku/fuzzmoji.git
-                        cd fuzzmoji
-                        sudo mkdir -p /usr/share/fuzzmoji/emoji-list
-                        sudo cp emoji-list /usr/share/fuzzmoji/emoji-list
-                        sudo cp fuzzmoji /usr/bin/fuzzmoji
-                        cd ..
-                        sudo rm -R fuzzmoji
-                        ;;
-                    "Docker")
-                        wget https://download.docker.com/linux/static/stable/x86_64/docker-28.0.4.tgz -qO- | tar xvfz - docker/docker --strip-components=1
-                        sudo mv ./docker /usr/local/bin
-                        ##Download the latest from https://docs.docker.com/desktop/release-notes/
-                        git clone https://desktop.docker.com/linux/main/amd64/187762/docker-desktop-x86_64.pkg.tar.zst
-                        sudo pacman -U ./docker-desktop-x86_64.pkg.tar.zst
-                        #AI 
-                        curl -fsSL https://ollama.com/install.sh | sh
-                        #ollama pull gemma3:27b 
-                        #ollama pull deepseek-r1:7b
-                        #OpenWebUi
-                        docker run -d -p 3000:8080 --add-host=host.docker.internal:host-gateway -v open-webui:/app/backend/data --name open-webui --restart always ghcr.io/open-webui/open-webui:main
-                        ;;
-                    "Blender")
-                        paru -S blender --noconfirm
-                        ;;
-                    "Kdenlive")
-                        paru -S kdenlive-git --noconfirm
-                        ;;
-                    "Steam")
-                        pacman -S steam --noconfirm
-                        ;;
-                    "Discord")
-                        paru -S discord --noconfirm
-                        ;;
-                    "Input Remapper")
-                        paru -S input-remapper --noconfirm
-                        ;;
-                esac
+                            ;;
+                    ".config Dot Files")
+                        git clone https://github.com/Piercingxx/piercing-dots.git
+                            chmod -R u+x piercing-dots
+                            chown -R "$username":"$username" piercing-dots
+                            cp -Rf "piercing-dots" /home/"$username"/.config/
+                            chown "$username":"$username" -R /home/"$username"/.config/*
+                    esac
                 done
-                fi            
-            msg_box "Selected Applications Installed Successfully!"
-            ;;
-        "Copy Dotfiles")
-            echo -e "${YELLOW}Copying Dotfiles...${NC}"
-                git clone https://github.com/Piercingxx/piercing-dots.git
-                chmod -R u+x piercing-dots
-                chown -R "$username":"$username" piercing-dots
-                cp -Rf "piercing-dots" /home/"$username"/.config/
-                chown "$username":"$username" -R /home/"$username"/.config/*
-            msg_box ".config Updated Successfully!"
+                fi   
+            msg_box "Piercing Rice Applied Successfully!"
                 ;;
 
         "Surface Kernel")
