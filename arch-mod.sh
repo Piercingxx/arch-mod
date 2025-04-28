@@ -69,10 +69,20 @@ while true; do
             echo -e "${YELLOW}Finding The Fastest Mirrors then Updating, Be Patient...${NC}"
             # Update mirrors
             sudo reflector --verbose --sort rate -l 75 --save /etc/pacman.d/mirrorlist
-            paru -Syu
-            wait
-            hyprpm update
-            hyprpm reload
+            #Which DE are we in?
+                if [ -n "$HYPRLAND_INSTANCE_SIGNATURE" ]; then
+                    # We are in Hyprland
+                    echo "Running Hyprland updates..."
+                    paru -Syu
+                    wait
+                    hyprpm update
+                    wait
+                    hyprpm reload
+                else
+                    # We are likely in Gnome (or another DE without the Hyprland variable)
+                    echo "Running Updates..."
+                    paru -Syu
+                fi
             msg_box "Mirrors & System Updated Successfully!"
             ;;
         "Add Paru, Flatpak, & Dependencies"*)
@@ -165,6 +175,7 @@ while true; do
                 hyprpm add https://github.com/virtcode/hypr-dynamic-cursors
                 hyprpm enable dynamic-cursors
                 hyprpm enable hyprtrails
+            echo -e "${GREEN}Installed successfully!${NC}"
             ;;
         "Gnome Extensions"*)
                 if [[ $EUID -eq 0 ]]; then
@@ -213,7 +224,6 @@ while true; do
                     "GSConnect")
                         paru -S gnome-shell-extension-gsconnect --noconfirm
                         ;;
-
                     esac
                 done
                 fi            
