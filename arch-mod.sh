@@ -42,7 +42,7 @@ function menu() {
 # Main menu loop
 while true; do
     clear
-    echo -e "${BLUE}Arch Mod Script${NC}"
+    echo -e "${BLUE}PiercingXX's Arch Mod Script${NC}"
     echo -e "${GREEN}Welcome ${username}${NC}\n"
     
     choice=$(menu)
