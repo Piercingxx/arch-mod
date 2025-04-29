@@ -57,7 +57,7 @@ while true; do
                 if ! command_exists reflector; then
                     echo "Reflector is not installed. Installing now..."
                     # Attempt to install reflector using pacman
-                    sudo pacman -S --noconfirm reflector
+                    sudo pacman -S reflector --noconfirm
                     # Check if the installation was successful
                     if ! command_exists reflector; then
                     echo "Failed to install reflector. Please check your pacman configuration and internet connection."
@@ -345,7 +345,7 @@ while true; do
                         sudo pacman -S steam --noconfirm
                         ;;
                     "Discord")
-                        paru -S discord --noconfirm
+                        paru -S vesktop-bin --noconfirm
                         ;;
                     "Input Remapper")
                         paru -S input-remapper --noconfirm
