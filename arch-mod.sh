@@ -31,14 +31,14 @@ function msg_box() {
 # Function to display menu
 function menu() {
     whiptail --backtitle "GitHub.com/PiercingXX" --title "Main Menu" \
-        --menu "Choose an option:" 0 0 0 \
+        --menu "Run Options In Order:" 0 0 0 \
         "Update Mirrors"                        "Update Mirrors" \
         "Update System"                         "Update System" \
-        "Add Paru, Flatpak, & Dependencies"     "Will Reboot after added" \
+        "Add Paru, Flatpak, & Dependencies"     "Will Automatically Reboot After" \
         "Core Applications"                     "Install Applications and Utilities" \
         "Additional Applications"               "Main Rig Applications" \
         "Hyprland"                              "This Will Install Hyprland & All Dependencies" \
-        "Gnome Extensions"                      "Install Gnome Shell Extensions" \
+        "Gnome Extensions"                      "My Favorite Gnome Shell Extensions" \
         "Piercing Gimp"                         "Piercing Gimp Presets" \
         "PiercingXX Rice"                       "Apply Piercing Rice" \
         "Surface Kernel"                        "Install Surface Kernal" \
