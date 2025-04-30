@@ -165,17 +165,22 @@ while true; do
             ;;   
         "Piercing Gimp")
             # Gimp Dots
-                git clone https://github.com/Piercingxx/gimp-dots.git
+                echo -e "${YELLOW}Installing Piercing Gimp Presets...${NC}"
+                if git clone https://github.com/Piercingxx/gimp-dots.git; then
                     chmod -R u+x gimp-dots
                     chown -R "$username":"$username" gimp-dots
                     sudo rm -Rf /home/"$username"/.var/app/org.gimp.GIMP/config/GIMP/*
                     sudo rm -Rf /home/"$username"/.config/GIMP/*
-                    mkdir /home/"$username"/.config/GIMP/3.0
+                    mkdir -p /home/"$username"/.config/GIMP/3.0
                     chown -R "$username":"$username" /home/"$username"/.config/GIMP
                     cd gimp-dots/Gimp || exit
                     cp -Rf 3.0/* /home/"$username"/.config/GIMP/3.0
                     chown "$username":"$username" -R /home/"$username"/.config/GIMP
                     cd "$builddir" || exit
+                    echo -e "${GREEN}Piercing Gimp Presets Installed Successfully!${NC}"
+                else
+                    echo -e "${RED}Failed to clone gimp-dots repository${NC}"
+                fi
             ;;
         "PiercingXX Rice")
             echo -e "${YELLOW}Downloading and Applying PiercingXX Rice...${NC}"
@@ -190,7 +195,7 @@ while true; do
                 # Piercings Gnome Customizations
                         cd piercing-dots/scripts || exit
                         ./gnome-customizations.sh
-                    msg_box "PiercingXX Rice Applied Successfully!"
+            echo -e "${GREEN}PiercingXX Rice Applied Successfully!${NC}"
             ;;
         "Surface Kernel")
             echo -e "${YELLOW}Microsoft Surface Kernel...${NC}"            
