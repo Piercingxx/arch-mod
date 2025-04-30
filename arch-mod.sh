@@ -46,7 +46,7 @@ function menu() {
         "Update Mirrors"                        "Update Mirrors" \
         "Update System"                         "Update System" \
         "Add Paru, Flatpak, & Dependencies"     "Will Automatically Reboot After" \
-        "Applications"                     "Install Applications and Utilities" \
+        "Applications"                          "Install Applications and Utilities" \
         "Hyprland"                              "This Will Install Hyprland & All Dependencies" \
         "Gnome Extensions"                      "My Favorite Gnome Shell Extensions" \
         "Piercing Gimp"                         "Piercing Gimp Presets (Distro Agnostic)" \
@@ -69,7 +69,7 @@ while true; do
             if ! command_exists reflector; then
                 echo "Reflector is not installed. Installing now..."
                 # Attempt to install reflector using pacman
-                sudo pacman -S reflector --noconfirm
+                sudo -v pacman -S reflector --noconfirm
                 # Check if the installation was successful
                 if ! command_exists reflector; then
                 echo "Failed to install reflector. Please check your pacman configuration and internet connection."
@@ -80,7 +80,7 @@ while true; do
             fi
             echo -e "${YELLOW}Finding The Fastest Mirrors then Updating, Be Patient...${NC}"
             # Update mirrors
-            sudo reflector --verbose --sort rate -l 75 --save /etc/pacman.d/mirrorlist
+            sudo -v reflector --verbose --sort rate -l 75 --save /etc/pacman.d/mirrorlist
             echo -e "${GREEN}Mirrors Updated${NC}"
             ;;
         "Update System")
@@ -122,16 +122,16 @@ while true; do
             git clone https://aur.archlinux.org/paru-bin.git && cd paru-bin && makepkg -si --noconfirm && cd ..
             # Add Flatpak
             echo "# Installing Flatpak..."
-            sudo pacman -S flatpak --noconfirm
+            sudo -v pacman -S flatpak --noconfirm
             flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
             echo "# Enabling Bluetooth and Printer services..."
             # Enable Bluetooth
-            sudo systemctl start bluetooth
+            sudo -v systemctl start bluetooth
             systemctl enable bluetooth
             # Enable Printer 
-            sudo pacman -S cups gutenprint cups-pdf gtk3-print-backends nmap net-tools cmake meson cpio --noconfirm
-            systemctl enable cups.service
-            systemctl start cups
+            sudo -v pacman -S cups gutenprint cups-pdf gtk3-print-backends nmap net-tools cmake meson cpio --noconfirm
+            sudo -v systemctl enable cups.service
+            sudo -v systemctl start cups
             msg_box "System will reboot now. Re-run the script after reboot to continue."
             sudo reboot
             ;;
@@ -211,7 +211,7 @@ while true; do
                     chmod -R u+x mybash
                     chown -R "$username":"$username" mybash
                     cd mybash || exit
-                    /setup.sh
+                    ./setup.sh
                     cd "$builddir" || exit
                     rm -rf mybash
             ;;
@@ -227,13 +227,13 @@ while true; do
                     else
                         echo "The file does not exist."
                     fi
-                paru -Syu
+                paru -Syu --noconfirm
                 paru -Sy libwacom-surface --noconfirm
-                sudo pacman -Syu
+                sudo pacman -Syu --noconfirm
                 sudo pacman -S linux-surface linux-surface-headers iptsd --noconfirm
                 sudo pacman -S linux-firmware-marvell --noconfirm
                 sudo pacman -S linux-surface-secureboot-mok --noconfirm
-                paru -S surface-dtx-daemon
+                paru -S surface-dtx-daemon --noconfirm
                 systemctl enable surface-dtx-daemon.service
                 systemctl --user surface-dtx-userd.service
                 sudo touch /boot/loader/entries/surface.conf
@@ -245,8 +245,8 @@ while true; do
                     options root=LABEL=arch rw"
             ;;
         "Reboot System")
-            echo -e "${YELLOW}Rebooting system in 5 seconds...${NC}"
-            sleep 5
+            echo -e "${YELLOW}Rebooting system in 3 seconds...${NC}"
+            sleep 2
             reboot
             ;;
         "Exit")
