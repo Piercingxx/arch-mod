@@ -51,6 +51,7 @@ function menu() {
         "Gnome Extensions"                      "My Favorite Gnome Shell Extensions" \
         "Piercing Gimp"                         "Piercing Gimp Presets (Distro Agnostic)" \
         "PiercingXX Rice"                       "Apply Piercing Rice (Distro Agnostic)" \
+        "Beautiful Bash"                        "Chris Titus' Beautiful Bash Script" \
         "Surface Kernel"                        "Install Surface Kernal" \
         "Reboot System"                         "Reboot the system" \
         "Exit"                                  "Exit the script" 3>&1 1>&2 2>&3
@@ -185,17 +186,34 @@ while true; do
         "PiercingXX Rice")
             echo -e "${YELLOW}Downloading and Applying PiercingXX Rice...${NC}"
                 # .config Dot Files
+                echo -e "${YELLOW}Downloading PiercingXX Dot Files...${NC}"
                     git clone https://github.com/Piercingxx/piercing-dots.git
                         chmod -R u+x piercing-dots
                         chown -R "$username":"$username" piercing-dots
                         cd piercing-dots || exit
                         cp -Rf dots/* /home/"$username"/.config/
                         chown "$username":"$username" -R /home/"$username"/.config/*
-                        cd "$builddir" || exit        
+                        cd "$builddir" || exit      
+                    echo -e "${GREEN}PiercingXX Dot Files Applied Successfully!${NC}"
                 # Piercings Gnome Customizations
-                        cd piercing-dots/scripts || exit
+                    echo -e "${YELLOW}Applying PiercingXX Gnome Customizations...${NC}"
+                        cd piercing-dots || exit
+                        cd scripts || exit
                         ./gnome-customizations.sh
+                        cd "$builddir" || exit
+                # Add in backgrounds and themes and apply them
+                rm -rf piercing-dots
             echo -e "${GREEN}PiercingXX Rice Applied Successfully!${NC}"
+            ;;
+        "Beautiful Bash")
+            echo -e "${YELLOW}Installing Beautiful Bash...${NC}"
+                git clone https://github.com/christitustech/mybash
+                    chmod -R u+x mybash
+                    chown -R "$username":"$username" mybash
+                    cd mybash || exit
+                    /setup.sh
+                    cd "$builddir" || exit
+                    rm -rf mybash
             ;;
         "Surface Kernel")
             echo -e "${YELLOW}Microsoft Surface Kernel...${NC}"            
