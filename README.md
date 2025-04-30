@@ -13,9 +13,7 @@ I recommend running all the options in order.
 
 - Add Paru, Flatpak, & Dependencies will do just that. It will auto reboot the system after. Run the script again to run everything else.
 
-- Core Applications will install all the applications I use daily.
-
-- Additional Applications will install the remaining applications I use on my main rig.
+- Core Applications will give you the option to install any of the applications I use.
 
 - Hyprland will install Hyprland and all the dependencies for my build of Hyprland.
 ![image](https://github.com/user-attachments/assets/d8113c86-4985-420c-ba0d-fc519fe14478)

@@ -59,10 +59,16 @@ builddir=$(pwd)
     paru -S wtype-git --noconfirm
     paru -S xcursor-simp1e-gruvbox-light --noconfirm
     # Fuzzmoji
-    git clone https://codeberg.org/codingotaku/fuzzmoji.git
-        cd fuzzmoji || exit
-        sudo mkdir -p /usr/share/fuzzmoji/emoji-list
-        sudo cp emoji-list /usr/share/fuzzmoji/emoji-list
-        sudo cp fuzzmoji /usr/bin/fuzzmoji
-        cd ..
-        sudo rm -R fuzzmoji
+            git clone https://codeberg.org/codingotaku/fuzzmoji.git
+                cd fuzzmoji || exit
+                sudo mkdir -p /usr/share/fuzzmoji/emoji-list
+                chmod -R 777 /usr/share/fuzzmoji/emoji-list
+                chown -R "$username":"$username" /usr/share/fuzzmoji/emoji-list
+                sudo cp emoji-list /usr/share/fuzzmoji/emoji-list
+                chmod -R 777 /usr/share/fuzzmoji/emoji-list
+                chown -R "$username":"$username" /usr/share/fuzzmoji/emoji-list
+                sudo cp fuzzmoji /usr/bin/fuzzmoji
+                chmod -R 777 /usr/bin/fuzzmoji
+                chown -R "$username":"$username" /usr/bin/fuzzmoji
+                cd "$builddir" || exit
+                sudo rm -R fuzzmoji

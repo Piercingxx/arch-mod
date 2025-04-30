@@ -46,8 +46,7 @@ function menu() {
         "Update Mirrors"                        "Update Mirrors" \
         "Update System"                         "Update System" \
         "Add Paru, Flatpak, & Dependencies"     "Will Automatically Reboot After" \
-        "Core Applications"                     "Install Applications and Utilities" \
-        "Additional Applications"               "Main Rig Applications" \
+        "Applications"                     "Install Applications and Utilities" \
         "Hyprland"                              "This Will Install Hyprland & All Dependencies" \
         "Gnome Extensions"                      "My Favorite Gnome Shell Extensions" \
         "Piercing Gimp"                         "Piercing Gimp Presets (Distro Agnostic)" \
@@ -143,21 +142,13 @@ while true; do
                 cd "$builddir" || exit
             echo -e "${GREEN}Installed successfully!${NC}"
             ;;     
-        "Core Applications")
+        "Applications")
             echo -e "${YELLOW}Installing Core Applications...${NC}"
                 cd scripts || exit
-                chmod u+x core-apps.sh
-                ./core-apps.sh
+                chmod u+x apps.sh
+                ./apps.sh
                 cd "$builddir" || exit
             echo -e "${GREEN}Core Apps Installed successfully!${NC}"
-            ;;
-        "Additional Applications")
-            echo -e "${YELLOW}Installing Additional Applications...${NC}"
-                cd scripts || exit
-                chmod u+x additional-apps.sh
-                ./additional-apps.sh
-                cd "$builddir" || exit
-            echo -e "${GREEN}Additional Apps Installed successfully!${NC}"
             ;;
         "Gnome Extensions"*)
             echo -e "${YELLOW}Installing Gnome Extensions...${NC}"
