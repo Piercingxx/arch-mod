@@ -8,6 +8,14 @@ command_exists() {
     command -v "$1" >/dev/null 2>&1
 }
 
+# Function to cache sudo credentials
+cache_sudo_credentials() {
+    echo "Caching sudo credentials for script execution..."
+    sudo -v
+    # Keep sudo credentials fresh for the duration of the script
+    (while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &)
+}
+
 # Checks for active network connection
 if [[ -n "$(command -v nmcli)" && "$(nmcli -t -f STATE g)" != connected ]]; then
     awk '{print}' <<<"Network connectivity is required to continue."
@@ -22,6 +30,9 @@ fi
 
 username=$(id -u -n 1000)
 builddir=$(pwd)
+
+# Cache sudo credentials
+cache_sudo_credentials
 
 # Function to display a message box
 function msg_box() {
@@ -45,7 +56,6 @@ function menu() {
         "Reboot System"                         "Reboot the system" \
         "Exit"                                  "Exit the script" 3>&1 1>&2 2>&3
 }
-
 # Main menu loop
 while true; do
     clear
@@ -55,23 +65,19 @@ while true; do
     case $choice in
         "Update Mirrors")
             echo -e "${YELLOW}Updating System...${NC}"
-            # Function to check if a command is installed
-                command_exists() {
-                    command -v "$1" >/dev/null 2>&1
-                }
-                # Check if reflector is installed
+            # Check if reflector is installed
+            if ! command_exists reflector; then
+                echo "Reflector is not installed. Installing now..."
+                # Attempt to install reflector using pacman
+                sudo pacman -S reflector --noconfirm
+                # Check if the installation was successful
                 if ! command_exists reflector; then
-                    echo "Reflector is not installed. Installing now..."
-                    # Attempt to install reflector using pacman
-                    sudo pacman -S reflector --noconfirm
-                    # Check if the installation was successful
-                    if ! command_exists reflector; then
-                    echo "Failed to install reflector. Please check your pacman configuration and internet connection."
-                    exit 1  # Exit with an error code
-                    else
-                    echo "Reflector installed successfully."
-                    fi
+                echo "Failed to install reflector. Please check your pacman configuration and internet connection."
+                exit 1  # Exit with an error code
+                else
+                echo "Reflector installed successfully."
                 fi
+            fi
             echo -e "${YELLOW}Finding The Fastest Mirrors then Updating, Be Patient...${NC}"
             # Update mirrors
             sudo reflector --verbose --sort rate -l 75 --save /etc/pacman.d/mirrorlist
@@ -80,26 +86,25 @@ while true; do
         "Update System")
             echo -e "${YELLOW}Updating System...${NC}"
             # Check if paru is installed
-                    if command_exists paru; then
-                        echo "Using paru for system update..."
-                        paru -Syu --noconfirm
-                    else
-                        echo "Paru not found, using pacman instead..."
-                        sudo pacman -Syu --noconfirm
-                    fi
+                if command_exists paru; then
+                    echo "Using paru for system update..."
+                    paru -Syu --noconfirm
+                else
+                    echo "Paru not found, using pacman instead..."
+                    sudo pacman -Syu --noconfirm
+                fi
                 wait
             # Check if flatpak is installed and update it
-                    if command_exists flatpak; then
-                        echo "Updating flatpak packages..."
-                        flatpak update -y
-                    else
-                        echo "Flatpak is not installed."
-                    fi
+                if command_exists flatpak; then
+                    echo "Updating flatpak packages..."
+                    flatpak update -y
+                else
+                    echo "Flatpak is not installed."
+                fi
                 wait
             #Which DE are we in?
-                if pgrep -x "Hyprland" > /dev/null;
-                then
-                    # We are in Hyprland
+                if pgrep -x "Hyprland" > /dev/null; then
+                # We are in Hyprland
                     echo "Running Hyprland updates..."
                     hyprpm update
                     wait
@@ -110,12 +115,16 @@ while true; do
         "Add Paru, Flatpak, & Dependencies"*)
             echo -e "${YELLOW}Installing Paru, Flatpak, & Dependencies...${NC}"
             # Install dependencies
+            echo "# Installing dependencies..."
             sudo pacman -S zip unzip gzip tar make --noconfirm
             # Clone and install Paru
+            echo "# Cloning and installing Paru..."
             git clone https://aur.archlinux.org/paru-bin.git && cd paru-bin && makepkg -si --noconfirm && cd ..
             # Add Flatpak
+            echo "# Installing Flatpak..."
             sudo pacman -S flatpak --noconfirm
             flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+            echo "# Enabling Bluetooth and Printer services..."
             # Enable Bluetooth
             sudo systemctl start bluetooth
             systemctl enable bluetooth
@@ -123,25 +132,31 @@ while true; do
             sudo pacman -S cups gutenprint cups-pdf gtk3-print-backends nmap net-tools cmake meson cpio --noconfirm
             systemctl enable cups.service
             systemctl start cups
-            echo -e "${GREEN}Paru, Flatpak, & Dependencies Installed Successfully! Rebooting Now${NC}"
+            msg_box "System will reboot now. Re-run the script after reboot to continue."
             sudo reboot
             ;;
         "Hyprland"*)
             echo -e "${YELLOW}Installing Hyprland & Dependencies...${NC}"
+                cd scripts || exit
                 chmod u+x hyprland-install.sh
                 ./hyprland-install.sh
+                cd "$builddir" || exit
             echo -e "${GREEN}Installed successfully!${NC}"
             ;;     
         "Core Applications")
             echo -e "${YELLOW}Installing Core Applications...${NC}"
+                cd scripts || exit
                 chmod u+x core-apps.sh
                 ./core-apps.sh
+                cd "$builddir" || exit
             echo -e "${GREEN}Core Apps Installed successfully!${NC}"
             ;;
         "Additional Applications")
             echo -e "${YELLOW}Installing Additional Applications...${NC}"
+                cd scripts || exit
                 chmod u+x additional-apps.sh
                 ./additional-apps.sh
+                cd "$builddir" || exit
             echo -e "${GREEN}Additional Apps Installed successfully!${NC}"
             ;;
         "Gnome Extensions"*)
