@@ -63,7 +63,7 @@ while true; do
             fi
             echo -e "${YELLOW}Finding The Fastest Mirrors then Updating, Be Patient...${NC}"
             # Update mirrors
-            sudo -v reflector --verbose --sort rate -l 75 --save /etc/pacman.d/mirrorlist
+            sudo reflector --verbose --sort rate -l 75 --save /etc/pacman.d/mirrorlist
             echo -e "${GREEN}Mirrors Updated${NC}"
             ;;
         "Update System")

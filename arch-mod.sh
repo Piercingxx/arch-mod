@@ -80,10 +80,10 @@ while true; do
             fi
             echo -e "${YELLOW}Finding The Fastest Mirrors then Updating, Be Patient...${NC}"
             # Update mirrors
-            sudo -v reflector --verbose --sort rate -l 75 --save /etc/pacman.d/mirrorlist
+            sudo reflector --verbose --sort rate -l 75 --save /etc/pacman.d/mirrorlist
             echo -e "${GREEN}Mirrors Updated${NC}"
             # Copy arch-maintenance.sh to home directory
-                cd script || exit
+                cd scripts || exit
                 cp -f arch-maintenance.sh /home/"$username"
                 chown "$username":"$username" /home/"$username"/arch-maintenance.sh
                 cd "$builddir" || exit
