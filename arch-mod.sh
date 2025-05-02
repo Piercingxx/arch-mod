@@ -69,7 +69,7 @@ while true; do
             if ! command_exists reflector; then
                 echo "Reflector is not installed. Installing now..."
                 # Attempt to install reflector using pacman
-                sudo -v pacman -S reflector --noconfirm
+                sudo pacman -S reflector --noconfirm
                 # Check if the installation was successful
                 if ! command_exists reflector; then
                 echo "Failed to install reflector. Please check your pacman configuration and internet connection."
@@ -128,16 +128,16 @@ while true; do
             git clone https://aur.archlinux.org/paru-bin.git && cd paru-bin && makepkg -si --noconfirm && cd ..
             # Add Flatpak
             echo "# Installing Flatpak..."
-            sudo -v pacman -S flatpak --noconfirm
+            sudo pacman -S flatpak --noconfirm
             flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
             echo "# Enabling Bluetooth and Printer services..."
             # Enable Bluetooth
-            sudo -v systemctl start bluetooth
+            sudo systemctl start bluetooth
             systemctl enable bluetooth
             # Enable Printer 
-            sudo -v pacman -S cups gutenprint cups-pdf gtk3-print-backends nmap net-tools cmake meson cpio --noconfirm
-            sudo -v systemctl enable cups.service
-            sudo -v systemctl start cups
+            sudo pacman -S cups gutenprint cups-pdf gtk3-print-backends nmap net-tools cmake meson cpio --noconfirm
+            sudo systemctl enable cups.service
+            sudo systemctl start cups
             msg_box "System will reboot now. Re-run the script after reboot to continue."
             sudo reboot
             ;;
