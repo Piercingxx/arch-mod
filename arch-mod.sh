@@ -87,7 +87,7 @@ while true; do
                 cp -f arch-maintenance.sh /home/"$username"
                 chown "$username":"$username" /home/"$username"/arch-maintenance.sh
                 cd "$builddir" || exit
-            echo -e "${GREEN}Arch-Update.sh Copied To Home Directory${NC}"
+            echo -e "${GREEN}arch-maintenance.sh Copied To Home Directory${NC}"
             ;;
         "Update System")
             echo -e "${YELLOW}Updating System...${NC}"
