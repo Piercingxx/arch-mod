@@ -218,6 +218,7 @@ while true; do
                     chown -R "$username":"$username" mybash
                     cd mybash || exit
                     ./setup.sh
+                    wait
                     cd "$builddir" || exit
                     rm -rf mybash
             ;;
