@@ -32,8 +32,8 @@ function msg_box() {
 function menu() {
     whiptail --backtitle "GitHub.com/PiercingXX" --title "Main Menu" \
         --menu "Run Options In Order:" 0 0 0 \
-        "Update Mirrors"                        "Update Mirrors" \
         "Update System"                         "Update System" \
+        "Update Mirrors"                        "Update Mirrors" \
         "Piercing Gimp"                         "Piercing Gimp Presets (Distro Agnostic)" \
         "PiercingXX Rice"                       "Apply Piercing Rice (Distro Agnostic)" \
         "Reboot System"                         "Reboot the system" \
@@ -46,26 +46,6 @@ while true; do
     echo -e "${GREEN}Welcome ${username}${NC}\n"
     choice=$(menu)
     case $choice in
-        "Update Mirrors")
-            echo -e "${YELLOW}Updating System...${NC}"
-            # Check if reflector is installed
-            if ! command_exists reflector; then
-                echo "Reflector is not installed. Installing now..."
-                # Attempt to install reflector using pacman
-                sudo -v pacman -S reflector --noconfirm
-                # Check if the installation was successful
-                if ! command_exists reflector; then
-                echo "Failed to install reflector. Please check your pacman configuration and internet connection."
-                exit 1  # Exit with an error code
-                else
-                echo "Reflector installed successfully."
-                fi
-            fi
-            echo -e "${YELLOW}Finding The Fastest Mirrors then Updating, Be Patient...${NC}"
-            # Update mirrors
-            sudo reflector --verbose --sort rate -l 75 --save /etc/pacman.d/mirrorlist
-            echo -e "${GREEN}Mirrors Updated${NC}"
-            ;;
         "Update System")
             echo -e "${YELLOW}Updating System...${NC}"
             # Check if paru is installed
@@ -94,6 +74,26 @@ while true; do
                     hyprpm reload
                 fi
             echo -e "${GREEN}System Updated Successfully!${NC}"
+            ;;
+        "Update Mirrors")
+            echo -e "${YELLOW}Updating System...${NC}"
+            # Check if reflector is installed
+            if ! command_exists reflector; then
+                echo "Reflector is not installed. Installing now..."
+                # Attempt to install reflector using pacman
+                sudo -v pacman -S reflector --noconfirm
+                # Check if the installation was successful
+                if ! command_exists reflector; then
+                echo "Failed to install reflector. Please check your pacman configuration and internet connection."
+                exit 1  # Exit with an error code
+                else
+                echo "Reflector installed successfully."
+                fi
+            fi
+            echo -e "${YELLOW}Finding The Fastest Mirrors then Updating, Be Patient...${NC}"
+            # Update mirrors
+            sudo reflector --verbose --sort rate -l 75 --save /etc/pacman.d/mirrorlist
+            echo -e "${GREEN}Mirrors Updated${NC}"
             ;;
         "Piercing Gimp")
             # Gimp Dots
