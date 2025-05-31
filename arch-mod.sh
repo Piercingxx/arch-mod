@@ -211,6 +211,12 @@ while true; do
                         ./gnome-customizations.sh
                         cd "$builddir" || exit
                 # Add in backgrounds and themes and apply them
+                    mkdir -p /home/"$username"/Pictures/backgrounds
+                    chown -R "$username":"$username" /home/"$username"/Pictures/backgrounds
+                    cp
+
+
+                    
                 rm -rf piercing-dots
             echo -e "${GREEN}PiercingXX Rice Applied Successfully!${NC}"
             ;;
