@@ -147,6 +147,9 @@ while true; do
                 chmod u+x hyprland-install.sh
                 ./hyprland-install.sh
                 cd "$builddir" || exit
+            # Enable Bluetooth again
+            sudo systemctl start bluetooth
+            systemctl enable bluetooth
             echo -e "${GREEN}Installed successfully!${NC}"
             ;;     
         "Applications")
