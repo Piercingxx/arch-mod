@@ -11,7 +11,7 @@ CHOICES=$(whiptail --title "Applications Installation" --checklist \
 "GIMP" "GIMP, Darktable" ON \
 "Synology" "SynoChat & Synology Drive" ON \
 "VSCode" "VS Code & GitHub Desktop" ON \
-"Fonts & Themes" "Nerd Fonts, Icons, Cursors" ON \
+"Fonts and Themes" "Nerd Fonts, Icons, Cursors" ON \
 "Blender" "Blender" OFF \
 "Kdenlive" "KdenLive" OFF \
 "Steam" "Steam & Discord, etc" OFF \
@@ -41,7 +41,7 @@ for CHOICE in $CHOICES; do
         '"VSCode"')
             paru -S visual-studio-code-bin github-desktop-bin --noconfirm
             ;;
-        '"Fonts & Themes"')
+        '"Fonts and Themes"')
             mkdir -p "$HOME"/.fonts
             chmod -R u+x "$HOME"/.fonts
             chown -R "$username":"$username" "$HOME"/.fonts
