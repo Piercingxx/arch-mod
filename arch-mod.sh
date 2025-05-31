@@ -43,7 +43,7 @@ function msg_box() {
 function menu() {
     whiptail --backtitle "GitHub.com/PiercingXX" --title "Main Menu" \
         --menu "Run Options In Order:" 0 0 0 \
-        "Update Mirrors"                        "Update Mirrors & adds "arch-maintenance.sh" to /home" \
+        "Update Mirrors"                        "Update Mirrors & adds 'arch-maintenance.sh' to /home" \
         "Update System"                         "Update System" \
         "Add Paru, Flatpak, & Dependencies"     "Will Automatically Reboot After" \
         "Applications"                          "Install Applications and Utilities" \
@@ -52,7 +52,7 @@ function menu() {
         "Piercing Gimp"                         "Piercing Gimp Presets (Distro Agnostic)" \
         "PiercingXX Rice"                       "Apply Piercing Rice (Distro Agnostic)" \
         "Beautiful Bash"                        "Chris Titus' Beautiful Bash Script" \
-        "Surface Kernel"                        "Install Surface Kernal" \
+        "Surface Kernel"                        "Install Microsoft Surface Kernal" \
         "Reboot System"                         "Reboot the system" \
         "Exit"                                  "Exit the script" 3>&1 1>&2 2>&3
 }
@@ -213,10 +213,18 @@ while true; do
                 # Add in backgrounds and themes and apply them
                     mkdir -p /home/"$username"/Pictures/backgrounds
                     chown -R "$username":"$username" /home/"$username"/Pictures/backgrounds
-                    cp
-
-
-                    
+                    cp -Rf piercing-dots/backgrounds/* /home/"$username"/Pictures/backgrounds
+                    chown -R "$username":"$username" /home/"$username"/Pictures/backgrounds
+                    mkdir -p /home/"$username"/Pictures/profile-image
+                    chown -R "$username":"$username" /home/"$username"/Pictures/profile-image
+                    cp -Rf piercing-dots/profile-image/* /home/"$username"/Pictures/profile-image
+                    chown -R "$username":"$username" /home/"$username"/Pictures/profile-images
+                    cd "$builddir" || exit
+                # Copy Refs to Download folder
+                    mkdir -p /home/"$username"/Downloads/refs
+                    chown -R "$username":"$username" /home/"$username"/Downloads/refs
+                    cp -Rf piercing-dots/refs/* /home/"$username"/Downloads/refs
+                    chown -R "$username":"$username" /home/"$username"/Downloads/refs
                 rm -rf piercing-dots
             echo -e "${GREEN}PiercingXX Rice Applied Successfully!${NC}"
             ;;
