@@ -171,6 +171,7 @@ while true; do
                 paru -S gnome-shell-extension-useless-gaps-git --noconfirm
                 paru -S gnome-shell-extension-caffeine-git --noconfirm
                 paru -S gnome-shell-extension-gsconnect --noconfirm
+                paru -S gnome-shell-extension-vitals --noconfirm
             echo -e "${GREEN}Gnome Extensions Installed successfully!${NC}"
             ;;   
         "Piercing Gimp")

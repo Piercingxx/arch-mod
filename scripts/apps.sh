@@ -65,6 +65,9 @@ for CHOICE in $CHOICES; do
                 cd "$builddir" || exit
                 sudo rm -R fuzzmoji
             paru -S papirus-icon-theme ttf-firacode awesome-terminal-fonts ttf-ms-fonts terminus-font-ttf noto-color-emoji-fontconfig wtype-git xcursor-simp1e-gruvbox-light --noconfirm
+            # Reload Font
+                fc-cache -vf
+                wait
             ;;
         '"Blender"')
             paru -S blender --noconfirm
