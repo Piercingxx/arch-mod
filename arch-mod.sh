@@ -154,6 +154,12 @@ while true; do
             ;;     
         "Applications")
             echo -e "${YELLOW}Installing Core Applications...${NC}"
+                if [ ! -d "$HOME/.fonts" ]; then
+                echo "Creating .fonts directory..."
+                mkdir -p "$HOME/.fonts"
+                fi
+                chmod -R u+x "$HOME"/.fonts
+                chown -R "$username":"$username" "$HOME"/.fonts
                 cd scripts || exit
                 chmod u+x apps.sh
                 ./apps.sh

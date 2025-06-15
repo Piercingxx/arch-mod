@@ -11,7 +11,6 @@ CHOICES=$(whiptail --title "Applications Installation" --checklist \
 "GIMP" "GIMP, Darktable" ON \
 "Synology" "SynoChat & Synology Drive" ON \
 "VSCode" "VS Code & GitHub Desktop" ON \
-"Fonts and Themes" "Nerd Fonts, Icons, Cursors" ON \
 "Blender" "Blender" OFF \
 "Kdenlive" "KdenLive" OFF \
 "Steam" "Steam & Discord, etc" OFF \
@@ -29,6 +28,30 @@ for CHOICE in $CHOICES; do
         '"Core Apps"')
             flatpak install flathub com.mattjakeman.ExtensionManager -y
             paru -S dconf waterfox-bin pacseek mpd mpv fuzzel ranger kitty mission-center python obsidian libreoffice-fresh code-nautilus-git nautilus-open-any-terminal nautilus-renamer --noconfirm
+            # Install fonts and Themes
+                cd "$HOME"/.fonts || exit
+                wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/FiraCode.zip
+                wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/Meslo.zip
+                unzip FiraCode.zip Meslo.zip
+                sudo rm FiraCode.zip Meslo.zip
+                cd "$builddir" || exit
+                git clone https://codeberg.org/codingotaku/fuzzmoji.git
+                    cd fuzzmoji || exit
+                    sudo mkdir -p /usr/share/fuzzmoji/emoji-list
+                    chmod -R 777 /usr/share/fuzzmoji/emoji-list
+                    chown -R "$username":"$username" /usr/share/fuzzmoji/emoji-list
+                    sudo cp emoji-list /usr/share/fuzzmoji/emoji-list
+                    chmod -R 777 /usr/share/fuzzmoji/emoji-list
+                    chown -R "$username":"$username" /usr/share/fuzzmoji/emoji-list
+                    sudo cp fuzzmoji /usr/bin/fuzzmoji
+                    chmod -R 777 /usr/bin/fuzzmoji
+                    chown -R "$username":"$username" /usr/bin/fuzzmoji
+                    cd "$builddir" || exit
+                    sudo rm -R fuzzmoji
+                paru -S papirus-icon-theme ttf-firacode awesome-terminal-fonts ttf-ms-fonts terminus-font-ttf noto-color-emoji-fontconfig wtype-git xcursor-simp1e-gruvbox-light --noconfirm
+            # Reload Font
+                fc-cache -vf
+                wait
             ;;
         '"GIMP"')
             paru -S gimp darktable opencl-amd --noconfirm
@@ -40,34 +63,6 @@ for CHOICE in $CHOICES; do
             ;;
         '"VSCode"')
             paru -S visual-studio-code-bin github-desktop-bin --noconfirm
-            ;;
-        '"Fonts and Themes"')
-            mkdir -p "$HOME"/.fonts
-            chmod -R u+x "$HOME"/.fonts
-            chown -R "$username":"$username" "$HOME"/.fonts
-            cd "$HOME"/.fonts || exit
-            wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/FiraCode.zip
-            wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/Meslo.zip
-            unzip FiraCode.zip Meslo.zip
-            sudo rm FiraCode.zip Meslo.zip
-            cd "$builddir" || exit
-            git clone https://codeberg.org/codingotaku/fuzzmoji.git
-                cd fuzzmoji || exit
-                sudo mkdir -p /usr/share/fuzzmoji/emoji-list
-                chmod -R 777 /usr/share/fuzzmoji/emoji-list
-                chown -R "$username":"$username" /usr/share/fuzzmoji/emoji-list
-                sudo cp emoji-list /usr/share/fuzzmoji/emoji-list
-                chmod -R 777 /usr/share/fuzzmoji/emoji-list
-                chown -R "$username":"$username" /usr/share/fuzzmoji/emoji-list
-                sudo cp fuzzmoji /usr/bin/fuzzmoji
-                chmod -R 777 /usr/bin/fuzzmoji
-                chown -R "$username":"$username" /usr/bin/fuzzmoji
-                cd "$builddir" || exit
-                sudo rm -R fuzzmoji
-            paru -S papirus-icon-theme ttf-firacode awesome-terminal-fonts ttf-ms-fonts terminus-font-ttf noto-color-emoji-fontconfig wtype-git xcursor-simp1e-gruvbox-light --noconfirm
-            # Reload Font
-                fc-cache -vf
-                wait
             ;;
         '"Blender"')
             paru -S blender --noconfirm
