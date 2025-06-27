@@ -43,16 +43,10 @@ function msg_box() {
 function menu() {
     whiptail --backtitle "GitHub.com/PiercingXX" --title "Main Menu" \
         --menu "Run Options In Order:" 0 0 0 \
-        "Update Mirrors"                        "Update Mirrors & adds 'arch-maintenance.sh' to /home" \
-        "Update System"                         "Update System" \
-        "Add Paru, Flatpak, & Dependencies"     "Will Automatically Reboot After" \
-        "Applications"                          "Install Applications and Utilities" \
-        "Hyprland"                              "This Will Install Hyprland & All Dependencies" \
-        "Gnome Extensions"                      "My Favorite Gnome Shell Extensions" \
-        "Piercing Gimp"                         "Piercing Gimp Presets (Distro Agnostic)" \
-        "PiercingXX Rice"                       "Apply Piercing Rice (Distro Agnostic)" \
-        "Beautiful Bash"                        "Chris Titus' Beautiful Bash Script" \
-        "Surface Kernel"                        "Install Microsoft Surface Kernal" \
+        "Step 1"                                "Will Automatically Reboot After" \
+        "Step 2"                                "Applications, Utilities, & Extensions" \
+        "Step 3"                                "Apply Piercing Rice, GIMP-dots, Beautiful Bash" \
+        "Optional Surface Kernel"               "Install Microsoft Surface Kernal" \
         "Reboot System"                         "Reboot the system" \
         "Exit"                                  "Exit the script" 3>&1 1>&2 2>&3
 }
@@ -63,7 +57,7 @@ while true; do
     echo -e "${GREEN}Welcome ${username}${NC}\n"
     choice=$(menu)
     case $choice in
-        "Update Mirrors")
+        "Step 1")
             echo -e "${YELLOW}Updating System...${NC}"
             # Check if reflector is installed
             if ! command_exists reflector; then
@@ -88,8 +82,6 @@ while true; do
                 chown "$username":"$username" /home/"$username"/arch-maintenance.sh
                 cd "$builddir" || exit
             echo -e "${GREEN}arch-maintenance.sh Copied To Home Directory${NC}"
-            ;;
-        "Update System")
             echo -e "${YELLOW}Updating System...${NC}"
             # Check if paru is installed
                 if command_exists paru; then
@@ -117,42 +109,31 @@ while true; do
                     hyprpm reload
                 fi
             echo -e "${GREEN}System Updated Successfully!${NC}"
-            ;;
-        "Add Paru, Flatpak, & Dependencies"*)
+            # Add Paru, Flatpak, & Dependencies
             echo -e "${YELLOW}Installing Paru, Flatpak, & Dependencies...${NC}"
-            # Install dependencies
-            echo "# Installing dependencies..."
-            sudo pacman -S zip unzip gzip tar make --noconfirm
-            # Clone and install Paru
-            echo "# Cloning and installing Paru..."
-            git clone https://aur.archlinux.org/paru-bin.git && cd paru-bin && makepkg -si --noconfirm && cd ..
-            # Add Flatpak
-            echo "# Installing Flatpak..."
-            sudo pacman -S flatpak --noconfirm
-            flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+                # Install dependencies
+                echo "# Installing dependencies..."
+                sudo pacman -S zip unzip gzip tar make --noconfirm
+                # Clone and install Paru
+                echo "# Cloning and installing Paru..."
+                git clone https://aur.archlinux.org/paru-bin.git && cd paru-bin && makepkg -si --noconfirm && cd ..
+                # Add Flatpak
+                echo "# Installing Flatpak..."
+                sudo pacman -S flatpak --noconfirm
+                flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
             echo "# Enabling Bluetooth and Printer services..."
-            # Enable Bluetooth
-            sudo systemctl start bluetooth
-            systemctl enable bluetooth
-            # Enable Printer 
-            sudo pacman -S cups gutenprint cups-pdf gtk3-print-backends nmap net-tools cmake meson cpio --noconfirm
-            sudo systemctl enable cups.service
-            sudo systemctl start cups
-            msg_box "System will reboot now. Re-run the script after reboot to continue."
+                # Enable Bluetooth
+                sudo systemctl start bluetooth
+                systemctl enable bluetooth
+                # Enable Printer 
+                sudo pacman -S cups gutenprint cups-pdf gtk3-print-backends nmap net-tools cmake meson cpio --noconfirm
+                sudo systemctl enable cups.service
+                sudo systemctl start cups
+                msg_box "System will reboot now. Re-run the script after reboot to continue."
             sudo reboot
             ;;
-        "Hyprland"*)
-            echo -e "${YELLOW}Installing Hyprland & Dependencies...${NC}"
-                cd scripts || exit
-                chmod u+x hyprland-install.sh
-                ./hyprland-install.sh
-                cd "$builddir" || exit
-            # Enable Bluetooth again
-            sudo systemctl start bluetooth
-            systemctl enable bluetooth
-            echo -e "${GREEN}Installed successfully!${NC}"
-            ;;     
-        "Applications")
+        "Step 2")
+            # App install
             echo -e "${YELLOW}Installing Core Applications...${NC}"
                 if [ ! -d "$HOME/.fonts" ]; then
                 echo "Creating .fonts directory..."
@@ -165,8 +146,7 @@ while true; do
                 ./apps.sh
                 cd "$builddir" || exit
             echo -e "${GREEN}Core Apps Installed successfully!${NC}"
-            ;;
-        "Gnome Extensions"*)
+            # Extensions Install
             echo -e "${YELLOW}Installing Gnome Extensions...${NC}"
                 paru -S gnome-shell-extension-appindicator-git --noconfirm
                 paru -S gnome-shell-extension-app-icons-taskbar --noconfirm
@@ -179,27 +159,19 @@ while true; do
                 paru -S gnome-shell-extension-gsconnect --noconfirm
                 paru -S gnome-shell-extension-vitals --noconfirm
             echo -e "${GREEN}Gnome Extensions Installed successfully!${NC}"
-            ;;   
-        "Piercing Gimp")
-            # Gimp Dots
-                echo -e "${YELLOW}Installing Piercing Gimp Presets...${NC}"
-                if git clone https://github.com/Piercingxx/gimp-dots.git; then
-                    chmod -R u+x gimp-dots
-                    chown -R "$username":"$username" gimp-dots
-                    sudo rm -Rf /home/"$username"/.var/app/org.gimp.GIMP/config/GIMP/*
-                    sudo rm -Rf /home/"$username"/.config/GIMP/*
-                    mkdir -p /home/"$username"/.config/GIMP/3.0
-                    chown -R "$username":"$username" /home/"$username"/.config/GIMP
-                    cd gimp-dots/Gimp || exit
-                    cp -Rf 3.0/* /home/"$username"/.config/GIMP/3.0
-                    chown "$username":"$username" -R /home/"$username"/.config/GIMP
-                    cd "$builddir" || exit
-                    echo -e "${GREEN}Piercing Gimp Presets Installed Successfully!${NC}"
-                else
-                    echo -e "${RED}Failed to clone gimp-dots repository${NC}"
-                fi
-            ;;
-        "PiercingXX Rice")
+            # Hyprland install
+            echo -e "${YELLOW}Installing Hyprland & Dependencies...${NC}"
+                cd scripts || exit
+                chmod u+x hyprland-install.sh
+                ./hyprland-install.sh
+                cd "$builddir" || exit
+            # Enable Bluetooth again
+            sudo systemctl start bluetooth
+            systemctl enable bluetooth
+            echo -e "${GREEN}Installed successfully!${NC}"
+            ;;     
+        "Step 3")
+            # PiercingXX Rice
             echo -e "${YELLOW}Downloading and Applying PiercingXX Rice...${NC}"
                 # .config Dot Files
                 echo -e "${YELLOW}Downloading PiercingXX Dot Files...${NC}"
@@ -232,10 +204,21 @@ while true; do
                     chown -R "$username":"$username" /home/"$username"/Downloads/refs
                     cp -Rf piercing-dots/refs/* /home/"$username"/Downloads/refs
                     chown -R "$username":"$username" /home/"$username"/Downloads/refs
-                rm -rf piercing-dots
-            echo -e "${GREEN}PiercingXX Rice Applied Successfully!${NC}"
-            ;;
-        "Beautiful Bash")
+                    rm -Rf piercing-dots
+            # Gimp Dots
+                echo -e "${YELLOW}Installing Piercing Gimp Presets...${NC}"
+                if git clone https://github.com/Piercingxx/gimp-dots.git; then
+                    chmod -R u+x gimp-dots
+                    chown -R "$username":"$username" gimp-dots
+                    cd ./gimp-dots
+                    sudo ./gimp-mod.sh
+                    cd "$builddir" || exit
+                    rm -Rf gimp-dots
+                    echo -e "${GREEN}Piercing Gimp Presets Installed Successfully!${NC}"
+                else
+                    echo -e "${RED}Failed to clone gimp-dots repository${NC}"
+                fi
+            # Beautiful Bash
             echo -e "${YELLOW}Installing Beautiful Bash...${NC}"
                 git clone https://github.com/christitustech/mybash
                     chmod -R u+x mybash
@@ -245,8 +228,9 @@ while true; do
                     wait
                     cd "$builddir" || exit
                     rm -rf mybash
+            echo -e "${GREEN}PiercingXX Rice Applied Successfully!${NC}"
             ;;
-        "Surface Kernel")
+        "Optional Surface Kernel")
             echo -e "${YELLOW}Microsoft Surface Kernel...${NC}"            
                 curl -s https://raw.githubusercontent.com/linux-surface/linux-surface/master/pkg/keys/surface.asc \
                     | sudo pacman-key --add -
