@@ -207,11 +207,13 @@ while true; do
                     rm -Rf piercing-dots
             # Gimp Dots
                 echo -e "${YELLOW}Installing Piercing Gimp Presets...${NC}"
+                rm -Rf gimp-dots
                 if git clone https://github.com/Piercingxx/gimp-dots.git; then
                     chmod -R u+x gimp-dots
                     chown -R "$username":"$username" gimp-dots
-                    cd ./gimp-dots || exit
+                    cd gimp-dots || exit
                     ./gimp-mod.sh
+                    wait
                     cd "$builddir" || exit
                     echo -e "${GREEN}Piercing Gimp Presets Installed Successfully!${NC}"
                 else
