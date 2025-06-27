@@ -210,7 +210,7 @@ while true; do
                 if git clone https://github.com/Piercingxx/gimp-dots.git; then
                     chmod -R u+x gimp-dots
                     chown -R "$username":"$username" gimp-dots
-                    cd ./gimp-dots
+                    cd ./gimp-dots || exit
                     sudo ./gimp-mod.sh
                     cd "$builddir" || exit
                     rm -Rf gimp-dots
