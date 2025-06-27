@@ -11,10 +11,10 @@ CHOICES=$(whiptail --title "Applications Installation" --checklist \
 "GIMP" "GIMP, Darktable" ON \
 "Synology" "SynoChat & Synology Drive" ON \
 "VSCode" "VS Code & GitHub Desktop" ON \
-"Blender" "Blender" OFF \
-"Kdenlive" "KdenLive" OFF \
-"Steam" "Steam & Discord, etc" OFF \
-"Docker" "Docker Desktop & Tools" OFF 3>&1 1>&2 2>&3)
+"Blender" "Blender" ON \
+"Kdenlive" "KdenLive" ON \
+"Steam" "Steam & Discord, etc" ON \
+"Docker" "Docker Desktop & Tools" ON 3>&1 1>&2 2>&3)
 
 # Check if user canceled the dialog
 if [ $? -ne 0 ]; then
@@ -27,7 +27,21 @@ for CHOICE in $CHOICES; do
     case $CHOICE in
         '"Core Apps"')
             flatpak install flathub com.mattjakeman.ExtensionManager -y
-            paru -S dconf waterfox-bin pacseek mpd mpv fuzzel ranger kitty mission-center python obsidian libreoffice-fresh code-nautilus-git nautilus-open-any-terminal nautilus-renamer --noconfirm
+            paru -S dconf --noconfirm
+            paru -S waterfox-bin --noconfirm
+            paru -S pacseek --noconfirm
+            paru -S mpd --noconfirm
+            paru -S mpv --noconfirm
+            paru -S fuzzel --noconfirm
+            paru -S ranger --noconfirm
+            paru -S kitty --noconfirm
+            paru -S mission-center --noconfirm
+            paru -S python --noconfirm
+            paru -S obsidian --noconfirm
+            paru -S libreoffice-fresh --noconfirm
+            paru -S code-nautilus-git --noconfirm
+            paru -S nautilus-open-any-terminal --noconfirm
+            paru -S nautilus-renamer --noconfirm
             # Install fonts and Themes
                 cd "$HOME"/.fonts || exit
                 wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/FiraCode.zip
@@ -54,15 +68,19 @@ for CHOICE in $CHOICES; do
                 wait
             ;;
         '"GIMP"')
-            paru -S gimp darktable opencl-amd --noconfirm
+            paru -S gimp --noconfirm
+            paru -S darktable --noconfirm
+            paru -S opencl-amd --noconfirm
             ;;
         '"Synology"')
-            paru -S synochat synology-drive --noconfirm
+            paru -S synochat --noconfirm
+            paru -S synology-drive --noconfirm
             #Synology Drive doesnt support wayland so run this..
             QT_QPA_PLATFORM=xcb
             ;;
         '"VSCode"')
-            paru -S visual-studio-code-bin github-desktop-bin --noconfirm
+            paru -S visual-studio-code-bin --noconfirm
+            paru -S github-desktop-bin --noconfirm
             ;;
         '"Blender"')
             paru -S blender --noconfirm
@@ -72,7 +90,8 @@ for CHOICE in $CHOICES; do
             ;;
         '"Steam"')
             sudo pacman -S steam --noconfirm
-            paru -S discord vesktop-bin input-remapper --noconfirm
+            paru -S discord --noconfirm
+            paru -S input-remapper --noconfirm
             ;;
         '"Docker"')
             # Docker
@@ -80,7 +99,7 @@ for CHOICE in $CHOICES; do
                 sudo mv ./docker /usr/local/bin
                 ##Download the latest from https://docs.docker.com/desktop/release-notes/
                 git clone https://desktop.docker.com/linux/main/amd64/187762/docker-desktop-x86_64.pkg.tar.zst
-                sudo pacman -U ./docker-desktop-x86_64.pkg.tar.zst
+                sudo pacman -U ./docker-desktop-x86_64.pkg.tar.zst --noconfirm
                 #AI 
                 curl -fsSL https://ollama.com/install.sh | sh
                 #ollama pull gemma3:27b 

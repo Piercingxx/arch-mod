@@ -211,9 +211,8 @@ while true; do
                     chmod -R u+x gimp-dots
                     chown -R "$username":"$username" gimp-dots
                     cd ./gimp-dots || exit
-                    sudo ./gimp-mod.sh
+                    ./gimp-mod.sh
                     cd "$builddir" || exit
-                    rm -Rf gimp-dots
                     echo -e "${GREEN}Piercing Gimp Presets Installed Successfully!${NC}"
                 else
                     echo -e "${RED}Failed to clone gimp-dots repository${NC}"
