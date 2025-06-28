@@ -22,7 +22,42 @@ if [ $? -ne 0 ]; then
     exit 1
 fi
 
-# Process the selections
+# Create Directories if needed
+    # font directory
+        if [ ! -d "$HOME/.fonts" ]; then
+            mkdir -p "$HOME/.fonts"
+        fi
+        chown -R "$username":"$username" "$HOME"/.fonts
+    # config directory
+        if [ ! -d "$HOME/.config" ]; then
+            mkdir -p /home/"$username"/.config
+        fi
+        chown -R "$username":"$username" /home/"$username"/.config
+    # icons directory
+        if [ ! -d "$HOME/.icons" ]; then
+            mkdir -p /home/"$username"/.icons
+        fi
+        chown -R "$username":"$username" /home/"$username"/.icons
+    # Background and Profile Image Directories
+        if [ ! -d "$HOME/$username/Pictures/backgrounds" ]; then
+            mkdir -p /home/"$username"/Pictures/backgrounds
+        fi
+        chown -R "$username":"$username" /home/"$username"/Pictures/backgrounds
+        if [ ! -d "$HOME/$username/Pictures/profile-image" ]; then
+            mkdir -p /home/"$username"/Pictures/profile-image
+        fi
+        chown -R "$username":"$username" /home/"$username"/Pictures/profile-image
+    # fstab external drive mounting directory
+        if [ ! -d "$HOME/.media/Working-Storage" ]; then
+            mkdir -p /media/Working-Storage
+        fi
+        chown "$username":"$username" /home/"$username"/media/Working-Storage
+        if [ ! -d "$HOME/.media/Archived-Storage" ]; then
+            mkdir -p /media/Archived-Storage
+        fi
+        chown "$username":"$username" /home/"$username"/media/Archived-Storage
+
+# App Options
 for CHOICE in $CHOICES; do
     case $CHOICE in
         '"Core Apps"')
@@ -42,6 +77,13 @@ for CHOICE in $CHOICES; do
             paru -S code-nautilus-git --noconfirm
             paru -S nautilus-open-any-terminal --noconfirm
             paru -S nautilus-renamer --noconfirm
+            #H265 support
+                sudo pacman -S libde265 meson gst-plugins-bad ffnvcodec-headers --noconfirm
+                # nvidia-vaapi-driver
+                    git clone https://github.com/elFarto/nvidia-vaapi-driver.git
+                    cd nvidia-vaapi-driver
+                    meson setup build
+                    meson install -C build
             # Install fonts and Themes
                 cd "$HOME"/.fonts || exit
                 wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/FiraCode.zip
