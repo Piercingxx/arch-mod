@@ -138,6 +138,7 @@ while true; do
                 cd scripts || exit
                 chmod u+x apps.sh
                 ./apps.sh
+                wait
                 cd "$builddir" || exit
             echo -e "${GREEN}Core Apps Installed successfully!${NC}"
             # Extensions Install
@@ -147,8 +148,6 @@ while true; do
                 paru -S gnome-shell-extension-blur-my-shell-git --noconfirm
                 paru -S gnome-shell-extension-just-perfection-desktop --noconfirm
                 paru -S gnome-shell-extension-pop-shell-git --noconfirm
-                paru -S gnome-shell-extension-forge --noconfirm
-                paru -S gnome-shell-extension-space-bar-git --noconfirm
                 paru -S gnome-shell-extension-useless-gaps-git --noconfirm
                 paru -S gnome-shell-extension-caffeine-git --noconfirm
                 paru -S gnome-shell-extension-gsconnect --noconfirm
@@ -257,7 +256,7 @@ while true; do
             ;;
         "Reboot System")
             echo -e "${YELLOW}Rebooting system in 3 seconds...${NC}"
-            sleep 2
+            sleep 1
             reboot
             ;;
         "Exit")

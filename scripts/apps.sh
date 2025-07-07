@@ -4,24 +4,6 @@
 username=$(id -u -n 1000)
 builddir=$(pwd)
 
-# Define the whiptail checklist options
-CHOICES=$(whiptail --title "Applications Installation" --checklist \
-"Select applications to install" 0 0 0 \
-"Core Apps" "Obsidian, Office, etc" ON \
-"GIMP" "GIMP, Darktable" ON \
-"Synology" "SynoChat & Synology Drive" ON \
-"VSCode" "VS Code & GitHub Desktop" ON \
-"Blender" "Blender" ON \
-"Kdenlive" "KdenLive" ON \
-"Steam" "Steam & Discord, etc" ON \
-"Docker" "Docker Desktop & Tools" ON 3>&1 1>&2 2>&3)
-
-# Check if user canceled the dialog
-if [ $? -ne 0 ]; then
-    echo "User canceled application selection"
-    exit 1
-fi
-
 # Create Directories if needed
     # font directory
         if [ ! -d "$HOME/.fonts" ]; then
@@ -57,10 +39,10 @@ fi
         fi
         chown "$username":"$username" /home/"$username"/media/Archived-Storage
 
-# App Options
-for CHOICE in $CHOICES; do
-    case $CHOICE in
-        '"Core Apps"')
+
+
+        
+# Apps to Install
             flatpak install flathub com.mattjakeman.ExtensionManager -y
             paru -S dconf --noconfirm
             paru -S waterfox-bin --noconfirm
@@ -108,34 +90,27 @@ for CHOICE in $CHOICES; do
             # Reload Font
                 fc-cache -vf
                 wait
-            ;;
-        '"GIMP"')
+# Gimp
             paru -S gimp --noconfirm
             paru -S darktable --noconfirm
             paru -S opencl-amd --noconfirm
-            ;;
-        '"Synology"')
+# Synology
             paru -S synochat --noconfirm
             paru -S synology-drive --noconfirm
             #Synology Drive doesnt support wayland so run this..
             QT_QPA_PLATFORM=xcb
-            ;;
-        '"VSCode"')
+# VScode
             paru -S visual-studio-code-bin --noconfirm
             paru -S github-desktop-bin --noconfirm
-            ;;
-        '"Blender"')
+# Blender
             paru -S blender --noconfirm
-            ;;
-        '"Kdenlive"')
+# Kdenlive
             paru -S kdenlive --noconfirm
-            ;;
-        '"Steam"')
+# Steam
             sudo pacman -S steam --noconfirm
             paru -S discord --noconfirm
             paru -S input-remapper --noconfirm
-            ;;
-        '"Docker"')
+# Docker
             # Docker
                 wget https://download.docker.com/linux/static/stable/x86_64/docker-28.0.4.tgz -qO- | tar xvfz - docker/docker --strip-components=1
                 sudo mv ./docker /usr/local/bin
@@ -148,6 +123,3 @@ for CHOICE in $CHOICES; do
                 #ollama pull deepseek-r1:7b
             #OpenWebUi
                 docker run -d -p 3000:8080 --add-host=host.docker.internal:host-gateway -v open-webui:/app/backend/data --name open-webui --restart always ghcr.io/open-webui/open-webui:main
-            ;;
-    esac
-done
