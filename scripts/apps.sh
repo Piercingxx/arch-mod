@@ -39,9 +39,6 @@ builddir=$(pwd)
         fi
         chown "$username":"$username" /home/"$username"/media/Archived-Storage
 
-
-
-        
 # Apps to Install
             flatpak install flathub com.mattjakeman.ExtensionManager -y
             paru -S dconf --noconfirm
@@ -59,6 +56,7 @@ builddir=$(pwd)
             paru -S code-nautilus-git --noconfirm
             paru -S nautilus-open-any-terminal --noconfirm
             paru -S nautilus-renamer --noconfirm
+            paru -S ulauncher --noconfirm
             #H265 support
                 sudo pacman -S libde265 meson gst-plugins-bad ffnvcodec-headers --noconfirm
                 # nvidia-vaapi-driver

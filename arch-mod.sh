@@ -152,6 +152,7 @@ while true; do
                 paru -S gnome-shell-extension-caffeine-git --noconfirm
                 paru -S gnome-shell-extension-gsconnect --noconfirm
                 paru -S gnome-shell-extension-vitals --noconfirm
+                # Super Key
             echo -e "${GREEN}Gnome Extensions Installed successfully!${NC}"
             # Hyprland install
             echo -e "${YELLOW}Installing Hyprland & Dependencies...${NC}"
