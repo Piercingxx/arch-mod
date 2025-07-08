@@ -10,6 +10,7 @@ ${PKGMGR} hyprpaper
 ${PKGMGR} hyprlock
 ${PKGMGR} hypridle
 ${PKGMGR} hyprcursor-git
+${PKGMGR} hyprsunset
 
 # Install additional utilities
 ${PKGMGR} wlsunset-git
@@ -74,6 +75,7 @@ hyprpm add https://github.com/hyprwm/hyprland-plugins
 hyprpm add https://github.com/virtcode/hypr-dynamic-cursors
 hyprpm enable dynamic-cursors
 hyprpm enable hyprtrails
+hyprpm enable hyprfocus
 
 # Success message
 echo -e "\nAll packages installed successfully!"

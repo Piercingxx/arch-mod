@@ -110,6 +110,10 @@ builddir=$(pwd)
             sudo pacman -S steam --noconfirm
             paru -S discord --noconfirm
             paru -S input-remapper --noconfirm
+# Tailscale
+    curl -fsSL https://tailscale.com/install.sh | sh
+# Ollama
+    curl -fsSL https://ollama.com/install.sh | sh
 # Docker
             # Docker
                 wget https://download.docker.com/linux/static/stable/x86_64/docker-28.0.4.tgz -qO- | tar xvfz - docker/docker --strip-components=1
