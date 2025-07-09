@@ -129,6 +129,8 @@ while true; do
                 sudo pacman -S cups gutenprint cups-pdf gtk3-print-backends nmap net-tools cmake meson cpio --noconfirm
                 sudo systemctl enable cups.service
                 sudo systemctl start cups
+            # Install dconf
+                paru -S dconf --noconfirm
                 msg_box "System will reboot now. Re-run the script after reboot to continue."
             sudo reboot
             ;;

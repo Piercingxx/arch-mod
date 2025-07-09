@@ -41,8 +41,8 @@ builddir=$(pwd)
 
 # Apps to Install
             flatpak install flathub com.mattjakeman.ExtensionManager -y
+            flatpak install flathub net.waterfox.waterfox -y
             paru -S dconf --noconfirm
-            paru -S waterfox-bin --noconfirm
             paru -S pacseek --noconfirm
             paru -S mpd --noconfirm
             paru -S mpv --noconfirm
