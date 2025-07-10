@@ -119,6 +119,9 @@ builddir=$(pwd)
     curl -fsSL https://tailscale.com/install.sh | sh
 # Ollama
     curl -fsSL https://ollama.com/install.sh | sh
+    #ollama pull gemma3:12b
+    ollama pull gemma3n:latest
+    #ollama pull codellama:latest
 # Docker
             # Docker
                 wget https://download.docker.com/linux/static/stable/x86_64/docker-28.0.4.tgz -qO- | tar xvfz - docker/docker --strip-components=1
