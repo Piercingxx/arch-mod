@@ -44,8 +44,8 @@ function menu() {
     whiptail --backtitle "GitHub.com/PiercingXX" --title "Main Menu" \
         --menu "Run Options In Order:" 0 0 0 \
         "Step 1"                                "Will Automatically Reboot After" \
-        "Step 2"                                "Applications, Utilities, & Extensions" \
-        "Step 3"                                "Apply Piercing Rice, GIMP-dots, Beautiful Bash" \
+        "Step 2"                                "Apps, Utils, & Exts, Rice, GIMP-dots" \
+        "Step 3"                                "Re-Apply Gnome Customizations" \
         "Optional Surface Kernel"               "Install Microsoft Surface Kernal" \
         "Reboot System"                         "Reboot the system" \
         "Exit"                                  "Exit the script" 3>&1 1>&2 2>&3
@@ -166,11 +166,9 @@ while true; do
             sudo systemctl start bluetooth
             systemctl enable bluetooth
             echo -e "${GREEN}Installed successfully!${NC}"
-            ;;     
-        "Step 3")
-            # PiercingXX Rice
-            echo -e "${YELLOW}Downloading and Applying PiercingXX Rice...${NC}"
-                # .config Dot Files
+            # Apply Piercing Rice
+                echo -e "${YELLOW}Downloading and Applying PiercingXX Rice...${NC}"
+                # .config Files
                 echo -e "${YELLOW}Downloading PiercingXX Dot Files...${NC}"
                     git clone https://github.com/Piercingxx/piercing-dots.git
                         chmod -R u+x piercing-dots
@@ -185,6 +183,7 @@ while true; do
                         cd piercing-dots || exit
                         cd scripts || exit
                         ./gnome-customizations.sh
+                        wait
                         cd "$builddir" || exit
                 # Add in backgrounds and themes and apply them
                     mkdir -p /home/"$username"/Pictures/backgrounds
@@ -197,36 +196,53 @@ while true; do
                     chown -R "$username":"$username" /home/"$username"/Pictures/profile-images
                     cd "$builddir" || exit
                 # Copy Refs to Download folder
-                    mkdir -p /home/"$username"/Downloads/refs
-                    chown -R "$username":"$username" /home/"$username"/Downloads/refs
-                    cp -Rf piercing-dots/refs/* /home/"$username"/Downloads/refs
-                    chown -R "$username":"$username" /home/"$username"/Downloads/refs
+                    cp -Rf piercing-dots/refs/* /home/"$username"/Downloads
                     rm -Rf piercing-dots
-            # Gimp Dots
-                echo -e "${YELLOW}Installing Piercing Gimp Presets...${NC}"
-                rm -Rf gimp-dots
-                if git clone https://github.com/Piercingxx/gimp-dots.git; then
-                    chmod -R u+x gimp-dots
-                    chown -R "$username":"$username" gimp-dots
-                    cd gimp-dots || exit
-                    ./gimp-mod.sh
-                    wait
-                    cd "$builddir" || exit
-                    echo -e "${GREEN}Piercing Gimp Presets Installed Successfully!${NC}"
-                else
-                    echo -e "${RED}Failed to clone gimp-dots repository${NC}"
-                fi
-            # Beautiful Bash
-            echo -e "${YELLOW}Installing Beautiful Bash...${NC}"
-                git clone https://github.com/christitustech/mybash
-                    chmod -R u+x mybash
-                    chown -R "$username":"$username" mybash
-                    cd mybash || exit
-                    ./setup.sh
-                    wait
-                    cd "$builddir" || exit
-                    rm -rf mybash
-            echo -e "${GREEN}PiercingXX Rice Applied Successfully!${NC}"
+                # Apply Gimp Dots
+                    echo -e "${YELLOW}Installing Piercing Gimp Presets...${NC}"
+                    rm -rf gimp-dots
+                    if git clone https://github.com/Piercingxx/gimp-dots.git; then
+                        chmod -R u+x gimp-dots
+                        chown -R "$username":"$username" gimp-dots
+                        cd ./gimp-dots || exit
+                        ./gimp-mod.sh
+                        cd "$builddir" || exit
+                        rm -Rf gimp-dots
+                        echo -e "${GREEN}Piercing Gimp Presets Installed Successfully!${NC}"
+                    else
+                        echo -e "${RED}Failed to clone gimp-dots repository${NC}"
+                    fi
+                # Apply Beautiful Bash
+                    echo -e "${YELLOW}Installing Beautiful Bash...${NC}"
+                    git clone https://github.com/christitustech/mybash
+                        chmod -R u+x mybash
+                        chown -R "$username":"$username" mybash
+                        cd mybash || exit
+                        ./setup.sh
+                        wait
+                        cd "$builddir" || exit
+                        rm -rf mybash
+                echo -e "${GREEN}PiercingXX Rice Applied Successfully!${NC}"
+            msg_box "System will reboot now. Re-run the script after reboot to continue."
+            sudo reboot
+            ;;
+        "Step 3")
+                echo -e "${YELLOW}Reapplying Gnome Customizations...${NC}"
+                # Piercings Gnome Customizations
+                    echo -e "${YELLOW}Applying PiercingXX Gnome Customizations...${NC}"
+                    if [ ! -d "piercing-dots" ] ; then
+                        git clone https://github.com/Piercingxx/piercing-dots.git
+                    else
+                        rm -rf piercing-dots
+                        git clone https://github.com/Piercingxx/piercing-dots.git
+                    fi
+                        chmod -R u+x piercing-dots
+                        chown -R "$username":"$username" piercing-dots
+                        cd piercing-dots || exit
+                        cd scripts || exit
+                        ./gnome-customizations.sh
+                        wait
+                        cd "$builddir" || exit
             ;;
         "Optional Surface Kernel")
             echo -e "${YELLOW}Microsoft Surface Kernel...${NC}"            
@@ -256,6 +272,7 @@ while true; do
                     linux /vmlinuz-linux-surface
                     initrd  /initramfs-linux-surface.img
                     options root=LABEL=arch rw"
+                echo -e "${GREEN}Microsoft Kernal Installed. Manually create a Boot Loader Entry then reboot!${NC}"
             ;;
         "Reboot System")
             echo -e "${YELLOW}Rebooting system in 3 seconds...${NC}"
