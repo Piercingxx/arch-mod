@@ -40,8 +40,6 @@ builddir=$(pwd)
         chown "$username":"$username" /home/"$username"/media/Archived-Storage
 
 # Apps to Install
-            flatpak install flathub com.mattjakeman.ExtensionManager -y
-            flatpak install flathub net.waterfox.waterfox -y
             paru -S dconf --noconfirm
             paru -S pacseek --noconfirm
             paru -S mpd --noconfirm
@@ -49,14 +47,21 @@ builddir=$(pwd)
             paru -S fuzzel --noconfirm
             paru -S ranger --noconfirm
             paru -S kitty --noconfirm
-            paru -S mission-center --noconfirm
             paru -S python --noconfirm
-            paru -S obsidian --noconfirm
-            paru -S libreoffice-fresh --noconfirm
             paru -S code-nautilus-git --noconfirm
             paru -S nautilus-open-any-terminal --noconfirm
             paru -S nautilus-renamer --noconfirm
             paru -S ulauncher --noconfirm
+            flatpak install flathub net.waterfox.waterfox -y
+            flatpak install flathub md.obsidian.Obsidian -y
+            flatpak install flathub org.libreoffice.LibreOffice -y
+            flatpak install flathub org.darktable.Darktable -y
+            flatpak install flathub com.mattjakeman.ExtensionManager -y
+            flatpak install flathub org.qbittorrent.qBittorrent -y
+            flatpak install flathub io.missioncenter.MissionCenter -y
+            flatpak install flathub com.tomjwatson.Emote -y
+            flatpak install flathub io.github.shiftey.Desktop -y
+            flatpak install flathub com.flashforge.FlashPrint -y
             #H265 support
                 sudo pacman -S libde265 meson gst-plugins-bad ffnvcodec-headers --noconfirm
                 # nvidia-vaapi-driver
@@ -96,8 +101,8 @@ builddir=$(pwd)
                 fc-cache -vf
                 wait
 # Gimp
-            paru -S gimp --noconfirm
-            paru -S darktable --noconfirm
+            flatpak install https://flathub.org/beta-repo/appstream/org.gimp.GIMP.flatpakref -y
+            flatpak install flathub org.darktable.Darktable -y
             paru -S opencl-amd --noconfirm
 # Synology
             paru -S synochat --noconfirm
@@ -108,12 +113,12 @@ builddir=$(pwd)
             paru -S visual-studio-code-bin --noconfirm
             paru -S github-desktop-bin --noconfirm
 # Blender
-            paru -S blender --noconfirm
+            flatpak install flathub org.blender.Blender -y
 # Kdenlive
-            paru -S kdenlive --noconfirm
+            flatpak install flathub org.kde.kdenlive -y
 # Steam
             sudo pacman -S steam --noconfirm
-            paru -S discord --noconfirm
+            flatpak install flathub com.discordapp.Discord -y
             paru -S input-remapper --noconfirm
 # Tailscale
     curl -fsSL https://tailscale.com/install.sh | sh
