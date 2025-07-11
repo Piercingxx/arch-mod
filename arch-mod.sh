@@ -76,12 +76,12 @@ while true; do
             # Update mirrors
             sudo reflector --verbose --sort rate -l 75 --save /etc/pacman.d/mirrorlist
             echo -e "${GREEN}Mirrors Updated${NC}"
-            # Copy arch-maintenance.sh to home directory
+            # Copy maintenance-arch.sh to home directory
                 cd scripts || exit
-                cp -f arch-maintenance.sh /home/"$username"
-                chown "$username":"$username" /home/"$username"/arch-maintenance.sh
+                cp -f maintenance-arch.sh /home/"$username"
+                chown "$username":"$username" /home/"$username"/maintenance-arch.sh
                 cd "$builddir" || exit
-            echo -e "${GREEN}arch-maintenance.sh Copied To Home Directory${NC}"
+            echo -e "${GREEN}maintenance-arch.sh Copied To Home Directory${NC}"
             echo -e "${YELLOW}Updating System...${NC}"
             # Check if paru is installed
                 if command_exists paru; then
