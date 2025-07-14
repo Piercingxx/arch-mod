@@ -48,6 +48,7 @@ builddir=$(pwd)
             paru -S ranger --noconfirm
             paru -S kitty --noconfirm
             paru -S python --noconfirm
+            paru -S npm --noconfirm
             paru -S code-nautilus-git --noconfirm
             paru -S nautilus-open-any-terminal --noconfirm
             paru -S nautilus-renamer --noconfirm
@@ -97,6 +98,7 @@ builddir=$(pwd)
                 paru -S noto-color-emoji-fontconfig --noconfirm
                 paru -S wtype-git --noconfirm
                 paru -S xcursor-simp1e-gruvbox-light --noconfirm
+                paru -S nerd-fonts-git --noconfirm
             # Reload Font
                 fc-cache -vf
                 wait
@@ -109,6 +111,17 @@ builddir=$(pwd)
             paru -S synology-drive --noconfirm
             #Synology Drive doesnt support wayland so run this..
             QT_QPA_PLATFORM=xcb
+# Nvim & Depends
+    paru -S neovim-git --noconfirm
+    paru -S luarocks --noconfirm
+    paru -S python --noconfirm
+    paru -S python-pip --noconfirm
+    paru -S lazygit --noconfirm
+    paru -S pdflatex --noconfirm
+    paru -S sqlite --noconfirm
+    sudo npm install -g @mermaid-js/mermaid-cli
+    sudo npm install -g neovim
+    python3 -m pip install --user --upgrade pynvim
 # VScode
             paru -S visual-studio-code-bin --noconfirm
             paru -S github-desktop-bin --noconfirm
@@ -122,11 +135,16 @@ builddir=$(pwd)
             paru -S input-remapper --noconfirm
 # Tailscale
     curl -fsSL https://tailscale.com/install.sh | sh
+    wait
 # Ollama
     curl -fsSL https://ollama.com/install.sh | sh
+    wait
+    ollama serve
+    wait
+    #ollama pull codellama:latest
     #ollama pull gemma3:12b
     ollama pull gemma3n:latest
-    #ollama pull codellama:latest
+    wait
 # Docker
             # Docker
                 wget https://download.docker.com/linux/static/stable/x86_64/docker-28.0.4.tgz -qO- | tar xvfz - docker/docker --strip-components=1
