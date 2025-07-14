@@ -45,7 +45,6 @@ function menu() {
         --menu "Run Options In Order:" 0 0 0 \
         "Step 1"                                "Will Automatically Reboot After" \
         "Step 2"                                "Apps, Utils, & Exts, Rice, GIMP-dots" \
-        "Step 3"                                "Re-Apply Gnome Customizations" \
         "Optional Surface Kernel"               "Install Microsoft Surface Kernal" \
         "Reboot System"                         "Reboot the system" \
         "Exit"                                  "Exit the script" 3>&1 1>&2 2>&3
@@ -133,17 +132,6 @@ while true; do
             # Install dconf
                 paru -S dconf --noconfirm
                 msg_box "System will reboot now. Re-run the script after reboot to continue."
-            sudo reboot
-            ;;
-        "Step 2")
-            # App install
-            echo -e "${YELLOW}Installing Core Applications...${NC}"
-                cd scripts || exit
-                chmod u+x apps.sh
-                ./apps.sh
-                wait
-                cd "$builddir" || exit
-            echo -e "${GREEN}Core Apps Installed successfully!${NC}"
             # Extensions Install
             echo -e "${YELLOW}Installing Gnome Extensions...${NC}"
                 paru -S gnome-shell-extension-appindicator-git --noconfirm
@@ -157,6 +145,33 @@ while true; do
                 paru -S gnome-shell-extension-vitals --noconfirm
                 # Super Key
             echo -e "${GREEN}Gnome Extensions Installed successfully!${NC}"
+            # Piercings Gnome Customizations
+                echo -e "${YELLOW}Applying PiercingXX Gnome Customizations...${NC}"
+                if [ ! -d "piercing-dots" ] ; then
+                    git clone https://github.com/Piercingxx/piercing-dots.git
+                else
+                    rm -rf piercing-dots
+                    git clone https://github.com/Piercingxx/piercing-dots.git
+                fi
+                    chmod -R u+x piercing-dots
+                    chown -R "$username":"$username" piercing-dots
+                    cd piercing-dots || exit
+                    cd scripts || exit
+                    ./gnome-customizations.sh
+                    wait
+                    cd "$builddir" || exit
+                    rm -rf piercing-dots
+            sudo reboot
+            ;;
+        "Step 2")
+            # App install
+            echo -e "${YELLOW}Installing Core Applications...${NC}"
+                cd scripts || exit
+                chmod u+x apps.sh
+                ./apps.sh
+                wait
+                cd "$builddir" || exit
+            echo -e "${GREEN}Core Apps Installed successfully!${NC}"
             # Hyprland install
             echo -e "${YELLOW}Installing Hyprland & Dependencies...${NC}"
                 cd scripts || exit
