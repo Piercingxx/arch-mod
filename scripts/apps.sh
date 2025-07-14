@@ -10,11 +10,6 @@ builddir=$(pwd)
             mkdir -p "$HOME/.fonts"
         fi
         chown -R "$username":"$username" "$HOME"/.fonts
-    # config directory
-        if [ ! -d "$HOME/.config" ]; then
-            mkdir -p /home/"$username"/.config
-        fi
-        chown -R "$username":"$username" /home/"$username"/.config
     # icons directory
         if [ ! -d "$HOME/.icons" ]; then
             mkdir -p /home/"$username"/.icons
@@ -98,7 +93,6 @@ builddir=$(pwd)
                 paru -S noto-color-emoji-fontconfig --noconfirm
                 paru -S wtype-git --noconfirm
                 paru -S xcursor-simp1e-gruvbox-light --noconfirm
-                paru -S nerd-fonts-git --noconfirm
             # Reload Font
                 fc-cache -vf
                 wait
