@@ -99,7 +99,7 @@ while true; do
                     echo "Flatpak is not installed."
                 fi
                 wait
-            #Which DE are we in?
+            # Which DE are we in?
                 if pgrep -x "Hyprland" > /dev/null; then
                 # We are in Hyprland
                     echo "Running Hyprland updates..."
@@ -131,7 +131,6 @@ while true; do
                 sudo systemctl start cups
             # Install dconf
                 paru -S dconf --noconfirm
-                msg_box "System will reboot now. Re-run the script after reboot to continue."
             # Extensions Install
             echo -e "${YELLOW}Installing Gnome Extensions...${NC}"
                 paru -S gnome-shell-extension-appindicator-git --noconfirm
@@ -144,7 +143,14 @@ while true; do
                 paru -S gnome-shell-extension-gsconnect --noconfirm
                 paru -S gnome-shell-extension-vitals --noconfirm
                 # Super Key
-            echo -e "${GREEN}Gnome Extensions Installed successfully!${NC}"
+                # Workspace buttons with App Icons
+            # Fonts
+            echo -e "${YELLOW}Installing Fonts...${NC}"
+                cd scripts || exit
+                chmod u+x fonts.sh
+                ./fonts.sh
+                wait
+                cd "$builddir" || exit
             # Piercings Gnome Customizations
                 echo -e "${YELLOW}Applying PiercingXX Gnome Customizations...${NC}"
                 if [ ! -d "piercing-dots" ] ; then
@@ -161,6 +167,7 @@ while true; do
                     wait
                     cd "$builddir" || exit
                     rm -rf piercing-dots
+            msg_box "System will reboot now. Re-run the script after reboot to continue."
             sudo reboot
             ;;
         "Step 2")

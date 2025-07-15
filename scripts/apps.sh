@@ -48,15 +48,17 @@ builddir=$(pwd)
     paru -S nautilus-open-any-terminal --noconfirm
     paru -S nautilus-renamer --noconfirm
     paru -S ulauncher --noconfirm
+    paru -S papirus-icon-theme-git --noconfirm
+    flatpak install flathub com.mattjakeman.ExtensionManager -y
     flatpak install flathub net.waterfox.waterfox -y
     flatpak install flathub md.obsidian.Obsidian -y
     flatpak install flathub org.libreoffice.LibreOffice -y
     flatpak install flathub org.darktable.Darktable -y
-    flatpak install flathub com.mattjakeman.ExtensionManager -y
     flatpak install flathub org.qbittorrent.qBittorrent -y
     flatpak install flathub io.missioncenter.MissionCenter -y
-    flatpak install flathub com.tomjwatson.Emote -y
+#    flatpak install flathub com.tomjwatson.Emote -y
     flatpak install flathub com.flashforge.FlashPrint -y
+
 # Install fonts and Themes
     cd "$HOME"/.fonts || exit
     wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/FiraCode.zip
@@ -88,46 +90,55 @@ builddir=$(pwd)
     # Reload Font
     fc-cache -vf
     wait
+
 # Gimp
     flatpak install https://flathub.org/beta-repo/appstream/org.gimp.GIMP.flatpakref -y
     flatpak install flathub org.darktable.Darktable -y
     paru -S opencl-amd --noconfirm
+
 # Synology
     paru -S synochat --noconfirm
     paru -S synology-drive --noconfirm
     #Synology Drive doesnt support wayland so run this..
     QT_QPA_PLATFORM=xcb
+
 # Nvim & Depends
     paru -S neovim-git --noconfirm
     paru -S luarocks --noconfirm
     paru -S python --noconfirm
     paru -S python-pip --noconfirm
     paru -S lazygit --noconfirm
-    paru -S pdflatex --noconfirm
     paru -S sqlite --noconfirm
+    sudo pacman -Fy pdflatex --noconfirm
     sudo npm install -g @mermaid-js/mermaid-cli
     sudo npm install -g neovim
     python3 -m pip install --user --upgrade pynvim
+
 # VScode
     paru -S visual-studio-code-bin --noconfirm
     paru -S github-desktop-bin --noconfirm
+
 # Blender
     flatpak install flathub org.blender.Blender -y
+
 # Kdenlive
     flatpak install flathub org.kde.kdenlive -y
+
 # Steam
-#   sudo pacman -S steam --noconfirm
-#   flatpak install flathub com.discordapp.Discord -y
-#   paru -S input-remapper --noconfirm
+    sudo pacman -S steam --noconfirm
+    flatpak install flathub com.discordapp.Discord -y
+    paru -S input-remapper --noconfirm
+
+# Ollama
+    curl -fsSL https://ollama.com/install.sh | sh
+    #ollama pull codellama:latest
+    #ollama pull gemma3:12b
+    #ollama pull gemma3n:latest
+
 # Tailscale
 #    curl -fsSL https://tailscale.com/install.sh | sh
 #    wait
-# Ollama
-#    curl -fsSL https://ollama.com/install.sh | sh
-#    wait
-#    #ollama pull codellama:latest
-#    #ollama pull gemma3:12b
-#    ollama pull gemma3n:latest
+
 # Docker
 #            # Docker
 #                wget https://download.docker.com/linux/static/stable/x86_64/docker-28.0.4.tgz -qO- | tar xvfz - docker/docker --strip-components=1
