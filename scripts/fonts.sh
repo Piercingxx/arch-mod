@@ -17,25 +17,15 @@ builddir=$(pwd)
         chown -R "$username":"$username" /home/"$username"/.icons
 
 # Install fonts
-    cd "$HOME"/.fonts || exit
+    echo "Installing Fonts"
+    cd "$builddir" || exit
     wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/FiraCode.zip
     wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/Meslo.zip
-    unzip FiraCode.zip Meslo.zip
-    sudo rm FiraCode.zip Meslo.zip
-    cd "$builddir" || exit
-    git clone https://codeberg.org/codingotaku/fuzzmoji.git
-        cd fuzzmoji || exit
-        sudo mkdir -p /usr/share/fuzzmoji/emoji-list
-        chmod -R 777 /usr/share/fuzzmoji/emoji-list
-        chown -R "$username":"$username" /usr/share/fuzzmoji/emoji-list
-        sudo cp emoji-list /usr/share/fuzzmoji/emoji-list
-        chmod -R 777 /usr/share/fuzzmoji/emoji-list
-        chown -R "$username":"$username" /usr/share/fuzzmoji/emoji-list
-        sudo cp fuzzmoji /usr/bin/fuzzmoji
-        chmod -R 777 /usr/bin/fuzzmoji
-        chown -R "$username":"$username" /usr/bin/fuzzmoji
-        cd "$builddir" || exit
-        sudo rm -R fuzzmoji
+    wget http://www.i18nguy.com/unicode/andagii.zip
+    unzip FiraCode.zip -d /home/"$username"/.fonts
+    unzip Meslo.zip -d /home/"$username"/.fonts
+    unzip andagii.zip -d /home/"$username"/.fonts
+    sudo rm FiraCode.zip Meslo.zip andagii.zip
     paru -S ttf-firacode --noconfirm
     paru -S awesome-terminal-fonts-patched --noconfirm
     paru -S ttf-ms-fonts --noconfirm
@@ -46,5 +36,3 @@ builddir=$(pwd)
     # Reload Font
     fc-cache -vf
     wait
-
-

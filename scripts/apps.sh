@@ -48,7 +48,6 @@ builddir=$(pwd)
     paru -S nautilus-open-any-terminal --noconfirm
     paru -S nautilus-renamer --noconfirm
     paru -S ulauncher --noconfirm
-    paru -S papirus-icon-theme-git --noconfirm
     flatpak install flathub com.mattjakeman.ExtensionManager -y
     flatpak install flathub net.waterfox.waterfox -y
     flatpak install flathub md.obsidian.Obsidian -y
@@ -56,40 +55,33 @@ builddir=$(pwd)
     flatpak install flathub org.darktable.Darktable -y
     flatpak install flathub org.qbittorrent.qBittorrent -y
     flatpak install flathub io.missioncenter.MissionCenter -y
-#    flatpak install flathub com.tomjwatson.Emote -y
     flatpak install flathub com.flashforge.FlashPrint -y
 
-# Install fonts and Themes
-    cd "$HOME"/.fonts || exit
-    wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/FiraCode.zip
-    wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/Meslo.zip
-    unzip FiraCode.zip Meslo.zip
-    sudo rm FiraCode.zip Meslo.zip
-    cd "$builddir" || exit
-    git clone https://codeberg.org/codingotaku/fuzzmoji.git
-        cd fuzzmoji || exit
-        sudo mkdir -p /usr/share/fuzzmoji/emoji-list
-        chmod -R 777 /usr/share/fuzzmoji/emoji-list
-        chown -R "$username":"$username" /usr/share/fuzzmoji/emoji-list
-        sudo cp emoji-list /usr/share/fuzzmoji/emoji-list
-        chmod -R 777 /usr/share/fuzzmoji/emoji-list
-        chown -R "$username":"$username" /usr/share/fuzzmoji/emoji-list
-        sudo cp fuzzmoji /usr/bin/fuzzmoji
-        chmod -R 777 /usr/bin/fuzzmoji
-        chown -R "$username":"$username" /usr/bin/fuzzmoji
-        cd "$builddir" || exit
-        sudo rm -R fuzzmoji
+# Theme stuffs
     paru -S papirus-icon-theme-git --noconfirm
-    paru -S ttf-firacode --noconfirm
-    paru -S awesome-terminal-fonts-patched --noconfirm
-    paru -S ttf-ms-fonts --noconfirm
-    paru -S terminus-font-ttf --noconfirm
-    paru -S noto-color-emoji-fontconfig --noconfirm
-    paru -S wtype-git --noconfirm
     paru -S xcursor-simp1e-gruvbox-light --noconfirm
-    # Reload Font
-    fc-cache -vf
-    wait
+
+###trialing installing fonts in step 1 instead of step 2
+## Install fonts
+#    echo "Installing Fonts"
+#    cd "$builddir" || exit
+#    wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/FiraCode.zip
+#    wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/Meslo.zip
+#    wget http://www.i18nguy.com/unicode/andagii.zip
+#    unzip FiraCode.zip -d /home/"$username"/.fonts
+#    unzip Meslo.zip -d /home/"$username"/.fonts
+#    unzip andagii.zip -d /home/"$username"/.fonts
+#    sudo rm FiraCode.zip Meslo.zip andagii.zip
+#    paru -S ttf-firacode --noconfirm
+#    paru -S awesome-terminal-fonts-patched --noconfirm
+#    paru -S ttf-ms-fonts --noconfirm
+#    paru -S terminus-font-ttf --noconfirm
+#    paru -S noto-color-emoji-fontconfig --noconfirm
+#    paru -S wtype-git --noconfirm
+#    paru -S xcursor-simp1e-gruvbox-light --noconfirm
+#    # Reload Font
+#    fc-cache -vf
+#    wait
 
 # Gimp
     flatpak install https://flathub.org/beta-repo/appstream/org.gimp.GIMP.flatpakref -y
