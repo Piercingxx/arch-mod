@@ -40,10 +40,10 @@ builddir=$(pwd)
     paru -S mpd --noconfirm
     paru -S mpv --noconfirm
     paru -S fuzzel --noconfirm
-    paru -S ranger --noconfirm
     paru -S kitty --noconfirm
     paru -S python --noconfirm
     paru -S npm --noconfirm
+    paru -S ranger --noconfirm
     paru -S code-nautilus-git --noconfirm
     paru -S nautilus-open-any-terminal --noconfirm
     paru -S nautilus-renamer --noconfirm
@@ -96,7 +96,10 @@ builddir=$(pwd)
 
 # Nvim & Depends
     paru -S neovim-git --noconfirm
+    sudo pacman -S nodejs npm --noconfirm
+    sudo pacman -S ruby --noconfirm
     paru -S luarocks --noconfirm
+    paru -S lua51 --noconfirm
     paru -S python --noconfirm
     paru -S python-pip --noconfirm
     paru -S lazygit --noconfirm
