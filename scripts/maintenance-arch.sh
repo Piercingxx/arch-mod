@@ -36,6 +36,7 @@ function menu() {
         "Update Mirrors"                        "Update Mirrors" \
         "Piercing Gimp"                         "Piercing Gimp Presets (Distro Agnostic)" \
         "PiercingXX Rice"                       "Apply Piercing Rice (Distro Agnostic)" \
+        "Rice-No Hyprland"                      "Piercing Rice w/o Hyprdots but still Hypr Keybinds" \
         "Reboot System"                         "Reboot the system" \
         "Exit"                                  "Exit the script" 3>&1 1>&2 2>&3
 }
@@ -129,7 +130,46 @@ while true; do
                         cd scripts || exit
                         ./gnome-customizations.sh
                         cd "$builddir" || exit
-                # Add in backgrounds and themes and apply them
+                # Add in backgrounds and themes
+                    mkdir -p /home/"$username"/Pictures/backgrounds
+                    chown -R "$username":"$username" /home/"$username"/Pictures/backgrounds
+                    cp -Rf piercing-dots/backgrounds/* /home/"$username"/Pictures/backgrounds
+                    chown -R "$username":"$username" /home/"$username"/Pictures/backgrounds
+                    mkdir -p /home/"$username"/Pictures/profile-image
+                    chown -R "$username":"$username" /home/"$username"/Pictures/profile-image
+                    cp -Rf piercing-dots/profile-image/* /home/"$username"/Pictures/profile-image
+                    chown -R "$username":"$username" /home/"$username"/Pictures/profile-images
+                    cd "$builddir" || exit
+                # Copy Refs to Download folder
+                    mkdir -p /home/"$username"/Downloads/refs
+                    chown -R "$username":"$username" /home/"$username"/Downloads/refs
+                    cp -Rf piercing-dots/refs/* /home/"$username"/Downloads/refs
+                    chown -R "$username":"$username" /home/"$username"/Downloads/refs
+                rm -rf piercing-dots
+            echo -e "${GREEN}PiercingXX Rice Applied Successfully!${NC}"
+            ;;
+        "Rice-No Hyprland")
+            echo -e "${YELLOW}Downloading and Applying PiercingXX Rice w/o Hyprdots...${NC}"
+                # .config Dot Files
+                echo -e "${YELLOW}Downloading PiercingXX Dot Files...${NC}"
+                    git clone https://github.com/Piercingxx/piercing-dots.git
+                        chmod -R u+x piercing-dots
+                        chown -R "$username":"$username" piercing-dots
+                        cp -Rf piercing-dots/dots/hypr/hyprland/keybinds.conf /home/"$username"/.config/hypr/hyprland
+                        cd "$builddir" || exit
+                        rm -Rf piercing-dots/dots/hypr/hyprland/*
+                        cd piercing-dots || exit
+                        cp -Rf dots/* /home/"$username"/.config/
+                        chown "$username":"$username" -R /home/"$username"/.config/*
+                        cd "$builddir" || exit      
+                    echo -e "${GREEN}PiercingXX Dot Files Applied Successfully!${NC}"
+                # Piercings Gnome Customizations
+                    echo -e "${YELLOW}Applying PiercingXX Gnome Customizations...${NC}"
+                        cd piercing-dots || exit
+                        cd scripts || exit
+                        ./gnome-customizations.sh
+                        cd "$builddir" || exit
+                # Add in backgrounds and themes
                     mkdir -p /home/"$username"/Pictures/backgrounds
                     chown -R "$username":"$username" /home/"$username"/Pictures/backgrounds
                     cp -Rf piercing-dots/backgrounds/* /home/"$username"/Pictures/backgrounds

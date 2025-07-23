@@ -98,6 +98,7 @@ builddir=$(pwd)
     paru -S neovim-git --noconfirm
     sudo pacman -S nodejs npm --noconfirm
     sudo pacman -S ruby --noconfirm
+    sudo pacman -S ripgrep --noconfirm
     paru -S luarocks --noconfirm
     paru -S lua51 --noconfirm
     paru -S python --noconfirm
