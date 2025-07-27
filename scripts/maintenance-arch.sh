@@ -138,7 +138,7 @@ while true; do
                     mkdir -p /home/"$username"/Pictures/profile-image
                     chown -R "$username":"$username" /home/"$username"/Pictures/profile-image
                     cp -Rf piercing-dots/profile-image/* /home/"$username"/Pictures/profile-image
-                    chown -R "$username":"$username" /home/"$username"/Pictures/profile-images
+                    chown -R "$username":"$username" /home/"$username"/Pictures/profile-image
                     cd "$builddir" || exit
                 # Copy Refs to Download folder
                     mkdir -p /home/"$username"/Downloads/refs
