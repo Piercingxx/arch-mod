@@ -35,6 +35,7 @@ builddir=$(pwd)
         chown "$username":"$username" /home/"$username"/media/Archived-Storage
 
 # Apps to Install
+    paru -Rs firefox --noconfirm
     paru -S dconf --noconfirm
     paru -S pacseek --noconfirm
     paru -S mpd --noconfirm
@@ -95,7 +96,8 @@ builddir=$(pwd)
     QT_QPA_PLATFORM=xcb
 
 # Nvim & Depends
-    paru -S neovim-git --noconfirm
+    paru -Rs neovim --noconfirm
+    paru -S neovim-nightly-bin --noconfirm
     sudo pacman -S nodejs npm --noconfirm
     sudo pacman -S ruby --noconfirm
     sudo pacman -S ripgrep --noconfirm
