@@ -220,6 +220,9 @@ while true; do
                     cd "$builddir" || exit
                 # Copy Refs to Download folder
                     cp -Rf piercing-dots/refs/* /home/"$username"/Downloads
+                # Replace .bashrc
+                    cp -Rf piercing-dots/bash/.bashrc /home/"$username"/
+                    chown -R "$username":"$username" /home/"$username"/.bashrc
                     rm -Rf piercing-dots
                 # Apply Gimp Dots
                     echo -e "${YELLOW}Installing Piercing Gimp Presets...${NC}"
