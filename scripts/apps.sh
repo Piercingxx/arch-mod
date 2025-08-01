@@ -44,8 +44,7 @@ builddir=$(pwd)
     paru -S kitty --noconfirm
     paru -S python --noconfirm
     paru -S npm --noconfirm
-    paru -S ranger --noconfirm
-    paru -S code-nautilus-git --noconfirm
+#   paru -S ranger --noconfirm
     paru -S nautilus-open-any-terminal --noconfirm
     paru -S nautilus-renamer --noconfirm
     paru -S ulauncher --noconfirm
@@ -57,6 +56,8 @@ builddir=$(pwd)
     flatpak install flathub org.qbittorrent.qBittorrent -y
     flatpak install flathub io.missioncenter.MissionCenter -y
     flatpak install flathub com.flashforge.FlashPrint -y
+# Yazi
+    paru -S yazi-git ffmpeg 7zip jq poppler fd ripgrep fzf zoxide resvg imagemagick --noconfirm
 
 # Theme stuffs
     paru -S papirus-icon-theme-git --noconfirm
@@ -105,16 +106,22 @@ builddir=$(pwd)
     paru -S lua51 --noconfirm
     paru -S python --noconfirm
     paru -S python-pip --noconfirm
+    paru -S python-pynvim --noconfirm
+    paru -S ueberzug --noconfirm
     paru -S lazygit --noconfirm
     paru -S sqlite --noconfirm
     sudo pacman -Fy pdflatex --noconfirm
     sudo npm install -g @mermaid-js/mermaid-cli
     sudo npm install -g neovim
     python3 -m pip install --user --upgrade pynvim
+    # Yazi
+    paru -S yazi-git ffmpeg 7zip jq poppler fd ripgrep fzf zoxide resvg imagemagick --noconfirm
+
 
 # VScode
     paru -S visual-studio-code-bin --noconfirm
     paru -S github-desktop-bin --noconfirm
+    paru -S code-nautilus-git --noconfirm
 
 # Blender
     flatpak install flathub org.blender.Blender -y
