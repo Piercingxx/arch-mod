@@ -116,7 +116,7 @@ builddir=$(pwd)
     paru -S sqlite --noconfirm
     sudo pacman -Fy pdflatex --noconfirm
     sudo npm install -g @mermaid-js/mermaid-cli
-    sudo npm install -g neovim
+    sudo npm install -g  neovim
     python3 -m pip install --user --upgrade pynvim
     # Yazi
     paru -S yazi-git ffmpeg 7zip jq poppler fd ripgrep fzf zoxide resvg imagemagick --noconfirm
@@ -135,7 +135,8 @@ builddir=$(pwd)
 
 # Steam
     sudo pacman -S steam --noconfirm
-    flatpak install flathub com.discordapp.Discord -y
+    paru -S discord-canary --noconfirm
+#    flatpak install flathub com.discordapp.Discord -y
     paru -S input-remapper --noconfirm
 
 # Ollama
