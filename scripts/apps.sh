@@ -4,36 +4,6 @@
 username=$(id -u -n 1000)
 builddir=$(pwd)
 
-# Create Directories if needed
-    # font directory
-        if [ ! -d "$HOME/.fonts" ]; then
-            mkdir -p "$HOME/.fonts"
-        fi
-        chown -R "$username":"$username" "$HOME"/.fonts
-    # icons directory
-        if [ ! -d "$HOME/.icons" ]; then
-            mkdir -p /home/"$username"/.icons
-        fi
-        chown -R "$username":"$username" /home/"$username"/.icons
-    # Background and Profile Image Directories
-        if [ ! -d "$HOME/$username/Pictures/backgrounds" ]; then
-            mkdir -p /home/"$username"/Pictures/backgrounds
-        fi
-        chown -R "$username":"$username" /home/"$username"/Pictures/backgrounds
-        if [ ! -d "$HOME/$username/Pictures/profile-image" ]; then
-            mkdir -p /home/"$username"/Pictures/profile-image
-        fi
-        chown -R "$username":"$username" /home/"$username"/Pictures/profile-image
-    # fstab external drive mounting directory
-        if [ ! -d "$HOME/.media/Working-Storage" ]; then
-            mkdir -p /home/"$username"/media/Working-Storage
-        fi
-        chown "$username":"$username" /home/"$username"/media/Working-Storage
-        if [ ! -d "$HOME/.media/Archived-Storage" ]; then
-            mkdir -p /home/"$username"/media/Archived-Storage
-        fi
-        chown "$username":"$username" /home/"$username"/media/Archived-Storage
-
 # Apps to Install
     paru -Rs firefox --noconfirm
     paru -S dconf --noconfirm
@@ -44,7 +14,6 @@ builddir=$(pwd)
     paru -S kitty --noconfirm
     paru -S python --noconfirm
     paru -S npm --noconfirm
-#   paru -S ranger --noconfirm
     paru -S nautilus-open-any-terminal --noconfirm
     paru -S nautilus-renamer --noconfirm
     paru -S ulauncher --noconfirm
@@ -62,32 +31,13 @@ builddir=$(pwd)
     ya pkg add yazi-rs/plugins:mount
     ya pack -a grappas/wl-clipboard
 
+# Apps to uninstall
+    sudo pacman -Rs gnome-console --noconfirm
+    sudo pacman -Rs firefox --noconfirm
 
 # Theme stuffs
     paru -S papirus-icon-theme-git --noconfirm
     paru -S xcursor-simp1e-gruvbox-light --noconfirm
-
-###trialing installing fonts in step 1 instead of step 2
-## Install fonts
-#    echo "Installing Fonts"
-#    cd "$builddir" || exit
-#    wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/FiraCode.zip
-#    wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/Meslo.zip
-#    wget http://www.i18nguy.com/unicode/andagii.zip
-#    unzip FiraCode.zip -d /home/"$username"/.fonts
-#    unzip Meslo.zip -d /home/"$username"/.fonts
-#    unzip andagii.zip -d /home/"$username"/.fonts
-#    sudo rm FiraCode.zip Meslo.zip andagii.zip
-#    paru -S ttf-firacode --noconfirm
-#    paru -S awesome-terminal-fonts-patched --noconfirm
-#    paru -S ttf-ms-fonts --noconfirm
-#    paru -S terminus-font-ttf --noconfirm
-#    paru -S noto-color-emoji-fontconfig --noconfirm
-#    paru -S wtype-git --noconfirm
-#    paru -S xcursor-simp1e-gruvbox-light --noconfirm
-#    # Reload Font
-#    fc-cache -vf
-#    wait
 
 # Gimp
     flatpak install https://flathub.org/beta-repo/appstream/org.gimp.GIMP.flatpakref -y
@@ -97,7 +47,8 @@ builddir=$(pwd)
 # Synology
     paru -S synochat --noconfirm
     paru -S synology-drive --noconfirm
-    #Synology Drive doesnt support wayland so run this..
+    paru -S synology-note-station --noconfirm
+    #Synology Drive doesnt support wayland so run this...
     QT_QPA_PLATFORM=xcb
 
 # Nvim & Depends
@@ -120,7 +71,6 @@ builddir=$(pwd)
     python3 -m pip install --user --upgrade pynvim
     # Yazi
     paru -S yazi-git ffmpeg 7zip jq poppler fd ripgrep fzf zoxide resvg imagemagick --noconfirm
-
 
 # VScode
     paru -S visual-studio-code-bin --noconfirm
@@ -146,8 +96,8 @@ builddir=$(pwd)
     #ollama pull gemma3n:latest
 
 # Tailscale
-#    curl -fsSL https://tailscale.com/install.sh | sh
-#    wait
+    curl -fsSL https://tailscale.com/install.sh | sh
+    wait
 
 # Docker
 #            # Docker
