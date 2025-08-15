@@ -43,8 +43,7 @@ function msg_box() {
 function menu() {
     whiptail --backtitle "GitHub.com/PiercingXX" --title "Main Menu" \
         --menu "Run Options In Order:" 0 0 0 \
-        "Step 1"                                "Essentials" \
-        "Step 2"                                "Apps & Utils" \
+        "Install"                               "Install PiercingXX Arch" \
         "Optional Surface Kernel"               "Install Microsoft Surface Kernal" \
         "Reboot System"                         "Reboot the system" \
         "Exit"                                  "Exit the script" 3>&1 1>&2 2>&3
@@ -56,18 +55,13 @@ while true; do
     echo -e "${GREEN}Welcome ${username}${NC}\n"
     choice=$(menu)
     case $choice in
-        "Step 1")
-            # Step 1 - Essentials
-            echo -e "${YELLOW}Running Step 1: Essentials...${NC}"
+        "Install")
+            echo -e "${YELLOW}Installing Essentials...${NC}"
                 cd scripts || exit
                 chmod u+x step-1.sh
                 ./step-1.sh
                 wait
                 cd "$builddir" || exit
-            msg_box "System will reboot now. Re-run the script after reboot to continue."
-            sudo reboot
-            ;;
-        "Step 2")
             # App install
             echo -e "${YELLOW}Installing Core Applications...${NC}"
                 cd scripts || exit
@@ -83,19 +77,24 @@ while true; do
                 ./hyprland-install.sh
                 cd "$builddir" || exit
             # Enable Bluetooth again
-            sudo systemctl start bluetooth
-            systemctl enable bluetooth
-            # Re-apply Piercing Rice
+                sudo systemctl start bluetooth
+                systemctl enable bluetooth
+            # Apply Piercing Rice
+                echo -e "${YELLOW}Applying PiercingXX Gnome Customizations...${NC}"
                 rm -rf piercing-dots
                 git clone --depth 1 https://github.com/Piercingxx/piercing-dots.git
                 chmod -R u+x piercing-dots
-                chown -R "$username":"$username" piercing-dots
+                cd piercing-dots || exit
+                ./install.sh
+                wait
+                cd "$builddir" || exit
+            # Re-apply Piercing Gnome Rice
                 cd piercing-dots/scripts || exit
                 ./gnome-customizations.sh
                 wait
                 cd "$builddir" || exit
                 rm -rf piercing-dots
-            msg_box "System will reboot now. Re-run the script after reboot to continue."
+            msg_box "System will reboot now."
             sudo reboot
             ;;
         "Optional Surface Kernel")

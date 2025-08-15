@@ -17,14 +17,18 @@ builddir=$(pwd)
     paru -S nautilus-open-any-terminal --noconfirm
     paru -S nautilus-renamer --noconfirm
     paru -S ulauncher --noconfirm
-    flatpak install flathub com.mattjakeman.ExtensionManager -y
-    flatpak install flathub net.waterfox.waterfox -y
-    flatpak install flathub md.obsidian.Obsidian -y
-    flatpak install flathub org.libreoffice.LibreOffice -y
-    flatpak install flathub org.darktable.Darktable -y
-    flatpak install flathub org.qbittorrent.qBittorrent -y
-    flatpak install flathub io.missioncenter.MissionCenter -y
-    flatpak install flathub com.flashforge.FlashPrint -y
+    flatpak install --noninteractive flathub net.waterfox.waterfox -y
+    flatpak install --noninteractive flathub md.obsidian.Obsidian -y
+    flatpak install --noninteractive flathub org.libreoffice.LibreOffice -y
+    flatpak install --noninteractive flathub org.gnome.SimpleScan -y
+    flatpak install --noninteractive flathub org.blender.Blender -y
+    flatpak install --noninteractive flathub com.mattjakeman.ExtensionManager -y
+    flatpak install --noninteractive flathub org.qbittorrent.qBittorrent -y
+    flatpak install --noninteractive flathub io.missioncenter.MissionCenter -y
+    flatpak install --noninteractive flathub io.github.shiftey.Desktop -y
+    flatpak install --noninteractive io.github.realmazharhussain.GdmSettings -y
+    flatpak install --noninteractive flathub com.flashforge.FlashPrint -y
+
 # Yazi
     paru -S yazi-git ffmpeg 7zip jq poppler fd ripgrep fzf zoxide resvg imagemagick --noconfirm
     ya pkg add dedukun/bookmarks
@@ -40,14 +44,14 @@ builddir=$(pwd)
     paru -S xcursor-simp1e-gruvbox-light --noconfirm
 
 # Gimp
-    flatpak install https://flathub.org/beta-repo/appstream/org.gimp.GIMP.flatpakref -y
-    flatpak install flathub org.darktable.Darktable -y
+    flatpak install --noninteractive https://flathub.org/beta-repo/appstream/org.gimp.GIMP.flatpakref -y
+    flatpak install --noninteractive flathub org.darktable.Darktable -y
     paru -S opencl-amd --noconfirm
 
 # Synology
     paru -S synochat --noconfirm
     paru -S synology-drive --noconfirm
-    paru -S synology-note-station --noconfirm
+    flatpak install --noninteractive flathub com.synology.synology-note-station -y
     #Synology Drive doesnt support wayland so run this...
     QT_QPA_PLATFORM=xcb
 
@@ -86,7 +90,7 @@ builddir=$(pwd)
 # Steam
     sudo pacman -S steam --noconfirm
     paru -S discord-canary --noconfirm
-#    flatpak install flathub com.discordapp.Discord -y
+    flatpak install --noninteractive flathub com.discordapp.Discord -y
     paru -S input-remapper --noconfirm
 
 # Ollama
@@ -98,6 +102,18 @@ builddir=$(pwd)
 # Tailscale
     curl -fsSL https://tailscale.com/install.sh | sh
     wait
+
+# Apply Beautiful Bash
+    echo -e "${YELLOW}Installing Beautiful Bash...${NC}"
+    git clone https://github.com/christitustech/mybash
+        chmod -R u+x mybash
+        chown -R "$username":"$username" mybash
+        cd mybash || exit
+        ./setup.sh
+        wait
+        cd "$builddir" || exit
+        rm -rf mybash
+
 
 # Docker
 #            # Docker

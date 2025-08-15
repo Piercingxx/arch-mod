@@ -153,8 +153,7 @@ builddir=$(pwd)
             rm -rf piercing-dots
             git clone --depth 1 https://github.com/Piercingxx/piercing-dots.git
             chmod -R u+x piercing-dots
-            chown -R "$username":"$username" piercing-dots
             cd piercing-dots || exit
             ./install.sh
             cd "$builddir" || exit
-    rm -rf piercing-dots
+            rm -rf piercing-dots
