@@ -56,6 +56,10 @@ while true; do
     choice=$(menu)
     case $choice in
         "Install")
+            #Turn off sleep/suspend to avoid interruptions
+                gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type 'false'
+                gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-battery-type 'false'
+                gsettings set org.gnome.settings-daemon.plugins.power idle-dim 'false'
             echo -e "${YELLOW}Installing Essentials...${NC}"
                 cd scripts || exit
                 chmod u+x step-1.sh
