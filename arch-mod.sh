@@ -56,7 +56,7 @@ while true; do
     choice=$(menu)
     case $choice in
         "Install")
-            #Turn off sleep/suspend to avoid interruptions
+            # Turn off sleep/suspend to avoid interruptions
                 gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type 'false'
                 gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-battery-type 'false'
                 gsettings set org.gnome.settings-daemon.plugins.power idle-dim 'false'
@@ -64,6 +64,16 @@ while true; do
                 cd scripts || exit
                 chmod u+x step-1.sh
                 ./step-1.sh
+                wait
+                cd "$builddir" || exit
+            echo -e "${GREEN}Essentials Installed successfully!${NC}"
+            # Apply Piercing Rice
+                echo -e "${YELLOW}Applying PiercingXX Gnome Customizations...${NC}"
+                rm -rf piercing-dots
+                git clone --depth 1 https://github.com/Piercingxx/piercing-dots.git
+                cd piercing-dots || exit
+                chmod u+x install.sh
+                ./install.sh
                 wait
                 cd "$builddir" || exit
             # App install
@@ -80,24 +90,17 @@ while true; do
                 chmod u+x hyprland-install.sh
                 ./hyprland-install.sh
                 cd "$builddir" || exit
+            echo -e "${GREEN}Hyprland & Dependencies Installed successfully!${NC}"
             # Enable Bluetooth again
                 sudo systemctl start bluetooth
                 systemctl enable bluetooth
-            # Apply Piercing Rice
-                echo -e "${YELLOW}Applying PiercingXX Gnome Customizations...${NC}"
-                rm -rf piercing-dots
-                git clone --depth 1 https://github.com/Piercingxx/piercing-dots.git
-                chmod -R u+x piercing-dots
-                cd piercing-dots || exit
-                ./install.sh
-                wait
-                cd "$builddir" || exit
-            # Re-apply Piercing Gnome Rice
+            # Apply Piercing Gnome Customizations as User
                 cd piercing-dots/scripts || exit
                 ./gnome-customizations.sh
                 wait
                 cd "$builddir" || exit
                 rm -rf piercing-dots
+            echo -e "${GREEN}PiercingXX Gnome Customizations Applied successfully!${NC}"
             msg_box "System will reboot now."
             sudo reboot
             ;;
