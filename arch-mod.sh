@@ -100,7 +100,8 @@ while true; do
                 wait
                 cd "$builddir" || exit
             # Replace .bashrc
-                cp -rf piercing-dots/resources/bash/.bashrc /home/"$username"/
+                cp -f piercing-dots/resources/bash/.bashrc /home/"$username"/.bashrc
+                source ~/.bashrc
             # Clean Up
                 rm -rf piercing-dots
             echo -e "${GREEN}PiercingXX Gnome Customizations Applied successfully!${NC}"
