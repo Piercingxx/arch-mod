@@ -5,6 +5,7 @@ username=$(id -u -n 1000)
 builddir=$(pwd)
 
 # Apps to Install
+    paru -S fwupd --noconfirm
     paru -Rs firefox --noconfirm
     paru -S dconf --noconfirm
     paru -S pacseek --noconfirm
