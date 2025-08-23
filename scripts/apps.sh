@@ -29,7 +29,6 @@ builddir=$(pwd)
     flatpak install --noninteractive flathub io.github.realmazharhussain.GdmSettings -y
     flatpak install flathub com.flashforge.FlashPrint -y
 
-
 # Yazi
     paru -S yazi-git ffmpeg 7zip jq poppler fd ripgrep fzf zoxide resvg imagemagick --noconfirm
     ya pkg add dedukun/bookmarks
@@ -96,9 +95,12 @@ builddir=$(pwd)
 
 # Ollama
     curl -fsSL https://ollama.com/install.sh | sh
-    #ollama pull codellama:latest
+    #ollama pull gpt-oss:20b
+    #ollama pull codellama:34b 
+    #ollama pull mistral:7b 
+    #ollama pull gemma3:27b-it-qat
     #ollama pull gemma3:12b
-    #ollama pull gemma3n:latest
+    #ollama pull huihui_ai/gemma3n-abliterated:e4b-fp16
 
 # Tailscale
     curl -fsSL https://tailscale.com/install.sh | sh
