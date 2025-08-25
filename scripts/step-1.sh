@@ -4,7 +4,38 @@
 username=$(id -u -n 1000)
 builddir=$(pwd)
 
+install_starship_and_fzf() {
+    if ! command_exists starship; then
+        if ! curl -sS https://starship.rs/install.sh | sh; then
+            print_colored "$RED" "Something went wrong during starship install!"
+            exit 1
+        fi
+    else
+        printf "Starship already installed\n"
+    fi
 
+    if ! command_exists fzf; then
+        if [ -d "$HOME/.fzf" ]; then
+            print_colored "$YELLOW" "FZF directory already exists. Skipping installation."
+        else
+            git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+            ~/.fzf/install
+        fi
+    else
+        printf "Fzf already installed\n"
+    fi
+}
+
+install_zoxide() {
+    if ! command_exists zoxide; then
+        if ! curl -sS https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | sh; then
+            print_colored "$RED" "Something went wrong during zoxide install!"
+            exit 1
+        fi
+    else
+        printf "Zoxide already installed\n"
+    fi
+}
 
 # Create Directories if needed
     echo -e "${YELLOW}Creating Necessary Directories...${NC}"
@@ -85,7 +116,7 @@ builddir=$(pwd)
     echo -e "${YELLOW}Installing Paru, Flatpak, & Dependencies...${NC}"
         # Install dependencies
         echo "# Installing dependencies..."
-        sudo pacman -S zip unzip gzip tar make --noconfirm
+        sudo pacman -S zip unzip gzip tar make wget bash bash-completion tar bat tree multitail fastfetch fontconfig trash-cli --noconfirm
         # Clone and install Paru
         echo "# Cloning and installing Paru..."
         git clone https://aur.archlinux.org/paru-bin.git && cd paru-bin && makepkg -si --noconfirm && cd ..
@@ -103,6 +134,9 @@ builddir=$(pwd)
         sudo pacman -S cups gutenprint cups-pdf gtk3-print-backends nmap net-tools cmake meson cpio --noconfirm
         sudo systemctl enable cups.service
         sudo systemctl start cups
+    # Install bash stuff
+        install_starship_and_fzf
+        install_zoxide
     # Install dconf
         paru -S dconf --noconfirm
 # Extensions Install

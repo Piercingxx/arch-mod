@@ -18,6 +18,7 @@ builddir=$(pwd)
     paru -S nautilus-open-any-terminal --noconfirm
     paru -S nautilus-renamer --noconfirm
     paru -S ulauncher --noconfirm
+    paru -S ventoy-bin --noconfirm
     flatpak install flathub net.waterfox.waterfox -y
     flatpak install flathub md.obsidian.Obsidian -y
     flatpak install flathub org.libreoffice.LibreOffice -y
@@ -79,7 +80,6 @@ builddir=$(pwd)
 
 # VScode
     paru -S visual-studio-code-bin --noconfirm
-    paru -S github-desktop-bin --noconfirm
     paru -S code-nautilus-git --noconfirm
 
 # Blender
@@ -101,21 +101,10 @@ builddir=$(pwd)
     #ollama pull mistral:7b 
     #ollama pull gemma3:27b-it-qat
     #ollama pull gemma3:12b
-    #ollama pull huihui_ai/gemma3n-abliterated:e4b-fp16
 
 # Tailscale
     curl -fsSL https://tailscale.com/install.sh | sh
     wait
-
-# Apply Beautiful Bash
-    echo -e "${YELLOW}Installing Beautiful Bash...${NC}"
-    git clone https://github.com/christitustech/mybash
-        cd mybash || exit
-        ./setup.sh
-        wait
-        cd "$builddir" || exit
-        rm -rf mybash
-
 
 # Docker
 #            # Docker
