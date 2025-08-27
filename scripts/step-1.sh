@@ -4,27 +4,6 @@
 username=$(id -u -n 1000)
 builddir=$(pwd)
 
-install_starship_and_fzf() {
-    if ! command_exists starship; then
-        if ! curl -sS https://starship.rs/install.sh | sh; then
-            print_colored "$RED" "Something went wrong during starship install!"
-            exit 1
-        fi
-    else
-        printf "Starship already installed\n"
-    fi
-
-    if ! command_exists fzf; then
-        if [ -d "$HOME/.fzf" ]; then
-            print_colored "$YELLOW" "FZF directory already exists. Skipping installation."
-        else
-            git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
-            ~/.fzf/install
-        fi
-    else
-        printf "Fzf already installed\n"
-    fi
-}
 
 install_zoxide() {
     if ! command_exists zoxide; then
@@ -135,8 +114,9 @@ install_zoxide() {
         sudo systemctl enable cups.service
         sudo systemctl start cups
     # Install bash stuff
-        install_starship_and_fzf
-        install_zoxide
+        paru -S fzf -y
+        paru -S zoxide-git -y
+        curl -sS https://starship.rs/install.sh | sh
     # Install dconf
         paru -S dconf --noconfirm
 # Extensions Install
@@ -152,7 +132,6 @@ install_zoxide() {
         paru -S gnome-shell-extension-vitals --noconfirm
         # Workspaces Buttons with App Icons
             git clone https://codeload.github.com/Favo02/workspaces-by-open-apps/zip/refs/heads/main
-            unzip workspaces-by-open-apps-main.zip
             chmod -R u+x workspaces-by-open-apps-main
             cd workspaces-by-open-apps-main || exit
             sudo ./install.sh local-install
@@ -168,7 +147,6 @@ install_zoxide() {
             rm -rf nautilus-open-any-terminal
         # Super Key
             git clone https://github.com/Tommimon/super-key.git
-            chmod -R u+x super-key
             cd super-key || exit
             ./build.sh -i
             cd "$builddir" || exit
@@ -185,8 +163,8 @@ install_zoxide() {
     echo -e "${YELLOW}Applying PiercingXX Gnome Customizations...${NC}"
         rm -rf piercing-dots
         git clone --depth 1 https://github.com/Piercingxx/piercing-dots.git
-        chmod -R u+x piercing-dots
         cd piercing-dots || exit
+        chmod u+x install.sh
         ./install.sh
         cd "$builddir" || exit
         rm -rf piercing-dots
