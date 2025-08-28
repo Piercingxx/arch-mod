@@ -65,6 +65,7 @@ function menu() {
     whiptail --backtitle "GitHub.com/PiercingXX" --title "Main Menu" \
         --menu "Run Options In Order:" 0 0 0 \
         "Install"                               "Install PiercingXX Arch" \
+        "Nvidia Drivers"                        "Install Nvidia Drivers" \
         "Optional Surface Kernel"               "Install Microsoft Surface Kernal" \
         "Reboot System"                         "Reboot the system" \
         "Exit"                                  "Exit the script" 3>&1 1>&2 2>&3
@@ -128,6 +129,13 @@ while true; do
             echo -e "${GREEN}PiercingXX Gnome Customizations Applied successfully!${NC}"
             msg_box "System will reboot now."
             sudo reboot
+            ;;
+        "Install Nvidia Drivers")
+            echo -e "${YELLOW}Installing Nvidia Drivers...${NC}"
+                cd scripts || exit
+                chmod +x ./nvidia.sh
+                sudo ./nvidia.sh
+                cd "$builddir" || exit
             ;;
         "Optional Surface Kernel")
             echo -e "${YELLOW}Microsoft Surface Kernel...${NC}"            

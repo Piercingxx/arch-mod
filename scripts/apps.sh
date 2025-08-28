@@ -6,6 +6,7 @@ builddir=$(pwd)
 
 # Apps to Install
     paru -S fwupd --noconfirm
+    paru -S w3m --noconfirm
     paru -Rs firefox --noconfirm
     paru -S dconf --noconfirm
     paru -S pacseek --noconfirm
@@ -107,15 +108,12 @@ builddir=$(pwd)
     wait
 
 # Docker
-#            # Docker
-#                wget https://download.docker.com/linux/static/stable/x86_64/docker-28.0.4.tgz -qO- | tar xvfz - docker/docker --strip-components=1
-#                sudo mv ./docker /usr/local/bin
-#                ##Download the latest from https://docs.docker.com/desktop/release-notes/
-#                git clone https://desktop.docker.com/linux/main/amd64/187762/docker-desktop-x86_64.pkg.tar.zst
-#                sudo pacman -U ./docker-desktop-x86_64.pkg.tar.zst --noconfirm
-#                #AI 
-#                curl -fsSL https://ollama.com/install.sh | sh
-#                #ollama pull gemma3:27b 
-#                #ollama pull deepseek-r1:7b
-#            #OpenWebUi
-#                docker run -d -p 3000:8080 --add-host=host.docker.internal:host-gateway -v open-webui:/app/backend/data --name open-webui --restart always ghcr.io/open-webui/open-webui:main
+    sudo apt install apt-transport-https ca-certificates curl gnupg lsb-release -y
+    sudo install -m 0755 -d /etc/apt/keyrings
+    curl -fsSL https://download.docker.com/linux/debian/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+    sudo chmod a+r /etc/apt/keyrings/docker.gpg
+    sudo apt update
+    sudo apt install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin -y
+
+# OpenWebUi
+#    docker run -d -p 3000:8080 --add-host=host.docker.internal:host-gateway -v open-webui:/app/backend/data --name open-webui --restart always ghcr.io/open-webui/open-webui:main
