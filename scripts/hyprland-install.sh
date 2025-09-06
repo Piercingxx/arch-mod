@@ -16,8 +16,8 @@ ${PKGMGR} hyprsunset
 ${PKGMGR} wlsunset-git
 ${PKGMGR} wl-clipboard
 ${PKGMGR} libdbusmenu-gtk3
-${PKGMGR} fcitx5
-${PKGMGR} fcitx5-config-qt
+#${PKGMGR} fcitx5
+#${PKGMGR} fcitx5-config-qt
 
 # Set up Waybar and menus
 ${PKGMGR} waybar
