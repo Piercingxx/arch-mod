@@ -66,6 +66,7 @@ install_zoxide() {
 # Installing more Depends
         paru -S multitail --noconfirm
         paru -S dconf --noconfirm
+        paru -S cpio cmake meson --nocofirm
     # Install bash stuff
         paru -S fzf --noconfirm
         paru -S zoxide --noconfirm
