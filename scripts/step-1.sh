@@ -46,13 +46,12 @@ install_zoxide() {
                 mkdir -p /home/"$username"/media/Archived-Storage
             fi
             chown "$username":"$username" /home/"$username"/media/Archived-Storage
-
 # System Update
         sudo pacman -Syu --noconfirm
 # Install dependencies
         echo "# Installing dependencies..."
         sudo pacman -S reflector --noconfirm
-        sudo pacman -S zip unzip gzip tar make wget bash bash-completion tar bat tree fastfetch fontconfig trash-cli --noconfirm
+        sudo pacman -S zip unzip gzip tar make wget tar fontconfig --noconfirm
 # Add Paru, Flatpak, & Dependencies if needed
     echo -e "${YELLOW}Installing Paru, Flatpak, & Dependencies...${NC}"
         # Clone and install Paru
@@ -64,10 +63,16 @@ install_zoxide() {
         flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
         flatpak remote-add --if-not-exists flathub-beta https://flathub.org/beta-repo/flathub-beta.flatpakrepo
 # Installing more Depends
+        echo "# Installing more dependencies..."
         paru -S multitail --noconfirm
         paru -S dconf --noconfirm
         paru -S cpio cmake meson --nocofirm
     # Install bash stuff
+        paru -S fastfetch --noconfirm
+        paru -S tree --noconfirm
+        paru -s bat --noconfirm
+        paru -S bash-completion --noconfirm
+        paru -S trash-cli --noconfirm
         paru -S fzf --noconfirm
         paru -S zoxide --noconfirm
         curl -sS https://starship.rs/install.sh | sh
@@ -99,9 +104,10 @@ install_zoxide() {
         paru -S gnome-shell-extension-gsconnect --noconfirm
         paru -S gnome-shell-extension-vitals --noconfirm
         # Workspaces Buttons with App Icons
-            git clone https://codeload.github.com/Favo02/workspaces-by-open-apps/zip/refs/heads/main
+            curl -L https://codeload.github.com/Favo02/workspaces-by-open-apps/zip/refs/heads/main -o workspaces.zip
+            unzip workspaces.zip -d workspaces-by-open-apps-main
             chmod -R u+x workspaces-by-open-apps-main
-            cd workspaces-by-open-apps-main || exit
+            cd workspaces-by-open-apps-main/workspaces-by-open-apps-main || exit
             sudo ./install.sh local-install
             cd "$builddir" || exit
             rm -rf workspaces-by-open-apps-main
@@ -110,13 +116,23 @@ install_zoxide() {
             cd nautilus-open-any-terminal || exit
             make
             sudo make install schema
-            glib-compile-schemas /usr/share/glib-2.0/schemas
+            sudo glib-compile-schemas /usr/share/glib-2.0/schemas
             cd "$builddir" || exit
             rm -rf nautilus-open-any-terminal
         # Super Key
+            echo -e "${YELLOW}Installing Super‑Key extension...${NC}"
             git clone https://github.com/Tommimon/super-key.git
             cd super-key || exit
             ./build.sh -i
+            EXT_BUILD_DIR="$builddir/super-key"
+                if [ ! -d "$EXT_BUILD_DIR" ]; then
+                    echo "Build output not found in $EXT_BUILD_DIR"
+                    exit 1
+                fi
+            EXT_DIR="$HOME/.local/share/gnome-shell/extensions"
+            EXT_ID="super-key@tommimon"   # <-- adjust if the folder name differs
+            mkdir -p "$EXT_DIR"
+            cp -r "$EXT_BUILD_DIR" "$EXT_DIR/$EXT_ID"
             cd "$builddir" || exit
             rm -rf super-key
     echo -e "${GREEN}Gnome Extensions Installed Successfully!${NC}"
