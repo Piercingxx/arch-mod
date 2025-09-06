@@ -114,9 +114,10 @@ install_zoxide() {
         sudo systemctl enable cups.service
         sudo systemctl start cups
     # Install bash stuff
-        paru -S fzf -y
-        paru -S zoxide-git -y
+        paru -S fzf --noconfirm
+        paru -S zoxide-git --noconfirm
         curl -sS https://starship.rs/install.sh | sh
+        
     # Install dconf
         paru -S dconf --noconfirm
 # Extensions Install
