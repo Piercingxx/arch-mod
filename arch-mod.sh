@@ -3,6 +3,12 @@
 
 # Define colors for whiptail
 
+# Check if running as root. If root, script will exit
+if [[ $EUID -eq 0 ]]; then
+    echo "This script should not be executed as root! Exiting......."
+    exit 1
+fi
+
 # Function to check if a command exists
 command_exists() {
     command -v "$1" >/dev/null 2>&1
@@ -123,7 +129,7 @@ while true; do
                 cd "$builddir" || exit
             # Replace .bashrc
                 cp -f piercing-dots/resources/bash/.bashrc /home/"$username"/.bashrc
-                source ~/.bashrc
+                source "$HOME/.bashrc"
             # Clean Up
                 rm -rf piercing-dots
             echo -e "${GREEN}PiercingXX Gnome Customizations Applied successfully!${NC}"
@@ -139,32 +145,10 @@ while true; do
             ;;
         "Optional Surface Kernel")
             echo -e "${YELLOW}Microsoft Surface Kernel...${NC}"            
-                curl -s https://raw.githubusercontent.com/linux-surface/linux-surface/master/pkg/keys/surface.asc \
-                    | sudo pacman-key --add -
-                sudo pacman-key --finger 56C464BAAC421453
-                sudo pacman-key --lsign-key 56C464BAAC421453
-                    if [ -f "/etc/pacman.conf" ]; then
-                        cat /etc/pacman.conf >> /etc/pacman.conf
-                        echo "Server = https://pkg.surfacelinux.com/arch/" >> /etc/pacman.conf
-                    else
-                        echo "The file does not exist."
-                    fi
-                paru -Syu --noconfirm
-                paru -Sy libwacom-surface --noconfirm
-                sudo pacman -Syu --noconfirm
-                sudo pacman -S linux-surface linux-surface-headers iptsd --noconfirm
-                sudo pacman -S linux-firmware-marvell --noconfirm
-                sudo pacman -S linux-surface-secureboot-mok --noconfirm
-                paru -S surface-dtx-daemon --noconfirm
-                systemctl enable surface-dtx-daemon.service
-                systemctl --user surface-dtx-userd.service
-                sudo touch /boot/loader/entries/surface.conf
-                    cat /boot/loader/entries/surface.conf >> /boot/loader/entries/surface.conf
-                    echo "
-                    title Arch Surface
-                    linux /vmlinuz-linux-surface
-                    initrd  /initramfs-linux-surface.img
-                    options root=LABEL=arch rw"
+                cd scripts || exit
+                chmod +x ./surface-kernel.sh
+                sudo ./surface-kernel.sh
+                cd "$builddir" || exit
                 echo -e "${GREEN}Microsoft Kernal Installed. Manually create a Boot Loader Entry then reboot!${NC}"
             ;;
         "Reboot System")

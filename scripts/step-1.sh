@@ -38,14 +38,14 @@ install_zoxide() {
             fi
             chown -R "$username":"$username" /home/"$username"/Pictures/profile-image
         # fstab external drive mounting directory
-            if [ ! -d "$HOME/.media/Working-Storage" ]; then
-                mkdir -p /home/"$username"/media/Working-Storage
+            if [ ! -d "/media/Working-Storage" ]; then
+                sudo mkdir -p /media/Working-Storage
+                sudo chown "$username":"$username" /media/Working-Storage
             fi
-            chown "$username":"$username" /home/"$username"/media/Working-Storage
-            if [ ! -d "$HOME/.media/Archived-Storage" ]; then
-                mkdir -p /home/"$username"/media/Archived-Storage
+            if [ ! -d "/media/Archived-Storage" ]; then
+                sudo mkdir -p /media/Archived-Storage
+                sudo chown "$username":"$username" /media/Archived-Storage
             fi
-            chown "$username":"$username" /home/"$username"/media/Archived-Storage
 # System Update
         sudo pacman -Syu --noconfirm
 # Install dependencies
