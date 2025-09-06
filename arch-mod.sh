@@ -117,7 +117,7 @@ while true; do
                 sudo systemctl start bluetooth
                 systemctl enable bluetooth
             # Apply Piercing Gnome Customizations as User
-                cd piercing-dots/resources/scripts || exit
+                cd piercing-dots/scripts || exit
                 ./gnome-customizations.sh
                 wait
                 cd "$builddir" || exit
