@@ -46,56 +46,15 @@ install_zoxide() {
                 mkdir -p /home/"$username"/media/Archived-Storage
             fi
             chown "$username":"$username" /home/"$username"/media/Archived-Storage
-# Check if reflector is installed
-    if ! command_exists reflector; then
-        echo "Reflector is not installed. Installing now..."
-        # Attempt to install reflector using pacman
-        sudo pacman -S reflector --noconfirm
-        # Check if the installation was successful
-        if ! command_exists reflector; then
-        echo "Failed to install reflector. Please check your pacman configuration and internet connection."
-        exit 1  # Exit with an error code
-        else
-        echo "Reflector installed successfully."
-        fi
-    fi
-    echo -e "${YELLOW}Finding The Fastest Mirrors then Updating, Be Patient...${NC}"
-# Update mirrors
-    sudo reflector --verbose --sort rate -l 75 --save /etc/pacman.d/mirrorlist
-    echo -e "${GREEN}Mirrors Updated${NC}"
+
 # System Update
-    echo -e "${YELLOW}Updating System...${NC}"
-    # Check if paru is installed
-        if command_exists paru; then
-            echo "Using paru for system update..."
-            paru -Syu --noconfirm
-        else
-            echo "Paru not found, using pacman instead..."
-            sudo pacman -Syu --noconfirm
-        fi
-        wait
-    # Check if flatpak is installed and update it
-        if command_exists flatpak; then
-            echo "Updating flatpak packages..."
-            flatpak update -y
-        else
-            echo "Flatpak is not installed."
-        fi
-        wait
-    # Which DE are we in?
-        if pgrep -x "Hyprland" > /dev/null; then
-        # We are in Hyprland
-            echo "Running Hyprland updates..."
-            hyprpm update
-            wait
-            hyprpm reload
-        fi
-    echo -e "${GREEN}System Updated Successfully!${NC}"
+        sudo pacman -Syu --noconfirm
+# Install dependencies
+        echo "# Installing dependencies..."
+        sudo pacman -S reflector --noconfirm
+        sudo pacman -S zip unzip gzip tar make wget bash bash-completion tar bat tree fastfetch fontconfig trash-cli --noconfirm
 # Add Paru, Flatpak, & Dependencies if needed
     echo -e "${YELLOW}Installing Paru, Flatpak, & Dependencies...${NC}"
-        # Install dependencies
-        echo "# Installing dependencies..."
-        sudo pacman -S zip unzip gzip tar make wget bash bash-completion tar bat tree multitail fastfetch fontconfig trash-cli --noconfirm
         # Clone and install Paru
         echo "# Cloning and installing Paru..."
         git clone https://aur.archlinux.org/paru-bin.git && cd paru-bin && makepkg -si --noconfirm && cd ..
@@ -104,8 +63,16 @@ install_zoxide() {
         sudo pacman -S flatpak --noconfirm
         flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
         flatpak remote-add --if-not-exists flathub-beta https://flathub.org/beta-repo/flathub-beta.flatpakrepo
-    echo "# Enabling Bluetooth and Printer services..."
+# Installing more Depends
+        paru -S multitail --noconfirm
+        paru -S dconf --noconfirm
+    # Install bash stuff
+        paru -S fzf --noconfirm
+        paru -S zoxide --noconfirm
+        curl -sS https://starship.rs/install.sh | sh
+        paru -S exa --noconfirm
 # System Control Services
+    echo "# Enabling Bluetooth and Printer services..."
     # Enable Bluetooth
         sudo systemctl start bluetooth
         systemctl enable bluetooth
@@ -113,17 +80,16 @@ install_zoxide() {
         sudo pacman -S cups gutenprint cups-pdf gtk3-print-backends nmap net-tools cmake meson cpio --noconfirm
         sudo systemctl enable cups.service
         sudo systemctl start cups
-    # Install bash stuff
-        paru -S fzf --noconfirm
-        paru -S zoxide --noconfirm
-        curl -sS https://starship.rs/install.sh | sh
-        paru -S exa --noconfirm
-    # Install dconf
-        paru -S dconf --noconfirm
+# Fonts
+    echo -e "${YELLOW}Installing Fonts...${NC}"
+        cd scripts || exit
+        chmod u+x fonts.sh
+        ./fonts.sh
+        wait
+        cd "$builddir" || exit
 # Extensions Install
     echo -e "${YELLOW}Installing Gnome Extensions...${NC}"
         paru -S gnome-shell-extension-appindicator-git --noconfirm
-        #paru -S gnome-shell-extension-app-icons-taskbar --noconfirm
         paru -S gnome-shell-extension-blur-my-shell-git --noconfirm
         paru -S gnome-shell-extension-just-perfection-desktop --noconfirm
         paru -S gnome-shell-extension-pop-shell-git --noconfirm
@@ -153,13 +119,6 @@ install_zoxide() {
             cd "$builddir" || exit
             rm -rf super-key
     echo -e "${GREEN}Gnome Extensions Installed Successfully!${NC}"
-# Fonts
-    echo -e "${YELLOW}Installing Fonts...${NC}"
-        cd scripts || exit
-        chmod u+x fonts.sh
-        ./fonts.sh
-        wait
-        cd "$builddir" || exit
 # Apply Piercing Rice
     echo -e "${YELLOW}Applying PiercingXX Gnome Customizations...${NC}"
         rm -rf piercing-dots
