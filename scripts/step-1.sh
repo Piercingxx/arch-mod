@@ -64,13 +64,13 @@ install_zoxide() {
         flatpak remote-add --if-not-exists flathub-beta https://flathub.org/beta-repo/flathub-beta.flatpakrepo
 # Installing more Depends
         echo "# Installing more dependencies..."
-        paru -S multitail --noconfirm
         paru -S dconf --noconfirm
         paru -S cpio cmake meson --nocofirm
     # Install bash stuff
         paru -S fastfetch --noconfirm
+        paru -S multitail --noconfirm
         paru -S tree --noconfirm
-        paru -s bat --noconfirm
+        pacman -s bat --noconfirm
         paru -S bash-completion --noconfirm
         paru -S trash-cli --noconfirm
         paru -S fzf --noconfirm
