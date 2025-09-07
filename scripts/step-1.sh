@@ -5,17 +5,6 @@ username=$(id -u -n 1000)
 builddir=$(pwd)
 
 
-install_zoxide() {
-    if ! command_exists zoxide; then
-        if ! curl -sS https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | sh; then
-            print_colored "$RED" "Something went wrong during zoxide install!"
-            exit 1
-        fi
-    else
-        printf "Zoxide already installed\n"
-    fi
-}
-
 # Create Directories if needed
     echo -e "${YELLOW}Creating Necessary Directories...${NC}"
         # font directory
@@ -75,7 +64,7 @@ install_zoxide() {
         paru -S trash-cli --noconfirm
         paru -S fzf --noconfirm
         paru -S zoxide --noconfirm
-        curl -sS https://starship.rs/install.sh | sh
+        paru -S starship --noconfirm
         paru -S exa --noconfirm
 # System Control Services
     echo "# Enabling Bluetooth and Printer services..."

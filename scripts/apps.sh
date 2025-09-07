@@ -31,6 +31,7 @@ builddir=$(pwd)
     flatpak install flathub io.github.shiftey.Desktop -y
     flatpak install --noninteractive flathub io.github.realmazharhussain.GdmSettings -y
     flatpak install flathub com.flashforge.FlashPrint -y
+    flatpak install flathub org.gnome.meld -y
 
 # Yazi
     paru -S yazi-git ffmpeg 7zip jq poppler fd ripgrep fzf zoxide resvg imagemagick --noconfirm
