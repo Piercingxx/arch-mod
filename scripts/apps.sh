@@ -33,6 +33,13 @@ builddir=$(pwd)
     flatpak install flathub com.flashforge.FlashPrint -y
     flatpak install flathub org.gnome.meld -y
 
+# Firewall
+    paru -S ufw --noconfirm
+    sudo ufw allow OpenSSH
+
+# Tailscale
+    paru -S tailscale --noconfirm
+
 # Yazi
     paru -S yazi-git ffmpeg 7zip jq poppler fd ripgrep fzf zoxide resvg imagemagick --noconfirm
     ya pkg add dedukun/bookmarks
@@ -42,10 +49,9 @@ builddir=$(pwd)
 # Apps to uninstall
     sudo pacman -Rs gnome-console --noconfirm
     sudo pacman -Rs firefox --noconfirm
-
+    
 # Theme stuffs
     paru -S papirus-icon-theme-git --noconfirm
-    paru -S xcursor-simp1e-gruvbox-light --noconfirm
 
 # Gimp
     flatpak install https://flathub.org/beta-repo/appstream/org.gimp.GIMP.flatpakref -y
