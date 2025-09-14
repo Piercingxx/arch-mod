@@ -115,12 +115,9 @@ builddir=$(pwd)
     wait
 
 # Docker
-    sudo apt install apt-transport-https ca-certificates curl gnupg lsb-release -y
-    sudo install -m 0755 -d /etc/apt/keyrings
-    curl -fsSL https://download.docker.com/linux/debian/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
-    sudo chmod a+r /etc/apt/keyrings/docker.gpg
-    sudo apt update
-    sudo apt install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin -y
+    paru -S docker docker-compose --noconfirm
+    sudo systemctl enable --now docker
+    sudo usermod -aG docker $username
 
 # OpenWebUi
 #    docker run -d -p 3000:8080 --add-host=host.docker.internal:host-gateway -v open-webui:/app/backend/data --name open-webui --restart always ghcr.io/open-webui/open-webui:main
