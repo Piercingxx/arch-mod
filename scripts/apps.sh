@@ -32,6 +32,7 @@ builddir=$(pwd)
     flatpak install --noninteractive flathub io.github.realmazharhussain.GdmSettings -y
     flatpak install flathub com.flashforge.FlashPrint -y
     flatpak install flathub org.gnome.meld -y
+    flatpak install flathub com.nextcloud.desktopclient.nextcloud -y
 
 # Firewall
     paru -S ufw --noconfirm

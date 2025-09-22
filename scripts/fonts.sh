@@ -29,6 +29,7 @@ builddir=$(pwd)
     sudo pacman -S ttf-firacode-nerd --noconfirm
     sudo pacman -S ttf-jetbrains-mono-nerd --noconfirm
     sudo pacman -S ttf-nerd-fonts-symbols-mono --noconfirm
+    paru -S ttf-nerd-fonts-symbols --noconfirm
     paru -S ttf-firacode --noconfirm
     paru -S awesome-terminal-fonts-patched --noconfirm
     paru -S ttf-ms-fonts --noconfirm
