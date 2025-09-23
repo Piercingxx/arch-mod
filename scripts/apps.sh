@@ -55,7 +55,7 @@ builddir=$(pwd)
     paru -S papirus-icon-theme-git --noconfirm
 
 # Gimp
-    flatpak install https://flathub.org/beta-repo/appstream/org.gimp.GIMP.flatpakref -y
+    flatpak install flathub org.gimp.GIMP -y
     flatpak install flathub org.darktable.Darktable -y
     paru -S opencl-amd --noconfirm
 
@@ -98,10 +98,10 @@ builddir=$(pwd)
     flatpak install flathub org.kde.kdenlive -y
 
 # Steam
-    sudo pacman -S steam --noconfirm
-    paru -S discord-canary --noconfirm
-    flatpak install flathub com.discordapp.Discord -y
-    paru -S input-remapper --noconfirm
+#    sudo pacman -S steam --noconfirm
+#    paru -S discord-canary --noconfirm
+#    flatpak install flathub com.discordapp.Discord -y
+#    paru -S input-remapper --noconfirm
 
 # Ollama
     curl -fsSL https://ollama.com/install.sh | sh
