@@ -20,6 +20,7 @@ builddir=$(pwd)
     paru -S nautilus-renamer --noconfirm
     paru -S ulauncher --noconfirm
     paru -S ventoy-bin --noconfirm
+    paru -S proton-vpn-gtk-app --noconfirm
     flatpak install flathub net.waterfox.waterfox -y
     flatpak install flathub md.obsidian.Obsidian -y
     flatpak install flathub org.libreoffice.LibreOffice -y
