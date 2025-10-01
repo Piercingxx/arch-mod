@@ -43,7 +43,7 @@ builddir=$(pwd)
     paru -S tailscale --noconfirm
 
 # Yazi
-    paru -S yazi-git ffmpeg 7zip jq poppler fd ripgrep fzf zoxide resvg imagemagick --noconfirm
+    paru -S yazi-nightly-bin ffmpeg 7zip jq poppler fd ripgrep fzf zoxide resvg imagemagick --noconfirm
     ya pkg add dedukun/bookmarks
     ya pkg add yazi-rs/plugins:mount
     ya pack -a grappas/wl-clipboard
