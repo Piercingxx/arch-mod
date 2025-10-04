@@ -89,6 +89,13 @@ while true; do
                 gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-battery-type 'false'
                 gsettings set org.gnome.settings-daemon.plugins.power idle-dim 'false'
             echo -e "${YELLOW}Installing Essentials...${NC}"
+            # Fonts
+                cd scripts || exit
+                chmod u+x fonts.sh
+                ./fonts.sh
+                wait
+                cd "$builddir" || exit
+            # Essentials
                 cd scripts || exit
                 chmod u+x step-1.sh
                 ./step-1.sh

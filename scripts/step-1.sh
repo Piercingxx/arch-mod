@@ -75,13 +75,6 @@ builddir=$(pwd)
         sudo pacman -S cups gutenprint cups-pdf gtk3-print-backends nmap net-tools cmake meson cpio --noconfirm
         sudo systemctl enable cups.service
         sudo systemctl start cups
-# Fonts
-    echo -e "${YELLOW}Installing Fonts...${NC}"
-        cd scripts || exit
-        chmod u+x fonts.sh
-        ./fonts.sh
-        wait
-        cd "$builddir" || exit
 # Extensions Install
     echo -e "${YELLOW}Installing Gnome Extensions...${NC}"
         paru -S gnome-shell-extension-appindicator-git --noconfirm
