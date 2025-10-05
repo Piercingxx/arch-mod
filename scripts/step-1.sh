@@ -75,48 +75,72 @@ builddir=$(pwd)
         sudo pacman -S cups gutenprint cups-pdf gtk3-print-backends nmap net-tools cmake meson cpio --noconfirm
         sudo systemctl enable cups.service
         sudo systemctl start cups
+# Install fonts
+    echo "Installing Fonts"
+    cd "$builddir" || exit
+    wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/FiraCode.zip
+    wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/Meslo.zip
+    wget http://www.i18nguy.com/unicode/andagii.zip
+    unzip FiraCode.zip -d /home/"$username"/.fonts
+    unzip Meslo.zip -d /home/"$username"/.fonts
+    unzip andagii.zip -d /home/"$username"/.fonts
+    sudo rm FiraCode.zip Meslo.zip andagii.zip
+    sudo pacman -S ttf-firacode-nerd --noconfirm
+    sudo pacman -S ttf-jetbrains-mono-nerd --noconfirm
+    sudo pacman -S ttf-nerd-fonts-symbols-mono --noconfirm
+    paru -S ttf-nerd-fonts-symbols --noconfirm
+    paru -S ttf-firacode --noconfirm
+    paru -S awesome-terminal-fonts-patched --noconfirm
+    paru -S ttf-ms-fonts --noconfirm
+    paru -S terminus-font-ttf --noconfirm
+    paru -S noto-color-emoji-fontconfig --noconfirm
+    paru -S wtype-git --noconfirm
+    paru -S xcursor-simp1e-gruvbox-light --noconfirm
+    # Reload Font
+    fc-cache -vf
+    wait
 # Extensions Install
     echo -e "${YELLOW}Installing Gnome Extensions...${NC}"
-        paru -S gnome-shell-extension-appindicator-git --noconfirm
-        paru -S gnome-shell-extension-blur-my-shell-git --noconfirm
-        paru -S gnome-shell-extension-just-perfection-desktop --noconfirm
-        paru -S gnome-shell-extension-pop-shell-git --noconfirm
-        paru -S gnome-shell-extension-useless-gaps-git --noconfirm
-        paru -S gnome-shell-extension-caffeine-git --noconfirm
-        paru -S gnome-shell-extension-gsconnect --noconfirm
-        paru -S gnome-shell-extension-vitals --noconfirm
-        # Workspaces Buttons with App Icons
-            curl -L https://codeload.github.com/Favo02/workspaces-by-open-apps/zip/refs/heads/main -o workspaces.zip
-            unzip workspaces.zip -d workspaces-by-open-apps-main
-            chmod -R u+x workspaces-by-open-apps-main
-            cd workspaces-by-open-apps-main/workspaces-by-open-apps-main || exit
-            sudo ./install.sh local-install
-            cd "$builddir" || exit
-            rm -rf workspaces-by-open-apps-main
-        # Nautilus Customization
-            git clone https://github.com/Stunkymonkey/nautilus-open-any-terminal.git
-            cd nautilus-open-any-terminal || exit
-            make
-            sudo make install schema
-            sudo glib-compile-schemas /usr/share/glib-2.0/schemas
-            cd "$builddir" || exit
-            rm -rf nautilus-open-any-terminal
-        # Super Key
-            echo -e "${YELLOW}Installing Super‑Key extension...${NC}"
-            git clone https://github.com/Tommimon/super-key.git
-            cd super-key || exit
-            ./build.sh -i
-            EXT_BUILD_DIR="$builddir/super-key"
-                if [ ! -d "$EXT_BUILD_DIR" ]; then
-                    echo "Build output not found in $EXT_BUILD_DIR"
-                    exit 1
-                fi
-            EXT_DIR="$HOME/.local/share/gnome-shell/extensions"
-            EXT_ID="super-key@tommimon"   # <-- adjust if the folder name differs
-            mkdir -p "$EXT_DIR"
-            cp -r "$EXT_BUILD_DIR" "$EXT_DIR/$EXT_ID"
-            cd "$builddir" || exit
-            rm -rf super-key
+    paru -S gnome-shell-extension-appindicator-git --noconfirm
+    paru -S gnome-shell-extension-blur-my-shell-git --noconfirm
+    paru -S gnome-shell-extension-just-perfection-desktop --noconfirm
+    paru -S gnome-shell-extension-pop-shell-git --noconfirm
+    paru -S gnome-shell-extension-useless-gaps-git --noconfirm
+    paru -S gnome-shell-extension-caffeine-git --noconfirm
+    paru -S gnome-shell-extension-gsconnect --noconfirm
+    paru -S gnome-shell-extension-vitals --noconfirm
+    # Workspaces Buttons with App Icons
+        curl -L https://codeload.github.com/Favo02/workspaces-by-open-apps/zip/refs/heads/main -o workspaces.zip
+        unzip workspaces.zip -d workspaces-by-open-apps-main
+        chmod -R u+x workspaces-by-open-apps-main
+        cd workspaces-by-open-apps-main/workspaces-by-open-apps-main || exit
+        sudo ./install.sh local-install
+        cd "$builddir" || exit
+        rm -rf workspaces-by-open-apps-main
+    # Nautilus Customization
+        git clone https://github.com/Stunkymonkey/nautilus-open-any-terminal.git
+        cd nautilus-open-any-terminal || exit
+        make
+        sudo make install schema
+        sudo glib-compile-schemas /usr/share/glib-2.0/schemas
+        cd "$builddir" || exit
+        rm -rf nautilus-open-any-terminal
+    # Super Key
+        echo -e "${YELLOW}Installing Super‑Key extension...${NC}"
+        git clone https://github.com/Tommimon/super-key.git
+        cd super-key || exit
+        ./build.sh -i
+        EXT_BUILD_DIR="$builddir/super-key"
+            if [ ! -d "$EXT_BUILD_DIR" ]; then
+                echo "Build output not found in $EXT_BUILD_DIR"
+                exit 1
+            fi
+        EXT_DIR="$HOME/.local/share/gnome-shell/extensions"
+        EXT_ID="super-key@tommimon"   # <-- adjust if the folder name differs
+        mkdir -p "$EXT_DIR"
+        cp -r "$EXT_BUILD_DIR" "$EXT_DIR/$EXT_ID"
+        cd "$builddir" || exit
+        rm -rf super-key
     echo -e "${GREEN}Gnome Extensions Installed Successfully!${NC}"
 # Apply Piercing Rice
     echo -e "${YELLOW}Applying PiercingXX Gnome Customizations...${NC}"

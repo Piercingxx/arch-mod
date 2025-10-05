@@ -95,12 +95,6 @@ while true; do
                 ./step-1.sh
                 wait
                 cd "$builddir" || exit
-            # Fonts
-                cd scripts || exit
-                chmod u+x fonts.sh
-                ./fonts.sh
-                wait
-                cd "$builddir" || exit
             echo -e "${GREEN}Essentials Installed successfully!${NC}"
             # Apply Piercing Rice
                 echo -e "${YELLOW}Applying PiercingXX Gnome Customizations...${NC}"
