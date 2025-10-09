@@ -32,8 +32,9 @@ builddir=$(pwd)
     flatpak install flathub io.github.shiftey.Desktop -y
     flatpak install --noninteractive flathub io.github.realmazharhussain.GdmSettings -y
     flatpak install flathub com.flashforge.FlashPrint -y
-    flatpak install flathub org.gnome.meld -y
+    flatpak install flathub org.gnome.meld -y # For file comparison
     flatpak install flathub com.nextcloud.desktopclient.nextcloud -y
+    flatpak install flathub com.github.xournalpp.xournalpp -y # For PDF annotation
 
 # Firewall
     paru -S ufw --noconfirm
