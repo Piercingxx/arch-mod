@@ -66,6 +66,7 @@ builddir=$(pwd)
         paru -S zoxide --noconfirm
         paru -S starship --noconfirm
         paru -S exa --noconfirm
+        paru -S jump-bin --noconfirm
 # System Control Services
     echo "# Enabling Bluetooth and Printer services..."
     # Enable Bluetooth
