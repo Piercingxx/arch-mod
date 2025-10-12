@@ -9,9 +9,6 @@ builddir=$(pwd)
     paru -S w3m --noconfirm
     paru -Rs firefox --noconfirm
     paru -S dconf --noconfirm
-    paru -S pacseek --noconfirm
-    paru -S mpd --noconfirm
-    paru -S mpv --noconfirm
     paru -S fuzzel --noconfirm
     paru -S kitty --noconfirm
     paru -S python --noconfirm
@@ -19,6 +16,7 @@ builddir=$(pwd)
     paru -S nautilus-open-any-terminal --noconfirm
     paru -S nautilus-renamer --noconfirm
     paru -S ulauncher --noconfirm
+    paru -S vlc --noconfirm
     paru -S ventoy-bin --noconfirm
     paru -S proton-vpn-gtk-app --noconfirm
     flatpak install flathub net.waterfox.waterfox -y
