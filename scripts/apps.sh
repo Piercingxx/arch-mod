@@ -52,7 +52,7 @@ builddir=$(pwd)
 # Apps to uninstall
     sudo pacman -Rs gnome-console --noconfirm
     sudo pacman -Rs firefox --noconfirm
-    
+
 # Theme stuffs
     paru -S papirus-icon-theme-git --noconfirm
 
@@ -86,8 +86,6 @@ builddir=$(pwd)
     sudo npm install -g @mermaid-js/mermaid-cli
     sudo npm install -g  neovim
     python3 -m pip install --user --upgrade pynvim
-    # Yazi
-    paru -S yazi-git ffmpeg 7zip jq poppler fd ripgrep fzf zoxide resvg imagemagick --noconfirm
 
 # VScode
     paru -S visual-studio-code-bin --noconfirm
