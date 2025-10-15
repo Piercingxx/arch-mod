@@ -30,7 +30,6 @@ ${PKGMGR} swaync
 ${PKGMGR} polkit-gnome
 
 # Install file manager and customization tools
-${PKGMGR} ranger
 ${PKGMGR} nautilus
 ${PKGMGR} nautilus-renamer
 ${PKGMGR} nautilus-open-any-terminal
@@ -73,11 +72,9 @@ ${PKGMGR} swww
 # Additional Hyprland plugins and configurations
 hyprpm update
 hyprpm reload
-hyprpm add https://github.com/hyprwm/hyprland-plugins
-hyprpm add https://github.com/virtcode/hypr-dynamic-cursors
-hyprpm enable dynamic-cursors
-hyprpm enable hyprtrails
-hyprpm enable hyprfocus
+# hyprpm add https://github.com/hyprwm/hyprland-plugins
+# hyprpm add https://github.com/virtcode/hypr-dynamic-cursors
+# hyprpm enable dynamic-cursors
 
 # Success message
 echo -e "\nAll packages installed successfully!"

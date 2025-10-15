@@ -96,10 +96,10 @@ builddir=$(pwd)
     flatpak install flathub org.kde.kdenlive -y
 
 # Steam
-#    sudo pacman -S steam --noconfirm
-#    paru -S discord-canary --noconfirm
-#    flatpak install flathub com.discordapp.Discord -y
-#    paru -S input-remapper --noconfirm
+    sudo pacman -S steam --noconfirm
+    paru -S discord-canary --noconfirm
+    flatpak install flathub com.discordapp.Discord -y
+    paru -S input-remapper --noconfirm
 
 # Ollama
     curl -fsSL https://ollama.com/install.sh | sh
