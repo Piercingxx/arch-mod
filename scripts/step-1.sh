@@ -106,10 +106,7 @@ builddir=$(pwd)
     paru -S gnome-shell-extension-blur-my-shell-git --noconfirm
     paru -S gnome-shell-extension-just-perfection-desktop --noconfirm
     paru -S gnome-shell-extension-pop-shell-git --noconfirm
-    paru -S gnome-shell-extension-useless-gaps-git --noconfirm
-    paru -S gnome-shell-extension-caffeine-git --noconfirm
     paru -S gnome-shell-extension-gsconnect --noconfirm
-    paru -S gnome-shell-extension-vitals --noconfirm
     # Workspaces Buttons with App Icons
         curl -L https://codeload.github.com/Favo02/workspaces-by-open-apps/zip/refs/heads/main -o workspaces.zip
         unzip workspaces.zip -d workspaces-by-open-apps-main
