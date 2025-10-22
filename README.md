@@ -7,12 +7,19 @@ Automates core package installation, GPU drivers, Surface kernel modules, Hyprla
 
 ## 📦 Features
 
-- Installs GNOME, developer tools, and essential apps
-- Optional NVIDIA driver and Microsoft Surface kernel support
-- Hyprland Wayland session setup
+- Installs GNOME & Hyprland by default, developer tools, and essential apps
 - Applies [Piercing‑Dots](https://github.com/PiercingXX/piercing-dots) dotfiles and customizations
+    - Window Manager Dots and all there utilities
+      - Hyprland/Awesome/BSPWM/i3/Sway
+    - GIMP dots
+    - Yazi/kitty setup
+    - Scripts that make linux easy:
+      - Maintenance.sh - identifies your distro | updates and cleans everything is your system | will auto update any scripts I modify in the github repo.
+      - terminal_software_manager.sh - lets you install or uninstall all your software from the terminal even if you dont remember how it was installed, or what the exact name is.
+      - open_daily_note.sh - daily notes using nvim and a folder backed up on my own server cloud for sync across all devices.
 - Firewall configuration with UFW
-- Flatpak integration and core desktop applications
+- Paru & Flatpak integration and core desktop applications
+- Optional NVIDIA driver and Microsoft Surface kernel support
 
 ---
 
