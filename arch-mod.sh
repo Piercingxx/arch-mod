@@ -120,13 +120,6 @@ while true; do
                 ./hyprland-install.sh
                 cd "$builddir" || exit
             echo -e "${GREEN}Hyprland & Dependencies Installed successfully!${NC}"
-            # Set Boot Beep
-            echo -e "${YELLOW}Setting Boot Beep...${NC}"
-                cd scripts || exit
-                chmod u+x set_boot_beep.sh
-                ./set_boot_beep.sh
-                cd "$builddir" || exit
-            echo -e "${GREEN}Boot Beep Set successfully!${NC}"
             # Enable Bluetooth again
                 sudo systemctl start bluetooth
                 systemctl enable bluetooth
