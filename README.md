@@ -62,7 +62,6 @@ See the LICENSE file for details.
 ## 🤝 Contributing
 
 Fork, branch, and PR welcome.  
-Keep scripts POSIX‑friendly and avoid hard‑coded paths.
 
 ---
 
