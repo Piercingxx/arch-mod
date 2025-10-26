@@ -103,11 +103,12 @@ builddir=$(pwd)
     wait
 # Extensions Install
     echo -e "${YELLOW}Installing Gnome Extensions...${NC}"
-    paru -S gnome-shell-extension-appindicator-git --noconfirm
+    paru -S libayatana-appindicator-glib --noconfirm
     paru -S gnome-shell-extension-blur-my-shell-git --noconfirm
     paru -S gnome-shell-extension-just-perfection-desktop --noconfirm
     paru -S gnome-shell-extension-pop-shell-git --noconfirm
     paru -S gnome-shell-extension-gsconnect --noconfirm
+    paru -S nautilus-open-any-terminal --noconfirm
     # Workspaces Buttons with App Icons
         curl -L https://codeload.github.com/Favo02/workspaces-by-open-apps/zip/refs/heads/main -o workspaces.zip
         unzip workspaces.zip -d workspaces-by-open-apps-main
@@ -116,14 +117,6 @@ builddir=$(pwd)
         sudo ./install.sh local-install
         cd "$builddir" || exit
         rm -rf workspaces-by-open-apps-main
-    # Nautilus Customization
-        git clone https://github.com/Stunkymonkey/nautilus-open-any-terminal.git
-        cd nautilus-open-any-terminal || exit
-        make
-        sudo make install schema
-        sudo glib-compile-schemas /usr/share/glib-2.0/schemas
-        cd "$builddir" || exit
-        rm -rf nautilus-open-any-terminal
     # Super Key
         echo -e "${YELLOW}Installing Super‑Key extension...${NC}"
         git clone https://github.com/Tommimon/super-key.git
