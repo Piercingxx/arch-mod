@@ -95,7 +95,7 @@ builddir=$(pwd)
     paru -S awesome-terminal-fonts-patched --noconfirm
     paru -S ttf-ms-fonts --noconfirm
     paru -S terminus-font-ttf --noconfirm
-    paru -S noto-color-emoji-fontconfig --noconfirm
+    paru -S noto-fonts-emoji-colrv1 --noconfirm
     paru -S wtype-git --noconfirm
     paru -S xcursor-simp1e-gruvbox-light --noconfirm
     # Reload Font
