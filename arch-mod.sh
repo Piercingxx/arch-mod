@@ -1,7 +1,17 @@
 #!/bin/bash
 # GitHub.com/PiercingXX
 
-# Define colors for whiptail
+
+# Check/install gum if missing
+if ! command -v gum &> /dev/null; then
+    echo "gum not found. Installing..."
+    if command -v pacman &> /dev/null; then
+        sudo pacman -S --noconfirm gum
+    else
+        echo "Please install gum manually."
+        exit 1
+    fi
+fi
 
 # Check if running as root. If root, script will exit
 if [[ $EUID -eq 0 ]]; then
@@ -49,11 +59,7 @@ fi
         fi
 
 
-# Install required tools for TUI
-if ! command -v whiptail &> /dev/null; then
-    echo -e "${YELLOW}Installing whiptail...${NC}"
-    pacman -S whiptail --noconfirm
-fi
+
 
 username=$(id -u -n 1000)
 builddir=$(pwd)
@@ -61,20 +67,22 @@ builddir=$(pwd)
 # Cache sudo credentials
 cache_sudo_credentials
 
-# Function to display a message box
+# Function to display a message box using gum
 function msg_box() {
-    whiptail --msgbox "$1" 0 0 0
+    gum style --border double --margin "1 2" --padding "1 2" --foreground 212 "$1"
+    read -n 1 -s -r -p "Press any key to continue..."; echo
 }
 
-# Function to display menu
+# Function to display menu using gum
 function menu() {
-    whiptail --backtitle "GitHub.com/PiercingXX" --title "Main Menu" \
-        --menu "Run Options In Order:" 0 0 0 \
-        "Install"                               "Install PiercingXX Arch" \
-        "Nvidia Drivers"                        "Install Nvidia Drivers" \
-        "Optional Surface Kernel"               "Install Microsoft Surface Kernal" \
-        "Reboot System"                         "Reboot the system" \
-        "Exit"                                  "Exit the script" 3>&1 1>&2 2>&3
+    local options=(
+        "Install Arch Mod"
+        "Optional Nvidia Drivers"
+        "Optional Surface Kernel"
+        "Reboot System"
+        "Exit"
+    )
+    printf "%s\n" "${options[@]}" | gum choose --header "Run Options In Order:" --cursor.foreground 212 --selected.foreground 212
 }
 # Main menu loop
 while true; do
@@ -83,7 +91,7 @@ while true; do
     echo -e "${GREEN}Welcome ${username}${NC}\n"
     choice=$(menu)
     case $choice in
-        "Install")
+        "Install Arch Mod")
             # Turn off sleep/suspend to avoid interruptions
                 gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type 'false'
                 gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-battery-type 'false'
@@ -137,7 +145,7 @@ while true; do
             msg_box "System will reboot now."
             sudo reboot
             ;;
-        "Install Nvidia Drivers")
+        "Optional Nvidia Drivers")
             echo -e "${YELLOW}Installing Nvidia Drivers...${NC}"
                 cd scripts || exit
                 chmod +x ./nvidia.sh
@@ -163,9 +171,5 @@ while true; do
             exit 0
             ;;
     esac
-    # Prompt to continue
-    while true; do
-        read -p "Press [Enter] to continue..." 
-        break
-    done
+    read -n 1 -s -r -p "Press any key to continue..."; echo
 done
