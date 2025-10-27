@@ -11,13 +11,13 @@ ${PKGMGR} hyprlock
 ${PKGMGR} hypridle
 ${PKGMGR} hyprcursor-git
 ${PKGMGR} hyprsunset
+${PKGMGR} polkit-gnome
 
 # Install additional utilities
 ${PKGMGR} wlsunset-git
 ${PKGMGR} wl-clipboard
 ${PKGMGR} libdbusmenu-gtk3
-#${PKGMGR} fcitx5
-#${PKGMGR} fcitx5-config-qt
+
 
 # Set up Waybar and menus
 ${PKGMGR} waybar
@@ -27,7 +27,6 @@ ${PKGMGR} wlogout
 ${PKGMGR} libnotify
 ${PKGMGR} notification-daemon
 ${PKGMGR} swaync
-${PKGMGR} polkit-gnome
 
 # Install file manager and customization tools
 ${PKGMGR} nautilus
@@ -52,9 +51,9 @@ ${PKGMGR} pavucontrol
 # Network and Bluetooth utilities
 ${PKGMGR} networkmanager
 ${PKGMGR} network-manager-applet
+${PKGMGR} bluetuith
 ${PKGMGR} bluez
-${PKGMGR} bluez-uti
-${PKGMGR} blueman
+${PKGMGR} bluez-utils
 
 # GUI customization tools
 ${PKGMGR} nwg-look
@@ -64,9 +63,6 @@ ${PKGMGR} dconf
 
 #Monitor locator
 ${PKGMGR} nwg-displays
-
-#Wallpaper
-${PKGMGR} swww
 
 
 # Additional Hyprland plugins and configurations

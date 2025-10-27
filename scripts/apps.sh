@@ -41,15 +41,21 @@ builddir=$(pwd)
 # Tailscale
     paru -S tailscale --noconfirm
 
-# Yazi
-    paru -S yazi-nightly-bin ffmpeg 7zip jq poppler fd ripgrep fzf zoxide resvg imagemagick --noconfirm
-    ya pkg add dedukun/bookmarks
-    ya pkg add yazi-rs/plugins:mount
-    ya pack -a grappas/wl-clipboard
-
 # Apps to uninstall
     sudo pacman -Rs gnome-console --noconfirm
     sudo pacman -Rs firefox --noconfirm
+    sudo pacman -Rs epiphany --noconfirm
+    sudo pacman -Rs gnome-terminal --noconfirm
+    sudo pacman -Rs gnome-software --noconfirm
+    sudo pacman -Rs software-center --noconfirm
+    sudo pacman -Rs dolphin --noconfirm
+    sudo pacman -Rs gnome-maps --noconfirm
+    sudo pacman -Rs gnome-photos --noconfirm
+    sudo pacman -Rs gnome-calendar --noconfirm
+    sudo pacman -Rs gnome-contacts --noconfirm
+    sudo pacman -Rs gnome-music --noconfirm
+    sudo pacman -Rs gnome-text-editor --noconfirm
+    sudo pacman -Rs gnome-weather --noconfirm
 
 # Theme stuffs
     paru -S papirus-icon-theme-git --noconfirm

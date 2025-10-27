@@ -37,11 +37,13 @@ builddir=$(pwd)
             fi
 # System Update
         sudo pacman -Syu --noconfirm
+
 # Install dependencies
         echo "# Installing dependencies..."
         sudo pacman -S reflector --noconfirm
         sudo pacman -S zip unzip gzip tar make wget tar fontconfig --noconfirm
         sudo pacman -Syu linux-firmware --noconfirm
+
 # Add Paru, Flatpak, & Dependencies if needed
     echo -e "${YELLOW}Installing Paru, Flatpak, & Dependencies...${NC}"
         # Clone and install Paru
@@ -52,6 +54,7 @@ builddir=$(pwd)
         sudo pacman -S flatpak --noconfirm
         flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
         flatpak remote-add --if-not-exists flathub-beta https://flathub.org/beta-repo/flathub-beta.flatpakrepo
+
 # Installing more Depends
         echo "# Installing more dependencies..."
         paru -S dconf --noconfirm
@@ -68,6 +71,22 @@ builddir=$(pwd)
         paru -S starship --noconfirm
         paru -S exa --noconfirm
         paru -S jump-bin --noconfirm
+    # Yazi
+        paru -S yazi-nightly-bin 
+        paru -S ffmpeg --noconfirm
+        paru -S 7zip --noconfirm
+        paru -S jq --noconfirm
+        paru -S poppler --noconfirm
+        paru -S fd --noconfirm
+        paru -S ripgrep --noconfirm
+        paru -S fzf --noconfirm
+        paru -S zoxide --noconfirm
+        paru -S resvg --noconfirm
+        paru -S imagemagick --noconfirm
+        ya pkg add dedukun/bookmarks
+        ya pkg add yazi-rs/plugins:mount
+        ya pkg add grappas/wl-clipboard
+
 # System Control Services
     echo "# Enabling Bluetooth and Printer services..."
     # Enable Bluetooth
@@ -77,6 +96,7 @@ builddir=$(pwd)
         sudo pacman -S cups gutenprint cups-pdf gtk3-print-backends nmap net-tools cmake meson cpio --noconfirm
         sudo systemctl enable cups.service
         sudo systemctl start cups
+
 # Install fonts
     echo "Installing Fonts"
     cd "$builddir" || exit
@@ -101,6 +121,7 @@ builddir=$(pwd)
     # Reload Font
     fc-cache -vf
     wait
+
 # Extensions Install
     echo -e "${YELLOW}Installing Gnome Extensions...${NC}"
     paru -S libayatana-appindicator-glib --noconfirm
@@ -134,6 +155,7 @@ builddir=$(pwd)
         cd "$builddir" || exit
         rm -rf super-key
     echo -e "${GREEN}Gnome Extensions Installed Successfully!${NC}"
+
 # Apply Piercing Rice
     echo -e "${YELLOW}Applying PiercingXX Gnome Customizations...${NC}"
         rm -rf piercing-dots
