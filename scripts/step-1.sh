@@ -43,6 +43,7 @@ builddir=$(pwd)
         sudo pacman -S reflector --noconfirm
         sudo pacman -S zip unzip gzip tar make wget tar fontconfig --noconfirm
         sudo pacman -Syu linux-firmware --noconfirm
+        sudo pacman -S bc brightnessctl dunst --noconfirm
 
 # Add Paru, Flatpak, & Dependencies if needed
     echo -e "${YELLOW}Installing Paru, Flatpak, & Dependencies...${NC}"
@@ -60,17 +61,7 @@ builddir=$(pwd)
         paru -S dconf --noconfirm
         paru -S cpio cmake meson --nocofirm
     # Install bash stuff
-        paru -S fastfetch --noconfirm
-        paru -S multitail --noconfirm
-        paru -S tree --noconfirm
-        pacman -s bat --noconfirm
-        paru -S bash-completion --noconfirm
-        paru -S trash-cli --noconfirm
-        paru -S fzf --noconfirm
-        paru -S zoxide --noconfirm
-        paru -S starship --noconfirm
-        paru -S exa --noconfirm
-        paru -S jump-bin --noconfirm
+        install_bashrc_support
     # Yazi
         paru -S yazi-nightly-bin 
         paru -S ffmpeg --noconfirm
