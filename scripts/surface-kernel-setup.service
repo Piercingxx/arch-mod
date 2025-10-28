@@ -1,0 +1,11 @@
+[Unit]
+Description=Install and configure Microsoft Surface kernel (linux-surface)
+After=network.target
+
+[Service]
+Type=oneshot
+ExecStart=/bin/bash /usr/local/bin/surface-kernel-setup.sh
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target

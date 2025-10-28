@@ -60,8 +60,6 @@ builddir=$(pwd)
         echo "# Installing more dependencies..."
         paru -S dconf --noconfirm
         paru -S cpio cmake meson --nocofirm
-    # Install bash stuff
-        install_bashrc_support
     # Yazi
         paru -S yazi-nightly-bin --noconfirm
         paru -S ffmpeg --noconfirm

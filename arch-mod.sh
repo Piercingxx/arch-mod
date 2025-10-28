@@ -103,6 +103,8 @@ while true; do
                 ./step-1.sh
                 wait
                 cd "$builddir" || exit
+            # Install bash stuff
+                install_bashrc_support
             echo -e "${GREEN}Essentials Installed successfully!${NC}"
             # Apply Piercing Rice
                 echo -e "${YELLOW}Applying PiercingXX Gnome Customizations...${NC}"
@@ -155,10 +157,13 @@ while true; do
         "Optional Surface Kernel")
             echo -e "${YELLOW}Microsoft Surface Kernel...${NC}"            
                 cd scripts || exit
-                chmod +x ./surface-kernel.sh
-                sudo ./surface-kernel.sh
+                chmod +x ./surface-kernel-setup.sh
+                sudo ./surface-kernel-setup.sh
+            # create boot entry
+                sudo efibootmgr --create --disk /dev/sda --part 1 --label "Microsoft Surface Linux Kernel" --loader "\vmlinuz-linux-surface" --unicode "root=UUID=$(blkid -s UUID -o value $(findmnt / -o SOURCE -n)) rw initrd=\initramfs-linux-surface.img" --verbose 
+                sudo systemctl enable --now surface-kernel-setup.service
                 cd "$builddir" || exit
-                echo -e "${GREEN}Microsoft Kernal Installed. Manually create a Boot Loader Entry then reboot!${NC}"
+                echo -e "${GREEN}Microsoft Kernel Installed. Manually create a Boot Loader Entry then reboot!${NC}"
             ;;
         "Reboot System")
             echo -e "${YELLOW}Rebooting system in 3 seconds...${NC}"
