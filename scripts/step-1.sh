@@ -63,7 +63,7 @@ builddir=$(pwd)
     # Install bash stuff
         install_bashrc_support
     # Yazi
-        paru -S yazi-nightly-bin 
+        paru -S yazi-nightly-bin --noconfirm
         paru -S ffmpeg --noconfirm
         paru -S 7zip --noconfirm
         paru -S jq --noconfirm
