@@ -161,7 +161,7 @@ while true; do
                 sudo install -m 755 scripts/surface-kernel-setup.sh /usr/local/bin/
                 sudo systemctl enable --now surface-kernel-setup.service
                 cd "$builddir" || exit
-                echo -e "${GREEN}Microsoft Kernel Installed. Manually create a Boot Loader Entry then reboot!${NC}"
+                echo -e "${GREEN}Microsoft Kernel Installed.!${NC}"
             ;;
         "Reboot System")
             echo -e "${YELLOW}Rebooting system in 3 seconds...${NC}"
