@@ -28,23 +28,12 @@ fi
 # Update package lists
 echo "Updating package lists..."
 sudo pacman -Syu --noconfirm
-
-# Install linux-surface kernel and dependencies
-echo "Installing linux-surface kernel and dependencies..."
 sudo pacman -S --noconfirm linux-surface linux-surface-headers iptsd
+paru -S libwacom-surface --noconfirm
+sudo pacman -S --noconfirm linux-firmware-marvell
+sudo pacman -S --noconfirm linux-firmware-intel
+sudo pacman -S --noconfirm linux-surface-secureboot-mok
 
-echo "\nIf you need libwacom-surface, install it from the AUR (e.g., with yay or paru)."
-echo "yay -S libwacom-surface"
-
-echo "\nIf you have a Surface Pro 4/5/6, Book 1/2, or Laptop 1/2, installing Marvell WiFi firmware..."
-echo "sudo pacman -S --noconfirm linux-firmware-marvell"
-
-echo "\nFor Intel camera firmware, run:"
-echo "sudo pacman -S --noconfirm linux-firmware-intel"
-
-echo "\nIf you have set up Secure Boot with SHIM, you can install the secureboot MOK package:"
-echo "sudo pacman -S --noconfirm linux-surface-secureboot-mok"
-echo "Follow the on-screen instructions and reboot to enroll the key."
 
 echo "\nUpdating GRUB configuration..."
 if command -v grub-mkconfig &> /dev/null; then
@@ -75,7 +64,7 @@ if bootctl is-installed &>/dev/null; then
 title   Microsoft Surface Linux
 linux   ${kernel_img}
 initrd  ${initrd_img}
-options root=PARTUUID=$(blkid -s PARTUUID -o value $(findmnt / -o SOURCE -n)) rw quiet splash
+options root=PARTUUID="$(blkid -s PARTUUID -o value $(findmnt / -o SOURCE -n))" rw quiet splash
 EOF
             echo "Created $surface_entry in $entries_dir."
         else
