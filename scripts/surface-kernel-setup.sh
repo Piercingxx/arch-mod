@@ -29,7 +29,8 @@ fi
 echo "Updating package lists..."
 sudo pacman -Syu --noconfirm
 sudo pacman -S --noconfirm linux-surface linux-surface-headers iptsd
-paru -S libwacom-surface --noconfirm
+# do not put --noconfirm on libwacom-surface
+paru -S libwacom-surface
 sudo pacman -S --noconfirm linux-firmware-marvell
 sudo pacman -S --noconfirm linux-firmware-intel
 sudo pacman -S --noconfirm linux-surface-secureboot-mok
