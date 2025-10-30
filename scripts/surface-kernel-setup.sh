@@ -31,6 +31,7 @@ sudo pacman -Syu --noconfirm
 sudo pacman -S --noconfirm linux-surface linux-surface-headers iptsd
 # do not put --noconfirm on libwacom-surface
 paru -S libwacom-surface
+paru -S linux-firmware-marvell --noconfirm
 sudo pacman -S --noconfirm linux-firmware-marvell
 sudo pacman -S --noconfirm linux-firmware-intel
 sudo pacman -S --noconfirm linux-surface-secureboot-mok
