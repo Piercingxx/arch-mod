@@ -27,7 +27,7 @@ builddir=$(pwd)
     flatpak install flathub com.mattjakeman.ExtensionManager -y
     flatpak install flathub org.qbittorrent.qBittorrent -y
     flatpak install flathub io.missioncenter.MissionCenter -y
-    flatpak install flathub io.github.shiftey.Desktop -y
+    flatpak install flathub io.github.shiftey.Desktop -y #Github Desktop
     flatpak install --noninteractive flathub io.github.realmazharhussain.GdmSettings -y
     flatpak install flathub com.flashforge.FlashPrint -y
     flatpak install flathub org.gnome.meld -y # For file comparison
