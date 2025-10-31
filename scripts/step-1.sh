@@ -60,7 +60,7 @@ builddir=$(pwd)
         echo "# Installing more dependencies..."
         paru -S dconf --noconfirm
         paru -S cpio cmake meson --nocofirm
-        paru -S libinput-gestures --noconfirm
+        paru -S wmctrl xdotool libinput-gestures --noconfirm
     # Yazi
         paru -S yazi-nightly-bin --noconfirm
         paru -S ffmpeg --noconfirm
