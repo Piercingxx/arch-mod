@@ -38,9 +38,6 @@ builddir=$(pwd)
     paru -S ufw --noconfirm
     sudo ufw allow OpenSSH
 
-# Tailscale
-    paru -S tailscale --noconfirm
-
 # Apps to uninstall
     sudo pacman -Rs gnome-console --noconfirm
     sudo pacman -Rs firefox --noconfirm
@@ -116,6 +113,7 @@ builddir=$(pwd)
     #ollama pull gemma3:12b
 
 # Tailscale
+    paru -S tailscale --noconfirm
     curl -fsSL https://tailscale.com/install.sh | sh
     wait
 
