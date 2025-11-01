@@ -48,7 +48,7 @@ Options include system install, NVIDIA drivers, Surface kernel, Hyprland, and re
 | `scripts/apps.sh`     | Installs core desktop applications      |
 | `scripts/hyprland-install.sh` | Installs Hyprland and dependencies |
 | `scripts/nvidia.sh`   | Installs proprietary NVIDIA drivers     |
-| `scripts/Surface.sh`  | Installs Microsoft Surface kernel       |
+| `scripts/Surface.sh`  | Installs Microsoft Surface kernel, script works best with GRUB       |
 
 ---
 
