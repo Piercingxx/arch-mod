@@ -86,6 +86,9 @@ builddir=$(pwd)
         sudo pacman -S cups gutenprint cups-pdf gtk3-print-backends nmap net-tools cmake meson cpio --noconfirm
         sudo systemctl enable cups.service
         sudo systemctl start cups
+    # Printer Drivers
+        paru -S cnijfilter2-mg3600 --noconfirm #Canon mg3600 driver
+        paru -S cndrvcups-lb --noconfirm # Canon D530 driver
 
 # Install fonts
     echo "Installing Fonts"
