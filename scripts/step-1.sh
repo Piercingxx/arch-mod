@@ -88,7 +88,7 @@ builddir=$(pwd)
         sudo systemctl start cups
     # Printer Drivers
         paru -S cnijfilter2-mg3600 --noconfirm #Canon mg3600 driver
-        paru -S cndrvcups-lb --noconfirm # Canon D530 driver
+        #paru -S cndrvcups-lb --noconfirm # Canon D530 driver
 
 # Install fonts
     echo "Installing Fonts"
