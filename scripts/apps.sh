@@ -73,21 +73,12 @@ builddir=$(pwd)
     paru -Rs neovim --noconfirm
     paru -S neovim-nightly-bin --noconfirm
     sudo pacman -S nodejs npm --noconfirm
-    sudo pacman -S ruby --noconfirm
     sudo pacman -S ripgrep --noconfirm
-    paru -S luarocks --noconfirm
     paru -S lua51 --noconfirm
     paru -S python --noconfirm
     paru -S python-pip --noconfirm
     paru -S python-pynvim --noconfirm
-    paru -S ueberzug --noconfirm
-    paru -S lazygit --noconfirm
-    paru -S sqlite --noconfirm
-    sudo pacman -Fy pdflatex --noconfirm
-    sudo npm install -g @mermaid-js/mermaid-cli
-    sudo npm install -g  neovim
     python3 -m pip install --user --upgrade pynvim
-    cargo install tree-sitter-cli
 
 # VScode
     paru -S visual-studio-code-bin --noconfirm

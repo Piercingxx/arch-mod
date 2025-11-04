@@ -90,25 +90,19 @@ builddir=$(pwd)
         paru -S cnijfilter2-mg3600 --noconfirm #Canon mg3600 driver
         #paru -S cndrvcups-lb --noconfirm # Canon D530 driver
 
+# Theme stuffs
+    paru -S papirus-icon-theme-git --noconfirm
+
 # Install fonts
     echo "Installing Fonts"
     cd "$builddir" || exit
-    wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/FiraCode.zip
-    wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/Meslo.zip
-    wget http://www.i18nguy.com/unicode/andagii.zip
-    unzip FiraCode.zip -d /home/"$username"/.fonts
-    unzip Meslo.zip -d /home/"$username"/.fonts
-    unzip andagii.zip -d /home/"$username"/.fonts
-    sudo rm FiraCode.zip Meslo.zip andagii.zip
     sudo pacman -S ttf-firacode-nerd --noconfirm
-    sudo pacman -S ttf-jetbrains-mono-nerd --noconfirm
-    sudo pacman -S ttf-nerd-fonts-symbols-mono --noconfirm
     paru -S ttf-nerd-fonts-symbols --noconfirm
-    paru -S ttf-firacode --noconfirm
+    paru -S noto-fonts-emoji-colrv1 --noconfirm
+    sudo pacman -S ttf-jetbrains-mono-nerd --noconfirm
     paru -S awesome-terminal-fonts-patched --noconfirm
     paru -S ttf-ms-fonts --noconfirm
     paru -S terminus-font-ttf --noconfirm
-    paru -S noto-fonts-emoji-colrv1 --noconfirm
     paru -S wtype-git --noconfirm
     paru -S xcursor-simp1e-gruvbox-light --noconfirm
     # Reload Font

@@ -18,7 +18,6 @@ ${PKGMGR} wlsunset-git
 ${PKGMGR} wl-clipboard
 ${PKGMGR} libdbusmenu-gtk3
 
-
 # Set up Waybar and menus
 ${PKGMGR} waybar
 ${PKGMGR} nwg-drawer
