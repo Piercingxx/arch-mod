@@ -101,7 +101,7 @@ builddir=$(pwd)
 
 # Steam
     sudo pacman -S steam --noconfirm
-    paru -S discord-canary --noconfirm
+    #paru -S discord-canary --noconfirm
     flatpak install flathub com.discordapp.Discord -y
     paru -S input-remapper --noconfirm
 
