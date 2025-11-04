@@ -87,6 +87,7 @@ builddir=$(pwd)
     sudo npm install -g @mermaid-js/mermaid-cli
     sudo npm install -g  neovim
     python3 -m pip install --user --upgrade pynvim
+    cargo install tree-sitter-cli
 
 # VScode
     paru -S visual-studio-code-bin --noconfirm
