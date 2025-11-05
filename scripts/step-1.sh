@@ -89,6 +89,8 @@ builddir=$(pwd)
     # Printer Drivers
         paru -S cnijfilter2-mg3600 --noconfirm #Canon mg3600 driver
         #paru -S cndrvcups-lb --noconfirm # Canon D530 driver
+    # Add dialout to edit ZMK and VIA Keyboards
+        sudo usermod -aG uucp $USER
 
 # Theme stuffs
     paru -S papirus-icon-theme-git --noconfirm

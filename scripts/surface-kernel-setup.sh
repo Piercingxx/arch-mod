@@ -32,16 +32,17 @@ sudo pacman -S --noconfirm linux-surface linux-surface-headers iptsd
 # do not put --noconfirm on libwacom-surface
 paru -S libwacom-surface
 sudo pacman -S --noconfirm linux-firmware-marvell
-sudo pacman -S --noconfirm linux-firmware-intel linux-firmware-marvell
+sudo pacman -S --noconfirm linux-firmware-intel
 sudo pacman -S --noconfirm linux-surface-secureboot-mok
 
 
+# Update GRUB configuration
 echo "\nUpdating GRUB configuration..."
 if command -v grub-mkconfig &> /dev/null; then
     sudo grub-mkconfig -o /boot/grub/grub.cfg
 fi
 
-# --- systemd-boot automation for Surface kernel ---
+# systemd-boot
 if bootctl is-installed &>/dev/null; then
     echo "\nDetected systemd-boot. Attempting to create and set Surface kernel as default..."
     entries_dir="/boot/loader/entries"
