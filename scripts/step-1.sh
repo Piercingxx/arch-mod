@@ -61,21 +61,6 @@ builddir=$(pwd)
         paru -S dconf --noconfirm
         paru -S cpio cmake meson --nocofirm
         paru -S wmctrl xdotool libinput-gestures --noconfirm
-    # Yazi
-        paru -S yazi-nightly-bin --noconfirm
-        paru -S ffmpeg --noconfirm
-        paru -S 7zip --noconfirm
-        paru -S jq --noconfirm
-        paru -S poppler --noconfirm
-        paru -S fd --noconfirm
-        paru -S ripgrep --noconfirm
-        paru -S fzf --noconfirm
-        paru -S zoxide --noconfirm
-        paru -S resvg --noconfirm
-        paru -S imagemagick --noconfirm
-        ya pkg add dedukun/bookmarks
-        ya pkg add yazi-rs/plugins:mount
-        ya pkg add grappas/wl-clipboard
 
 # System Control Services
     echo "# Enabling Bluetooth and Printer services..."

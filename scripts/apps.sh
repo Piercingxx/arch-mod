@@ -69,6 +69,25 @@ builddir=$(pwd)
     #Synology Drive doesnt support wayland so run this...
     QT_QPA_PLATFORM=xcb
 
+# Yazi
+    paru -S yazi-nightly-bin --noconfirm
+    paru -S ffmpeg --noconfirm
+    paru -S 7zip --noconfirm
+    paru -S jq --noconfirm
+    paru -S poppler --noconfirm
+    paru -S fd --noconfirm
+    paru -S ripgrep --noconfirm
+    paru -S fzf --noconfirm
+    paru -S zoxide --noconfirm
+    paru -S resvg --noconfirm
+    paru -S imagemagick --noconfirm
+    ya pkg add dedukun/bookmarks
+    ya pkg add dedukun/relative-motions
+    ya pkg add yazi-rs/plugins:mount
+    ya pkg add grappas/wl-clipboard
+    ya pkg add yazi-rs/plugins:chmod
+    ya pkg add yazi-rs/plugins:smart-enter
+
 # Nvim & Depends
     paru -Rs neovim --noconfirm
     paru -S neovim-nightly-bin --noconfirm
