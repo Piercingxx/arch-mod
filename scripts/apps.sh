@@ -34,10 +34,12 @@ builddir=$(pwd)
     flatpak install flathub com.nextcloud.desktopclient.nextcloud -y
     flatpak install flathub com.github.xournalpp.xournalpp -y # For PDF annotation
 
-# SSH & Firewall
+# SSH & Firewall - for arch systems
     sudo pacman -S openssh --noconfirm
+    sudo systemctl enable --now sshd
     paru -S ufw --noconfirm
-    sudo ufw allow OpenSSH
+    sudo ufw enable
+    sudo ufw allow SSH
 
 # Apps to uninstall
     sudo pacman -Rs gnome-console --noconfirm
