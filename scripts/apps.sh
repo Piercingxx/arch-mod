@@ -117,6 +117,11 @@ builddir=$(pwd)
 # Kdenlive
     flatpak install flathub org.kde.kdenlive -y
 
+# Vial
+    paru -S vial-appimage --noconfirm
+    # Allows user to access keyboard 
+    sudo usermod -aG uucp $USER
+
 # Steam
     sudo pacman -S steam --noconfirm
     #paru -S discord-canary --noconfirm
