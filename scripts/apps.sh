@@ -106,6 +106,8 @@ builddir=$(pwd)
     paru -S python-pip --noconfirm
     paru -S python-pynvim --noconfirm
     python3 -m pip install --user --upgrade pynvim
+    sudo pacman -S chafa --noconfirm
+    sudo pacman -S ripgrep --noconfirm
 
 # VScode
     paru -S visual-studio-code-bin --noconfirm
