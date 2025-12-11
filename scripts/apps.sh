@@ -148,5 +148,11 @@ builddir=$(pwd)
     sudo systemctl enable --now docker
     sudo usermod -aG docker $username
 
+# ClamAV
+    paru -S clamav --noconfirm
+    sudo systemctl enable --now clamav-freshclam
+    sudo systemctl enable --now clamav-daemon
+    sudo freshclam
+
 # OpenWebUi
 #    docker run -d -p 3000:8080 --add-host=host.docker.internal:host-gateway -v open-webui:/app/backend/data --name open-webui --restart always ghcr.io/open-webui/open-webui:main
