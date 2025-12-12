@@ -123,9 +123,33 @@ username=$(id -un)
     # Allows user to access keyboard 
     sudo usermod -aG uucp $USER
 
-# Steam
+# Steam and Gaming
     sudo pacman -S steam --noconfirm
-    #paru -S discord-canary --noconfirm
+    # Steam Needs Vulkan and 32-bit libs for Proton games
+        sudo pacman -S vulkan-tools --noconfirm
+        sudo pacman -S vulkan-icd-loader --noconfirm
+        sudo pacman -S lib32-vulkan-icd-loader --noconfirm
+        sudo pacman -S mesa lib32-mesa --noconfirm
+        sudo pacman -S mesa-demos --noconfirm
+        sudo pacman -S vulkan-radeon lib32-vulkan-radeon --noconfirm 
+        sudo pacman -S lib32-gcc-libs --noconfirm 
+        sudo pacman -S lib32-glibc --noconfirm 
+        sudo pacman -S lib32-libdrm --noconfirm 
+        sudo pacman -S lib32-libx11 --noconfirm 
+        sudo pacman -S lib32-libxext --noconfirm 
+        sudo pacman -S lib32-libxcomposite --noconfirm 
+        sudo pacman -S lib32-libxrender --noconfirm 
+        sudo pacman -S lib32-libxfixes --noconfirm 
+        sudo pacman -S ib32-libxrandr --noconfirm 
+        sudo pacman -S lib32-libxtst --noconfirm 
+        sudo pacman -S lib32-libpulse --noconfirm 
+        sudo pacman -S lib32-openssl --noconfirm 
+        sudo pacman -S lib32-sdl2--noconfirm 
+    # If NVIDIA proprietary driver is present, install its 32-bit runtime pieces
+        if lspci -nn | grep -qi 'NVIDIA'; then
+            echo "[*] NVIDIA GPU detected; installing NVIDIA Vulkan runtime components..."
+            sudo pacman -S --needed --noconfirm nvidia nvidia-utils lib32-nvidia-utils
+        fi
     flatpak install flathub com.discordapp.Discord -y
     paru -S input-remapper --noconfirm
 
