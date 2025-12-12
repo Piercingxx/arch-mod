@@ -1,7 +1,7 @@
 #!/bin/bash
 # GitHub.com/PiercingXX
 
-username=$(id -u -n 1000)
+username=$(id -un)
 builddir=$(pwd)
 
 
@@ -40,6 +40,18 @@ builddir=$(pwd)
 
 # Install dependencies
         echo "# Installing dependencies..."
+        sudo pacman -S trash-cli --noconfirm
+        sudo pacman -S fastfetch --noconfirm
+        sudo pacman -S tree --noconfirm
+        sudo pacman -S zoxide --noconfirm
+        sudo pacman -S bash-completion --noconfirm
+        sudo pacman -S starship --noconfirm
+        sudo pacman -S eza --noconfirm
+        sudo pacman -S bat --noconfirm
+        sudo pacman -S fzf --noconfirm
+        sudo pacman -S trash-cli --noconfirm
+        sudo pacman -S chafa --noconfirm
+        sudo pacman -S w3m --noconfirm
         sudo pacman -S reflector --noconfirm
         sudo pacman -S zip unzip gzip tar make wget tar fontconfig --noconfirm
         sudo pacman -Syu linux-firmware --noconfirm
@@ -59,14 +71,15 @@ builddir=$(pwd)
 # Installing more Depends
         echo "# Installing more dependencies..."
         paru -S dconf --noconfirm
-        paru -S cpio cmake meson --nocofirm
+        paru -S cpio cmake meson --noconfirm
         paru -S wmctrl xdotool libinput-gestures --noconfirm
+        paru -S multitail jump-bin --noconfirm
 
 # System Control Services
     echo "# Enabling Bluetooth and Printer services..."
     # Enable Bluetooth
         sudo systemctl start bluetooth
-        systemctl enable bluetooth
+        sudo systemctl enable bluetooth
     # Enable Printer 
         sudo pacman -S cups gutenprint cups-pdf gtk3-print-backends nmap net-tools cmake meson cpio --noconfirm
         sudo systemctl enable cups.service

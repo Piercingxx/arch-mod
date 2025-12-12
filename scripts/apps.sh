@@ -1,8 +1,7 @@
 #!/bin/bash
 # GitHub.com/PiercingXX
 
-username=$(id -u -n 1000)
-builddir=$(pwd)
+username=$(id -un)
 
 # Apps to Install
     paru -S fwupd --noconfirm

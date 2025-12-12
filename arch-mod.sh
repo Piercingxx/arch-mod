@@ -34,8 +34,8 @@ cache_sudo_credentials() {
 
 # Checks for active network connection
 if [[ -n "$(command -v nmcli)" && "$(nmcli -t -f STATE g)" != connected ]]; then
-    awk '{print}' <<<"Network connectivity is required to continue."
-    exit
+    echo "Network connectivity is required to continue."
+    exit 1
 fi
 
 # Check for active network connection
@@ -61,7 +61,7 @@ fi
 
 
 
-username=$(id -u -n 1000)
+username=$(id -un)
 builddir=$(pwd)
 
 # Cache sudo credentials
@@ -103,7 +103,11 @@ while true; do
                 ./step-1.sh
                 wait
                 cd "$builddir" || exit
-            # Install bash stuff
+            # Install bash support
+                # Load user's bashrc
+                if [ -f "/home/$username/.bashrc" ]; then
+                    . "/home/$username/.bashrc"
+                fi
                 install_bashrc_support
             echo -e "${GREEN}Essentials Installed successfully!${NC}"
             # Apply Piercing Rice
@@ -132,7 +136,7 @@ while true; do
             echo -e "${GREEN}Hyprland & Dependencies Installed successfully!${NC}"
             # Enable Bluetooth again
                 sudo systemctl start bluetooth
-                systemctl enable bluetooth
+                sudo systemctl enable bluetooth
             # Apply Piercing Gnome Customizations as User
                 cd piercing-dots/scripts || exit
                 ./gnome-customizations.sh
