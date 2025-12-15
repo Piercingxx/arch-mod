@@ -57,6 +57,11 @@ builddir=$(pwd)
         sudo pacman -Syu linux-firmware --noconfirm
         sudo pacman -S bc brightnessctl dunst --noconfirm
 
+# Ensure Pipewire for audio
+    sudo pacman -S pipewire wireplumber pipewire-pulse pipewire-alsa --noconfirm
+    sudo pacman -S gst-plugins-good gst-plugins-bad gst-plugins-ugly gst-libav --noconfirm
+    systemctl --user restart pipewire pipewire-pulse wireplumber
+
 # Add Paru, Flatpak, & Dependencies if needed
     echo -e "${YELLOW}Installing Paru, Flatpak, & Dependencies...${NC}"
         # Clone and install Paru
