@@ -108,6 +108,9 @@ username=$(id -un)
     sudo pacman -S chafa --noconfirm
     sudo pacman -S ripgrep --noconfirm
 
+# Opencode
+    paru -S opencode-bin --noconfirm
+
 # VScode
     paru -S visual-studio-code-bin --noconfirm
     paru -S code-nautilus-git --noconfirm
